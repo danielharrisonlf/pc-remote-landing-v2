@@ -39,7 +39,7 @@ A auditoria visual encontrou problemas que uma checagem de overflow não detecta
 4. Instalação em três ações, sem transformar a verificação por cores em argumento principal de venda.
 5. Comparação por finalidade, rede, conta, cobrança, plataformas e pareamento. Fontes oficiais disponíveis.
 6. Segurança com evidência do botão Interromper e detalhes técnicos recolhidos.
-7. Downloads, QR, hashes, condições da versão de avaliação e Linux via compilação.
+7. Downloads, QR, hashes, condições da versão de avaliação e Ubuntu em `.deb` e instalador compactado.
 8. FAQ baseado nas dúvidas e limites reais.
 
 ## Tokens
@@ -50,6 +50,10 @@ Geist variável local, títulos 30-60 px, texto principal 14-17 px, auxiliares 1
 
 As imagens são capturas das versões 0.6.0/0.6.1 obtidas em QA dos aplicativos reais. A interface dentro delas não foi inventada ou recolorida. `public/screenshots/sources.json` registra os arquivos de origem, dimensões e tamanho. O script de preparação apenas redimensiona e converte para WebP.
 
-Sem promessa de latência zero, segurança absoluta ou RAM sem benchmark. TeamViewer/AnyDesk também têm LAN; Unified Remote também é local. Linux tem implementação, mas não há .deb publicado e a validação em hardware/Wayland permanece limitada. APK de avaliação usa debug; EXE sem Authenticode. Hashes e versões estão em `src/content.ts`.
+Sem promessa de latência zero, segurança absoluta ou RAM sem benchmark. TeamViewer/AnyDesk também têm LAN; Unified Remote também é local. A pré-release Ubuntu oferece `.deb` amd64 e instalador compactado para 22.04, 24.04 e 26.04 LTS, com instalação e abertura validadas nas três versões. A autorização e o controle em um desktop GNOME Wayland real permanecem pendentes, com essa condição visível no bloco de download. APK de avaliação usa debug; EXE sem Authenticode. Hashes e versões estão em `src/content.ts`.
+
+## Downloads Ubuntu, 18/10/2026
+
+O aviso de compilação foi substituído por downloads da release `v0.6.4-ubuntu.1`. O hero aponta para o bloco Ubuntu; os downloads principais de Windows e Android mantêm suas posições. O bloco Ubuntu mostra as três versões LTS, arquitetura amd64, comando do instalador, autorização no Wayland, condição de pré-release, hash verificável, guia e release oficial. No mobile, ações ficam abaixo do texto e o código pode quebrar linha; a âncora considera o cabeçalho para manter o título acessível. Comparação, FAQ e descrição de busca refletem o pacote publicado.
 
 Nenhum registro de memória durável foi criado: Semantica não está disponível nesta sessão.

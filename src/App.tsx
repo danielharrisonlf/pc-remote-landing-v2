@@ -50,6 +50,7 @@ function Hero() {
       <div className="hero-actions"><a className="button" href={links.windows}><WindowsLogo size={21} />Baixar para Windows<DownloadSimple size={18} /></a><a className="button secondary" href={links.android}><AndroidLogo size={21} />Baixar para Android</a></div>
       <p className="hero-note"><CheckCircle size={16} />Na mesma rede Wi-Fi. Sem conta ou mensalidade.</p>
       <a className="hero-setup-link" href="#como-funciona">Instale no PC e no Android para começar <ArrowRight size={15} /></a>
+      <a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Também para Ubuntu 22.04, 24.04 e 26.04 LTS <ArrowRight size={15} /></a>
     </div>
     <figure className="hero-product">
       <div className="product-scene"><div className="desktop-shot"><Screenshot name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} priority /></div><PhoneScreenshot name="media" priority alt="Android com busca no YouTube e controles de mídia" /></div>
@@ -101,7 +102,7 @@ function Benefits() {
 
 function HowItWorks() {
   return <section className="section shell" id="como-funciona"><div className="section-title"><h2>Baixe nos dois.<br />Pareie e comece.</h2><p>Sem login. O pareamento é feito diretamente entre os aparelhos.</p></div><ol className="steps">
-    <li><span className="step-number">1</span><h3>Instale nos dois aparelhos</h3><p>Baixe o instalador no Windows e o APK no Android. Abra os aplicativos.</p><a className="text-link" href="#downloads">Ver downloads <ArrowRight size={16} /></a></li>
+    <li><span className="step-number">1</span><h3>Instale nos dois aparelhos</h3><p>Baixe o instalador para Windows ou Ubuntu e o APK no Android. Abra os aplicativos.</p><a className="text-link" href="#downloads">Ver downloads <ArrowRight size={16} /></a></li>
     <li><span className="step-number">2</span><h3>Encontre seu computador</h3><p>No PC, toque em “Parear celular”. No Android, leia o QR ou digite o código de 8 dígitos.</p></li>
     <li><span className="step-number">3</span><h3>Confirme e comece a usar</h3><p>No pareamento por código, compare a faixa de verificação. Aprove o pedido no PC e abra a ferramenta que quiser.</p></li>
   </ol></section>
@@ -138,11 +139,28 @@ function HashControl({ value, platform }: { value: string; platform: string }) {
 }
 
 function Downloads() {
-  return <section className="section downloads-section" id="downloads"><div className="shell"><div className="section-title"><p className="eyebrow">Windows + Android</p><h2>Baixe grátis.<br />Controle seu PC.</h2><p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p></div><div className="download-grid">
+  return <section className="section downloads-section" id="downloads"><div className="shell"><div className="section-title"><p className="eyebrow">Windows ou Ubuntu + Android</p><h2>Baixe grátis.<br />Controle seu PC.</h2><p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p></div><div className="download-grid">
     <article className="download-card"><div className="download-top"><WindowsLogo size={30} /><span>1. Instale no PC</span></div><div className="download-heading"><h3>PC Remote para Windows</h3><span>Mouse, mídia, arquivos e energia.</span></div><p>Windows 10 (1809+) e 11 · x64<br />Instalador .exe · v0.6.4</p><a className="button" href={links.windows}><DownloadSimple size={19} />Baixar para Windows</a><a className="release-link" href={links.windowsRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.windows} platform="Windows" /></article>
     <article className="download-card"><div className="download-top"><AndroidLogo size={30} /><span>2. Instale no celular</span></div><div className="download-heading"><h3>PC Remote para Android</h3><span>Seu controle, pronto para conectar.</span></div><p>Android 7 ou superior · APK universal<br />App nativo · v0.6.3-kotlin</p><a className="button secondary" href={links.android}><DownloadSimple size={19} />Baixar APK Android</a><a className="release-link" href={links.androidRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.android} platform="Android" /></article>
     <aside className="qr-download"><img src="/android-apk-qr.svg" width="144" height="144" loading="lazy" alt="QR code com o link direto para baixar o APK oficial no Android" /><h3>Está no computador?</h3><p>Aponte a câmera do celular para baixar o APK.</p></aside>
-  </div><div className="install-notes"><p><strong>Versão de avaliação.</strong> O Windows pode exibir um aviso do SmartScreen; o instalador ainda não tem Authenticode. O APK usa chave debug e o Android solicita autorização para instalar dessa fonte.</p><a href={links.installation} target="_blank" rel="noreferrer">Guia de instalação <ArrowUpRight size={16} /></a></div><div className="linux-download"><LinuxLogo size={27} /><p><strong>Usa Linux?</strong> O código inclui suporte a Ubuntu 22.04 e 24.04. Compile pelo repositório; ainda não há pacote .deb publicado.</p><a className="text-link" href={links.linux} target="_blank" rel="noreferrer">Instruções e limitações <ArrowUpRight size={16} /></a></div></div></section>
+  </div><div className="install-notes"><p><strong>Versão de avaliação.</strong> O Windows pode exibir um aviso do SmartScreen; o instalador ainda não tem Authenticode. O APK usa chave debug e o Android solicita autorização para instalar dessa fonte.</p><a href={links.installation} target="_blank" rel="noreferrer">Guia de instalação Windows <ArrowUpRight size={16} /></a></div>
+    <aside className="linux-download" id="ubuntu-download" aria-labelledby="ubuntu-download-title">
+      <LinuxLogo size={30} aria-hidden="true" />
+      <div className="linux-copy">
+        <h3 id="ubuntu-download-title">Ubuntu 22.04, 24.04 e 26.04 LTS</h3>
+        <p>Pacote .deb para PC amd64 · aplicativo v0.6.4. Instale com as dependências necessárias, sem compilar.</p>
+        <p>Prefere o instalador compactado? Extraia a pasta e execute <code>bash install-ubuntu.sh</code>.</p>
+        <p>No Wayland, abra <strong>Configurações → Controle no Ubuntu → Autorizar controle</strong> no PC Remote e permita mouse e teclado.</p>
+        <p className="linux-evaluation"><strong>Pré-release Ubuntu.</strong> Instalação e abertura testadas nas três LTS. O uso em um desktop GNOME Wayland real ainda precisa de validação.</p>
+        <HashControl value={hashes.linux} platform="Ubuntu (.deb)" />
+      </div>
+      <div className="linux-actions">
+        <a className="button" href={links.linux}><DownloadSimple size={19} />Baixar Ubuntu .deb</a>
+        <a className="text-link" href={links.linuxBundle}>Instalador compactado <DownloadSimple size={16} /></a>
+        <a className="text-link" href={links.linuxGuide} target="_blank" rel="noreferrer">Guia do Ubuntu <ArrowUpRight size={16} /></a>
+        <a className="text-link" href={links.linuxRelease} target="_blank" rel="noreferrer">Ver pré-release <ArrowUpRight size={16} /></a>
+      </div>
+    </aside></div></section>
 }
 
 function Faq() {
@@ -150,6 +168,7 @@ function Faq() {
     ['Preciso de internet para usar?', 'Depois de baixar e instalar, o controle funciona sem internet. O computador e o celular precisam estar na mesma rede local. O PC pode usar cabo de rede enquanto o Android usa o Wi-Fi do mesmo roteador. A busca no YouTube e o download de atualizações precisam de internet.'],
     ['Consigo ver a tela do PC no celular ou acessar de fora de casa?', 'Não. O PC Remote é um controle local de mouse, teclado, mídia, arquivos, clipboard e energia. Ele não transmite a tela e não oferece conexão pela internet para usar fora da sua rede.'],
     ['Como funciona a instalação no Android?', 'Baixe o APK oficial, abra o arquivo no celular e permita a instalação dessa fonte quando o Android solicitar. Esta versão é de avaliação e usa chave de assinatura debug. Depois, abra o app e pareie com o computador.'],
+    ['Funciona no Ubuntu 26.04 LTS?', 'Há um pacote .deb amd64 para Ubuntu 22.04, 24.04 e 26.04 LTS, sem precisar compilar. No Wayland, autorize mouse e teclado nas Configurações do PC Remote e confirme a janela do sistema. A instalação e a abertura passaram nas três LTS; esta pré-release ainda precisa de validação em um desktop GNOME Wayland real. As atualizações no Ubuntu são feitas instalando o novo .deb.'],
     ['É seguro deixar o aplicativo aberto?', 'A conexão exige pareamento e aprovação no PC. O código temporário, a confirmação visual e o certificado fixado ajudam a proteger o acesso. Você pode revogar celulares e usar Interromper para bloquear mouse, teclado e energia. Nenhum software elimina todos os riscos.'],
     ['Por que copiar e colar nem sempre sincroniza em segundo plano?', 'O Android limita a leitura da área de transferência quando outro app está em primeiro plano. Abra o PC Remote ou use o envio manual. Você pode desligar a sincronização a qualquer momento.'],
     ['Funciona com qualquer player de música ou vídeo?', 'O app usa as capacidades que o player publica para o sistema: controles de mídia do Windows e MPRIS no Linux. Nem todo player permite todas as ações. O Android indica quais controles estão disponíveis.'],
@@ -181,7 +200,7 @@ function MobileDownloadBar() {
     observer.observe(hero); observer.observe(downloads)
     return () => observer.disconnect()
   }, [])
-  return visible ? <aside className="mobile-download-bar" aria-label="Download rápido"><div><strong>PC Remote é grátis</strong><span>Windows + Android</span></div><a className="button small" href="#downloads">Baixar os apps <ArrowDown size={17} /></a></aside> : null
+  return visible ? <aside className="mobile-download-bar" aria-label="Download rápido"><div><strong>PC Remote é grátis</strong><span>PC + Android</span></div><a className="button small" href="#downloads">Baixar os apps <ArrowDown size={17} /></a></aside> : null
 }
 
 export default function App() {

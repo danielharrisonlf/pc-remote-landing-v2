@@ -7,20 +7,24 @@ export const links = {
   protocol: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/PROTOCOL.md',
   security: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/SECURITY-AUDIT.md',
   releases: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases',
-  changelog: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/releases/0.6.4.md',
+  changelog: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/releases/0.6.4-ubuntu.1.md',
   installation: 'https://github.com/danielharrisonlf/pc-remote-desktop#baixar-e-instalar--windows-064',
-  linux: 'https://github.com/danielharrisonlf/pc-remote-desktop#compilação-e-empacotamento-no-linux-ubuntu-2204--2404-lts',
+  linux: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/pc-remote-desktop-0.6.4-amd64.deb',
+  linuxBundle: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/pc-remote-ubuntu-0.6.4-amd64.tar.gz',
+  linuxRelease: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4-ubuntu.1',
+  linuxGuide: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/UBUNTU.md',
 }
 export const hashes = {
   windows: '3fe6cd4e5efa41c2e9c7037be165502c34f1a499b924cdc3458362f1e3a7354c',
   android: '673890551e02d89f5b8448ab0cf25b0500a9416782d4c102299b6c0347fea3f9',
+  linux: '591407a13b30059fd3309d5687fcb897fc8cd6263916563da44c1a9bde91dea4',
 }
 export const comparison = [
   { label: 'Feito para', pc: 'Controlar o PC pelo Android', remote: 'Acessar e operar uma sessão remota', unified: 'Usar o celular como controle', phone: 'Usar funções do celular no PC' },
   { label: 'Conexão local', pc: 'LAN por padrão, sem internet', remote: 'Modo LAN disponível; depende de configuração', unified: 'Servidor local na rede', phone: 'Wi-Fi e Bluetooth, conforme o recurso' },
   { label: 'Conta para começar', pc: 'Não precisa', remote: 'Varia por produto e modo de conexão', unified: 'Não exige conta de nuvem no uso local', phone: 'Conta Microsoft' },
   { label: 'Modelo de uso', pc: 'Gratuito e código aberto', remote: 'Uso pessoal e planos pagos; consulte as condições', unified: 'Free e Full com compra única', phone: 'Incluído no Windows' },
-  { label: 'Computador', pc: 'Windows; Ubuntu via compilação', remote: 'Windows, macOS e Linux', unified: 'Windows, macOS e Linux', phone: 'Windows' },
+  { label: 'Computador', pc: 'Windows; Ubuntu 22.04, 24.04 e 26.04 LTS (.deb)', remote: 'Windows, macOS e Linux', unified: 'Windows, macOS e Linux', phone: 'Windows' },
   { label: 'Pareamento', pc: 'QR ou código + confirmação no PC', remote: 'ID, permissões e modos de acesso', unified: 'Servidor local; senha configurável', phone: 'QR e conta Microsoft' },
 ]
 export const comparisonSources = [

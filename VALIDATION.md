@@ -35,5 +35,16 @@ Relatório bruto e evidências de navegador desta revisão estão no workspace p
 - O app não transmite a tela nem permite acesso externo à LAN.
 - O Android restringe clipboard em segundo plano e nem todos os players aceitam todas as ações.
 - A versão publicada ainda é de avaliação; APK debug e EXE sem Authenticode.
-- Linux via código; pacote .deb não publicado.
+- Ubuntu com `.deb` amd64 e instalador compactado publicados como pré-release; validação em um desktop GNOME Wayland real pendente.
 - Comparativo usa documentação oficial e não afirma que concorrentes dependem sempre da nuvem.
+
+## Atualização dos downloads Ubuntu, 18/10/2026
+
+- `npm run lint`, `npm run build` (TypeScript, cliente, SSR e HTML estático) e `git diff --check` aprovados.
+- Oito cenários Playwright sobre o build de produção: 320, 390, 768 e 1280 px, nos temas claro e escuro, sem overflow horizontal ou erros de JavaScript.
+- Âncora do hero para Ubuntu, URLs exatas do `.deb` e `.tar.gz`, comando `bash install-ubuntu.sh`, hash expandido e FAQ Ubuntu verificados.
+- Hash do `.deb` conferido com a release pública: `591407a13b30059fd3309d5687fcb897fc8cd6263916563da44c1a9bde91dea4`.
+- Capturas do bloco Ubuntu em 390 e 1280 px, claro e escuro, inspecionadas. O texto apresenta a pré-release e a pendência de validação em GNOME Wayland real.
+- Evidências em `../artifacts/landing-ubuntu/browser-checks.json`, `qa-final.log` e capturas correspondentes. O navegador Orca perdeu a conexão durante a primeira inspeção; a verificação foi concluída em Chromium pelo Playwright.
+
+As métricas Lighthouse e a matriz Axe acima pertencem ao redesign anterior; não foram medidas novamente para esta alteração de conteúdo e downloads.
