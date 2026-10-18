@@ -1,6 +1,6 @@
 ﻿# PC Remote | Landing page
 
-Landing page do PC Remote em React 19, TypeScript e Vite. A apresentação usa benefícios, capturas reais dos aplicativos, exploração de funcionalidades por teclado, comparação documentada e downloads diretos.
+Landing page do PC Remote em React 19, TypeScript e Vite. A apresentação usa benefícios, capturas reais ampliáveis, exploração de funcionalidades por teclado, comparação documentada e downloads diretos. Inclui temas claro/escuro com preferência persistida e layouts específicos para mobile.
 
 ## Desenvolvimento
 

@@ -4,8 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0F141C" />
-    <meta name="description" content="Controle seu PC Windows ou Linux pelo Android na sua rede local. Touchpad, teclado, mídia e arquivos sem conta, sem nuvem e sem mensalidade." />
-    <meta property="og:title" content="PC Remote | Seu celular. O controle do seu PC." />
+    <script>
+      (() => {
+        let saved
+        try { saved = localStorage.getItem('pc-remote-theme') } catch {}
+        const theme = saved === 'light' || saved === 'dark' ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        document.documentElement.dataset.theme = theme
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#0f141c' : '#f8fafc')
+      })()
+    </script>
+    <meta name="description" content="Seu Android vira o controle do PC. Mouse, teclado, mídia e arquivos pela sua rede Wi-Fi. Baixe grátis para Windows e Android, sem conta ou mensalidade." />
+    <meta property="og:title" content="PC Remote | Seu Android vira o controle do PC" />
     <meta property="og:description" content="Transforme o Android em touchpad, teclado e controle de mídia para o PC. Conexão local, gratuita e de código aberto." />
     <meta property="og:type" content="website" />
     <link rel="preload" as="image" href="/screenshots/desktop.webp" fetchpriority="high" />

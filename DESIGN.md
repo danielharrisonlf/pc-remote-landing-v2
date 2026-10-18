@@ -4,7 +4,22 @@
 
 Redesign completo da apresentação para usuários domésticos de Android e Windows. A página explica tarefas e benefícios antes de detalhes de arquitetura. Sistema visual próprio em CSS, com a marca oficial preservada; não implementa um design system de terceiros.
 
-Configuração da skill: DESIGN_VARIANCE 6, MOTION_INTENSITY 3, VISUAL_DENSITY 4. Layout variado, leitura familiar e animação apenas para indicar mudança da ferramenta selecionada. O tema escuro é uma restrição explícita do briefing.
+Configuração da skill: DESIGN_VARIANCE 6, MOTION_INTENSITY 3, VISUAL_DENSITY 4. Layout variado, leitura familiar e animação apenas para indicar mudança da ferramenta selecionada. A solicitação posterior inclui tema claro e escuro: a primeira visita segue o sistema e o seletor persiste a escolha.
+
+## Refinamento mobile e temas, 18/10/2026
+
+A auditoria visual encontrou problemas que uma checagem de overflow não detectava: screenshots pequenas demais no hero, cinco abas de 67 px com texto de 10 px, tabela de cinco colunas no tablet e texto Linux comprimido em 92 px.
+
+- Hero empilhado abaixo de 1100 px; abaixo de 768 px exibe a captura Android maior, sem sobrepor miniaturas ilegíveis.
+- Fonte de corpo 14-18 px, metadados 12-13 px e controles de toque com pelo menos 44 px.
+- Seletor nativo de ferramentas no mobile; tabs com teclado no desktop. Atalhos adicionais permitem descobrir todos os recursos.
+- Comparação em cartões abaixo de 1001 px, com seleção do concorrente. A tabela completa permanece no desktop.
+- Bloco Linux usa duas linhas em mobile, sem comprimir o parágrafo entre ícone e link.
+- Capturas abrem em dialog nativo, com ajuste à tela, tamanho original, rolagem e fechamento por Escape. Não alteram as cores do aplicativo real.
+- Toggle claro/escuro acessível com `role=switch`, preferência do sistema, persistência e sincronização entre abas. Script inicial aplica o tema antes da pintura; o HTML estático continua hidratando sem divergência.
+- Tokens semânticos substituem cores fixas para superfícies, texto, bordas e ações. O acento de texto no tema claro é mais escuro para manter contraste.
+- CTA móvel aparece após o hero e fica oculto durante a seção de downloads. Conteúdo principal mantém downloads diretos.
+- A copy explica o controle do PC pelo Android, o benefício de não ir até a mesa e a necessidade de instalar nos dois aparelhos. Não promete tempo de instalação, risco zero ou compatibilidade Linux ainda não validada.
 
 ## Auditoria do estado anterior
 

@@ -1,30 +1,34 @@
 # Verificação do redesign
 
-Verificação local em 17/10/2026, sobre o build de produção servido pelo Vite Preview.
+Verificação local em 18/10/2026, sobre o build de produção servido pelo Vite Preview.
 
 ## Checks
 
 - `npm run build`: TypeScript, build Vite, build de renderização e geração de HTML estático aprovados.
 - `npm run lint`: aprovado.
 - `git diff --check`: aprovado.
-- Playwright independente em 375, 768, 1280 e 1920 px: sem overflow horizontal global.
-- Cinco ferramentas com painel e imagem correspondentes; teclado com setas, Home e End.
+- Auditoria visual anterior em 375, 390, 768 e 1280 px: identificou screenshots pequenas, abas ilegíveis, comparativo denso e texto Linux comprimido. Correções registradas em `DESIGN.md`.
+- Cinco ferramentas com painel e imagem correspondentes; seletor nativo mobile e tabs desktop com setas, Home e End.
+- Matriz Playwright de 24 cenários: claro e escuro em 320, 375, 390, 640, 767, 768, 1000, 1024, 1099, 1100, 1280 e 1920 px. Zero falhas, overflow ou erros de JavaScript. Menu (Escape e clique fora), seletores, hashes expandidos, modal ajustado/original e CTA móvel verificados.
 - Menu mobile, links âncora, comparação mobile, perguntas expansíveis e URLs de downloads verificados.
 - Imagens reais otimizadas para WebP, com texto alternativo e dimensões; fonte Geist local.
 - HTML sem dependência de JS para conteúdo inicial; sem telemetria ou requisições de terceiros para renderizar.
+- Axe Core WCAG 2 A/AA e 2.1 AA em 375 e 1280 px, claro e escuro, página e imagem ampliada: zero violações automatizadas nas oito combinações. Não substitui avaliação humana completa.
+- Tema aplicado antes da primeira pintura, com preferência persistida; fallback funcional quando armazenamento não está disponível.
+- Preferência do sistema, mudança de preferência do sistema, persistência após reload, sincronização entre abas e armazenamento bloqueado verificados em `theme-behavior.json`.
 
 ## Lighthouse mobile
 
 | Categoria | Score |
 | --- | ---: |
-| Performance | 97 |
+| Performance | 98 |
 | Acessibilidade | 100 |
 | Boas práticas | 100 |
 | SEO | 100 |
 
-LCP: 2,4 s. CLS: 0. Medição de laboratório local, não garantia de resultado em todas as redes ou aparelhos. Não representa dados reais de usuários.
+LCP: 2,3 s. CLS: inferior a 0,001. Medição de laboratório local, não garantia de resultado em todas as redes ou aparelhos. Não representa dados reais de usuários.
 
-Relatório bruto e evidências de navegador estão no workspace pai em `../artifacts/landing-redesign/`: `lighthouse-mobile-final.json`, `qa-independent-results-prod.json` e capturas de responsividade. Não fazem parte do bundle público.
+Relatório bruto e evidências de navegador desta revisão estão no workspace pai em `../artifacts/landing-refinement/`: `lighthouse-mobile.json`, `axe-review.json`, capturas e verificações independentes. A evidência anterior permanece em `../artifacts/landing-redesign/`. Esses arquivos não fazem parte do bundle público.
 
 ## Limites de produto preservados na copy
 
