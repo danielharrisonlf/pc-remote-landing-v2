@@ -1,0 +1,51 @@
+[
+  {
+    "name": "media",
+    "source": "../artifacts/qa/0.6-e2e/r5-player-card.png",
+    "width": 640,
+    "height": 1138,
+    "bytes": 32800
+  },
+  {
+    "name": "touchpad",
+    "source": "../artifacts/qa/0.6-e2e/r7-released.png",
+    "width": 640,
+    "height": 1138,
+    "bytes": 26188
+  },
+  {
+    "name": "files",
+    "source": "../artifacts/qa/0.6-e2e/r3-upload-progress.png",
+    "width": 640,
+    "height": 1138,
+    "bytes": 35374
+  },
+  {
+    "name": "clipboard",
+    "source": "../artifacts/qa/0.6.1-e2e/61-release-image-from-pc.png",
+    "width": 640,
+    "height": 1422,
+    "bytes": 42038
+  },
+  {
+    "name": "power",
+    "source": "../artifacts/qa/0.6.1-e2e/05-power-scheduled-phone.png",
+    "width": 640,
+    "height": 1138,
+    "bytes": 38306
+  },
+  {
+    "name": "desktop",
+    "source": "../artifacts/qa/0.6.1-e2e/06-pc-overview-scheduled.png",
+    "width": 1260,
+    "height": 966,
+    "bytes": 66234
+  },
+  {
+    "name": "security",
+    "source": "../artifacts/qa/0.6.1-e2e/10-pc-interromper.png",
+    "width": 1000,
+    "height": 767,
+    "bytes": 40574
+  }
+]
