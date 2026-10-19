@@ -94,3 +94,14 @@ Refatoração do sistema visual preservando marca, Geist, acento cyan, capturas 
 - Downloads: metadados com ponto médio viraram lista de definição (Sistema, Pacote, Versão). As versões vêm de `versions` em `content.ts`, que também monta os links, porque os cartões mostravam 0.6.4/0.6.5 enquanto os links já eram 0.6.5/0.6.6. O QR codificava o APK 0.6.5; foi regenerado (qrcode 1.5.4, correção M, quiet zone de 4 módulos) para o APK 0.6.6 e ganhou três passos de escaneamento. O banner de releases conta os itens do JSON.
 - Ícones de texto (`+`, `↑`) substituídos por Phosphor. Barra móvel sempre montada, desliza com `inert` quando oculta, respeita safe areas.
 - Ícone: mesma geometria dos dois prismas, tile sangrado (a marca fica maior no favicon), sem filtro de sombra (borrava em 16 px), variante escura por `prefers-color-scheme` no SVG e tile escuro no cabeçalho quando o tema é escuro. PNG 32, apple-touch 180 (quadrado, o iOS aplica a máscara), 192 e 512 com manifest, gerados por `npm run build:icons`. Os ícones dos apps desktop e Android não foram alterados.
+
+## Hero só com o celular e capturas 0.6.6, 19/10/2026
+
+- O hero mostra apenas o celular: a promessa é o Android como controle, e a janela escura do desktop competia com as telas claras do app. O app desktop continua em Segurança, onde a captura prova o botão Interromper.
+- Três celulares em palco (Mídia na frente, Deck de Ações e Apresentador atrás), sem rotação, com sombra de chão neutra. Selo de plataforma só no aparelho da frente. No celular, os dois de trás aparecem parcialmente atrás do principal.
+- Fundo do hero com grade de pontos mascarada, o mesmo motivo da área do touchpad do app. Sem brilho colorido.
+- Novas capturas da 0.6.6-kotlin em AVD Pixel 7 (1080 × 2400, 20:9), pareado com o PC Remote real do Windows. Barra de status em modo demo do Android (relógio 9:41, sinal e bateria cheios); a interface do app não foi alterada. A sessão de mídia é real, com um WAV silencioso chamado "Faixa de demonstração"; o texto em Transferir chegou pela sincronização de clipboard real. Originais em `../artifacts/qa/0.6.6-landing/`.
+- Explorador reorganizado pelas abas do próprio app: Mídia, Mouse e teclado, Slides e atalhos (novo: Deck de Ações, Apresentador e teclado numérico, disponíveis desde o desktop 0.6.3), Arquivos e texto (arquivos + clipboard) e Energia. A aba de Controles mostra dois aparelhos no desktop.
+- Copy de vendas reescrita em torno de cenas concretas (sofá, apresentação, arquivo que precisa ir para o PC), mantendo os limites: sem "latência zero", sem promessa de tempo de instalação, Wake-on-LAN condicionado à placa de rede e à BIOS.
+- Toggle de tema compacto: botão de 40 px (44 px no celular) com o ícone do tema ativo e troca animada; mantém `role=switch`.
+- Preload só da captura de mídia, usada em todas as larguras; Open Graph continua com a captura horizontal do desktop.

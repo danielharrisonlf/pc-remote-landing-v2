@@ -6,12 +6,11 @@ import { ArrowUp } from '@phosphor-icons/react/dist/csr/ArrowUp'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/csr/ArrowUpRight'
 import { Camera } from '@phosphor-icons/react/dist/csr/Camera'
 import { Check } from '@phosphor-icons/react/dist/csr/Check'
-import { ClipboardText } from '@phosphor-icons/react/dist/csr/ClipboardText'
+import { ArrowsLeftRight } from '@phosphor-icons/react/dist/csr/ArrowsLeftRight'
 import { Copy } from '@phosphor-icons/react/dist/csr/Copy'
 import { CursorClick } from '@phosphor-icons/react/dist/csr/CursorClick'
 import { Desktop } from '@phosphor-icons/react/dist/csr/Desktop'
 import { DownloadSimple } from '@phosphor-icons/react/dist/csr/DownloadSimple'
-import { FolderSimple } from '@phosphor-icons/react/dist/csr/FolderSimple'
 import { GithubLogo } from '@phosphor-icons/react/dist/csr/GithubLogo'
 import { LinuxLogo } from '@phosphor-icons/react/dist/csr/LinuxLogo'
 import { List } from '@phosphor-icons/react/dist/csr/List'
@@ -19,6 +18,7 @@ import { LockKey } from '@phosphor-icons/react/dist/csr/LockKey'
 import { MagnifyingGlassPlus } from '@phosphor-icons/react/dist/csr/MagnifyingGlassPlus'
 import { Moon } from '@phosphor-icons/react/dist/csr/Moon'
 import { PlayPause } from '@phosphor-icons/react/dist/csr/PlayPause'
+import { PresentationChart } from '@phosphor-icons/react/dist/csr/PresentationChart'
 import { Plus } from '@phosphor-icons/react/dist/csr/Plus'
 import { Power } from '@phosphor-icons/react/dist/csr/Power'
 import { Scan } from '@phosphor-icons/react/dist/csr/Scan'
@@ -72,8 +72,8 @@ function ThemeToggle() {
       title={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
       onClick={toggle}
     >
-      <Sun className="theme-sun" size={19} />
-      <Moon className="theme-moon" size={19} />
+      <Sun className="theme-sun" size={18} />
+      <Moon className="theme-moon" size={18} />
     </button>
   )
 }
@@ -167,55 +167,57 @@ function Header({ activeView, onSelectView }: HeaderProps) {
   )
 }
 
-function PhoneScreenshot({ name, alt, priority = false, className = '' }: { name: string; alt: string; priority?: boolean; className?: string }) {
-  const tall = name === 'clipboard'
-  return <Screenshot frame="phone" name={name} width={640} height={tall ? 1422 : 1138} alt={alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} className={`${tall ? 'device-tall' : ''} ${className}`} />
+function PhoneScreenshot({ name, alt, priority = false, badge = true, className = '' }: { name: string; alt: string; priority?: boolean; badge?: boolean; className?: string }) {
+  return <Screenshot frame="phone" name={name} width={720} height={1600} alt={alt} badge={badge} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} className={className} />
 }
 
 function Hero({ onNavigateReleases }: { onNavigateReleases: () => void }) {
   return (
-    <section className="hero shell" id="top">
-      <div className="hero-copy">
-        <h1>Seu Android vira<br /><span>o controle do PC.</span></h1>
-        <p className="hero-description">Mouse, teclado, mídia e arquivos. Os comandos vão direto do celular ao computador pela sua rede Wi-Fi, sem conta e sem servidor na nuvem.</p>
-        <div className="hero-actions">
-          <a className="button" href={links.android}><AndroidLogo size={21} /><span>Baixar Android</span></a>
-          <a className="button secondary" href={links.windows}><WindowsLogo size={21} /><span>Baixar Windows</span></a>
+    <section className="hero" id="top">
+      <div className="shell hero-inner">
+        <div className="hero-copy">
+          <h1>Controle o PC<br /><span>direto do sofá.</span></h1>
+          <p className="hero-description">Pause o filme, passe os slides, digite e desligue o computador pelo Android. Cada comando vai direto pela sua rede Wi-Fi, sem passar por servidor na nuvem.</p>
+          <div className="hero-actions">
+            <a className="button" href={links.android}><AndroidLogo size={21} /><span>Baixar para Android</span></a>
+            <a className="button secondary" href={links.windows}><WindowsLogo size={21} /><span>Baixar para Windows</span></a>
+          </div>
+          <ul className="hero-proof" aria-label="Por que é diferente">
+            <li><WifiHigh size={18} />Funciona na rede de casa, mesmo sem internet</li>
+            <li><LockKey size={18} />Sem conta, sem login</li>
+            <li><a href={links.desktopRepo} target="_blank" rel="noreferrer"><GithubLogo size={18} />Grátis e de código aberto<ArrowUpRight size={14} /></a></li>
+          </ul>
+          <div className="hero-help">
+            <a className="hero-setup-link" href="#como-funciona">Como funciona em 3 passos <ArrowRight size={15} /></a>
+            <a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Usa Ubuntu? <ArrowRight size={15} /></a>
+            <a
+              className="hero-ubuntu-link text-link"
+              href="#releases"
+              onClick={(e) => { e.preventDefault(); onNavigateReleases() }}
+            >
+              <Tag size={17} />Histórico de releases <ArrowRight size={15} />
+            </a>
+          </div>
         </div>
-        <ul className="hero-proof" aria-label="Por que é diferente">
-          <li><WifiHigh size={18} />Controle pela rede local</li>
-          <li><LockKey size={18} />Sem conta e sem login</li>
-          <li><a href={links.desktopRepo} target="_blank" rel="noreferrer"><GithubLogo size={18} />Grátis e código aberto<ArrowUpRight size={14} /></a></li>
-        </ul>
-        <div className="hero-help">
-          <a className="hero-setup-link" href="#como-funciona">Como instalar nos dois aparelhos <ArrowRight size={15} /></a>
-          <a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Usa Ubuntu? <ArrowRight size={15} /></a>
-          <a
-            className="hero-ubuntu-link text-link"
-            href="#releases"
-            onClick={(e) => { e.preventDefault(); onNavigateReleases() }}
-          >
-            <Tag size={17} />Ver histórico de releases <ArrowRight size={15} />
-          </a>
-        </div>
+        <figure className="hero-product">
+          <div className="phone-stage">
+            <PhoneScreenshot name="deck" badge={false} className="stage-phone stage-left" alt="Deck de Ações no Android com atalhos como mostrar a área de trabalho, capturar a tela e alternar janelas" />
+            <PhoneScreenshot name="slides" badge={false} className="stage-phone stage-right" alt="Apresentador de slides no Android com timer, próximo, anterior, tela preta e tela branca" />
+            <PhoneScreenshot name="media" priority className="stage-phone stage-front" alt="Tela de mídia no Android tocando uma faixa no PC, com volume do computador em 53%" />
+          </div>
+          <figcaption><MagnifyingGlassPlus size={16} />Telas reais do app Android {versions.android}. Toque para ampliar.</figcaption>
+        </figure>
       </div>
-      <figure className="hero-product">
-        <div className="product-scene">
-          <Screenshot frame="window" className="scene-window" name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} crop={[8, 8, 1]} fetchPriority="high" />
-          <PhoneScreenshot name="media" priority className="scene-phone" alt="Android com busca no YouTube e controles de mídia" />
-        </div>
-        <figcaption><MagnifyingGlassPlus size={16} />Telas reais do app. Toque para ampliar.</figcaption>
-      </figure>
     </section>
   )
 }
 
 const tools = [
-  { id: 'media', label: 'Mídia e volume', icon: PlayPause, title: 'O filme continua. Você fica no sofá.', description: 'Pause, troque de faixa e ajuste o volume do computador sem levantar. Escolha o player ativo ou pesquise no YouTube pelo celular.', bullets: ['Reproduzir, pausar, avançar e voltar', 'Volume e mudo do computador', 'Busca no YouTube abre no navegador do PC'], note: 'Os controles disponíveis dependem do player. O app mostra quais ações são compatíveis.', alt: 'Tela real de mídia com seleção de player, botão de pausa e busca no YouTube', metric: 'Seu entretenimento, ao alcance da mão.' },
-  { id: 'touchpad', label: 'Mouse e teclado', icon: CursorClick, title: 'O mouse ficou longe? Use o celular.', description: 'Transforme a tela do Android em touchpad. Navegue, role páginas e digite na janela aberta no computador.', bullets: ['Um dedo move o cursor; um toque clica', 'Dois dedos rolam e abrem o menu de contexto', 'Teclado e atalhos como Enter, Tab e Esc'], note: 'O PC Remote controla a janela em foco. Não transmite a tela do computador para o celular.', alt: 'Touchpad real ativado no Android com gestos, teclas rápidas e botões de clique', metric: 'Cursor, gestos e digitação. No mesmo app.' },
-  { id: 'files', label: 'Arquivos', icon: FolderSimple, title: 'Do celular para o PC. E de volta.', description: 'Envie uma foto, um documento ou um arquivo grande pela rede local. Sem cabo, sem e-mail para você mesmo e sem upload na nuvem.', bullets: ['Até 1 GB por arquivo, nos dois sentidos', 'Acompanhe o progresso e cancele quando quiser', 'Arquivos recebidos ficam na pasta PC Remote'], note: 'A integridade é conferida por SHA-256. No Windows, os avisos de segurança de arquivos recebidos são preservados.', alt: 'Transferência real de um arquivo de 1 GB entre celular e computador com progresso e opção de cancelar', metric: 'Até 1 GB por arquivo.' },
-  { id: 'clipboard', label: 'Copiar e colar', icon: ClipboardText, title: 'Copie aqui. Continue no outro aparelho.', description: 'Leve links, trechos de texto e imagens de um dispositivo ao outro. Ative a sincronização ou envie manualmente quando precisar.', bullets: ['Textos e imagens nos dois sentidos', 'PNG e JPEG de até 32 MB', 'Pause a sincronização no PC ou no Android'], note: 'Sem histórico de conteúdo em disco. O Android pode limitar a leitura automática em segundo plano.', alt: 'Tela real da área de transferência com uma imagem recebida do PC e botão de copiar no celular', metric: 'Menos troca de telas. Menos retrabalho.' },
-  { id: 'power', label: 'Energia', icon: Power, title: 'Terminou por hoje? Desligue pelo celular.', description: 'Bloqueie, suspenda ou desligue o computador à distância dentro de casa. Prefere esperar? Deixe a ação agendada.', bullets: ['Ações imediatas ou agendadas de 15 min a 2 h', 'Cancele pelo celular ou pelo computador', 'Programas não são fechados à força'], note: 'Arquivos não salvos podem impedir o desligamento. O desktop informa quando existe uma ação agendada.', alt: 'Tela real de energia do PC com desligamento agendado em 15 minutos e ações de bloquear, suspender e reiniciar', metric: 'Você escolhe a hora de encerrar.' },
+  { id: 'media', image: 'media', label: 'Mídia e volume', icon: PlayPause, title: 'O filme continua. Você fica no sofá.', description: 'Pause, avance e ajuste o volume do computador sem levantar. Quer ver outra coisa? Pesquise no YouTube pelo celular, até por voz, e o vídeo abre no PC.', bullets: ['Tocar, pausar, avançar e voltar no player ativo', 'Volume e mudo do computador na ponta do dedo', 'Busca no YouTube, digitada ou falada'], note: 'Os controles disponíveis dependem do player. O app apaga os botões que ele não aceita.', alt: 'Tela real de mídia tocando uma faixa no PC, com volume do computador em 53%', metric: 'Seu entretenimento, ao alcance da mão.' },
+  { id: 'touchpad', image: 'touchpad', label: 'Mouse e teclado', icon: CursorClick, title: 'O mouse ficou longe? A tela do celular vira touchpad.', description: 'Mova o cursor, role páginas e digite no computador como se estivesse na mesa. Esc, Tab, Enter e Espaço ficam a um toque.', bullets: ['Um dedo move o cursor; um toque clica', 'Dois dedos rolam; toque com dois dedos abre o menu', 'Teclado do Android digita direto no PC'], note: 'O PC Remote controla a janela em foco. Ele não transmite a tela do computador para o celular.', alt: 'Touchpad real no Android com área de gestos, teclas Esc, Tab, Enter e Espaço e botões de clique', metric: 'Cursor, gestos e digitação no mesmo app.' },
+  { id: 'controls', image: 'deck', backImage: 'slides', backAlt: 'Apresentador de slides com timer, próximo, anterior, tela preta e tela branca', label: 'Slides e atalhos', icon: PresentationChart, title: 'Apresente sem ficar preso ao notebook.', description: 'Passe os slides andando pela sala, com timer e tela preta para pausar a plateia. No Deck de Ações, um toque mostra a área de trabalho, captura a tela ou fecha a janela.', bullets: ['Próximo e anterior também pelos botões de volume', '12 atalhos do sistema no Deck de Ações', 'Teclado numérico para planilhas e calculadora'], note: 'Os comandos agem na janela em foco no computador. O Deck usa atalhos do próprio sistema operacional.', alt: 'Deck de Ações no Android com doze atalhos, como mostrar a área de trabalho, capturar a tela e alternar janelas', metric: 'Apresentador, atalhos e teclado numérico.' },
+  { id: 'transfer', image: 'transfer', label: 'Arquivos e texto', icon: ArrowsLeftRight, title: 'Copiou no PC? Já está no celular.', description: 'Copie um link ou um trecho no computador e cole no Android, ou o contrário. Fotos e documentos vão pela rede de casa, sem cabo, sem e-mail para você mesmo e sem upload.', bullets: ['Área de transferência em tempo real, com texto e imagem', 'Arquivos de até 1 GB nos dois sentidos', 'Integridade conferida por SHA-256'], note: 'Sem histórico do conteúdo copiado em disco. O Android pode limitar a leitura automática com o app em segundo plano; o envio manual continua disponível.', alt: 'Tela Transferir no Android com um texto recebido do PC em tempo real e opções para enviar arquivo e texto', metric: 'Menos troca de aparelho, menos retrabalho.' },
+  { id: 'power', image: 'power', label: 'Energia', icon: Power, title: 'Terminou por hoje? Desligue pelo celular.', description: 'Bloqueie, suspenda, reinicie ou desligue o computador sem ir até ele. Prefere esperar o download terminar? Agende para depois.', bullets: ['Bloquear, suspender, reiniciar e desligar', 'Agendamento de 15 min a 2 h, com cancelamento', 'Programas abertos podem pedir para salvar antes'], note: 'Arquivos não salvos podem impedir o desligamento. O app também envia Wake-on-LAN quando a placa de rede e a BIOS do PC permitem ligar pela rede.', alt: 'Tela Conexão no Android com o PC conectado e os botões Bloquear, Suspender, Desligar e Reiniciar', metric: 'Você escolhe a hora de encerrar.' },
 ]
 
 function Features() {
@@ -239,36 +241,36 @@ function Features() {
     event.preventDefault(); setSelected(next); refs.current[next]?.focus()
   }
   return <section className="section shell" id="recursos">
-    <div className="section-title"><h2>Faça pelo celular.<br />Fique onde você está.</h2><p>Do vídeo no sofá ao arquivo que você precisa no PC. Escolha o que quer fazer.</p></div>
+    <div className="section-title"><h2>Um app, cinco controles.<br />Todos no seu bolso.</h2><p>Do filme no sofá à apresentação na sala de reunião. Escolha uma tarefa e veja a tela real.</p></div>
     <div className="feature-tabs" ref={tabList} role="tablist" aria-label="Funcionalidades do PC Remote">{tools.map((item, i) => <button ref={el => { refs.current[i] = el }} key={item.id} id={`tab-${item.id}`} aria-selected={selected === i} aria-controls="feature-panel" tabIndex={selected === i ? 0 : -1} role="tab" onKeyDown={e => navigateTabs(e, i)} onClick={() => setSelected(i)}><item.icon size={21} /><span>{item.label}</span></button>)}</div>
     <div className="feature-panel" id="feature-panel" role="tabpanel" aria-label={tool.label} tabIndex={0}>
       <div className="feature-copy" key={`copy-${tool.id}`}><span className="feature-kind"><tool.icon size={22} />{tool.label}</span><h3>{tool.title}</h3><p>{tool.description}</p><ul className="check-list">{tool.bullets.map(item => <li key={item}><Check size={18} />{item}</li>)}</ul><a className="text-link" href="#downloads">Baixar e começar a usar <ArrowRight size={18} /></a><details className="feature-note"><summary>Detalhes e compatibilidade</summary><p>{tool.note}</p></details></div>
-      <figure className="feature-visual" key={tool.id}><PhoneScreenshot name={tool.id} alt={tool.alt} /><figcaption>{tool.metric}</figcaption></figure>
+      <figure className={`feature-visual${tool.backImage ? ' has-back' : ''}`} key={tool.id}><div className="feature-phones">{tool.backImage && <PhoneScreenshot name={tool.backImage} alt={tool.backAlt ?? ''} badge={false} className="feature-back" />}<PhoneScreenshot name={tool.image} alt={tool.alt} className="feature-front" /></div><figcaption>{tool.metric}</figcaption></figure>
     </div>
     <div className="feature-shortcuts" aria-label="Explorar outros recursos">{tools.map((item, i) => <button type="button" key={item.id} className={selected === i ? 'selected' : ''} aria-pressed={selected === i} onClick={() => { setSelected(i); document.getElementById('recursos')?.scrollIntoView({ block: 'start' }) }}><item.icon size={20} /><span>{item.label}</span><ArrowUpRight size={15} /></button>)}</div>
   </section>
 }
 
 function Benefits() {
-  return <section className="section benefits-section" id="diferenciais"><div className="shell"><div className="section-title"><h2>Sem conta.<br />Sem mensalidade.</h2><p>O que você precisa para usar já é seu: um PC, um Android e a sua rede.</p></div><div className="benefits-grid">
-    <article className="benefit-main"><WifiHigh size={32} /><h3>Se o Wi-Fi funciona,<br />o controle continua.</h3><p>A internet pode cair. Com os dois aparelhos na mesma rede, você continua usando mouse, mídia, arquivos e área de transferência.</p><span className="benefit-detail">Conexão direta pela LAN. Sem servidor externo de controle.</span></article>
-    <article><LockKey size={26} /><h3>Sem criar mais uma conta.</h3><p>Sem login, senha de serviço ou e-mail. Você autoriza o celular diretamente no computador.</p></article>
-    <article><GithubLogo size={26} /><h3>Todas as ferramentas. Zero mensalidade.</h3><p>Mouse, mídia, arquivos e mais, sem anúncios nem limite de sessão. Código aberto para você conferir.</p><a className="text-link" href={links.desktopRepo} target="_blank" rel="noreferrer">Explorar o código <ArrowUpRight size={16} /></a></article>
-  </div><div className="engineering-note"><Desktop size={22} /><p><strong>Feito para controlar, sem transmitir a tela inteira.</strong> Desktop em Tauri v2 + Rust e Android nativo. Só as ações e os dados necessários passam pela sua rede.</p></div></div></section>
+  return <section className="section benefits-section" id="diferenciais"><div className="shell"><div className="section-title"><h2>Sem conta, sem mensalidade,<br />sem nuvem no meio.</h2><p>Você já tem tudo o que precisa: um PC, um Android e o Wi-Fi de casa. O PC Remote só liga os três.</p></div><div className="benefits-grid">
+    <article className="benefit-main"><WifiHigh size={32} /><h3>A internet caiu?<br />O controle continua.</h3><p>Celular e computador conversam direto pela rede de casa. Com os dois no mesmo Wi-Fi, mouse, mídia, arquivos e área de transferência seguem funcionando.</p><span className="benefit-detail">Conexão direta pela LAN, sem servidor externo de controle.</span></article>
+    <article><LockKey size={26} /><h3>Nada de cadastro.</h3><p>Sem login, senha de serviço ou e-mail. Você aprova o celular no próprio computador e pronto.</p></article>
+    <article><GithubLogo size={26} /><h3>Tudo liberado, de graça.</h3><p>Todas as ferramentas, sem anúncios, sem limite de sessão e sem plano pago. O código é aberto para quem quiser conferir.</p><a className="text-link" href={links.desktopRepo} target="_blank" rel="noreferrer">Ver o código no GitHub <ArrowUpRight size={16} /></a></article>
+  </div><div className="engineering-note"><Desktop size={22} /><p><strong>Feito para controlar, não para espelhar a tela.</strong> Desktop em Tauri v2 + Rust e Android nativo em Kotlin. Só os comandos e os dados que você envia passam pela rede.</p></div></div></section>
 }
 
 function HowItWorks() {
-  return <section className="section shell" id="como-funciona"><div className="section-title"><h2>Baixe nos dois.<br />Pareie e comece.</h2><p>Sem login. O pareamento é feito diretamente entre os aparelhos.</p></div><ol className="steps">
+  return <section className="section shell" id="como-funciona"><div className="section-title"><h2>Três passos e o PC<br />responde ao seu celular.</h2><p>Sem login e sem configurar roteador. O pareamento acontece direto entre os aparelhos.</p></div><ol className="steps">
     <li><span className="step-number">1</span><h3>Instale nos dois aparelhos</h3><p>Baixe o instalador para Windows ou Ubuntu e o APK no Android. Abra os aplicativos.</p><a className="text-link" href="#downloads">Ver downloads <ArrowRight size={16} /></a></li>
-    <li><span className="step-number">2</span><h3>Encontre seu computador</h3><p>No PC, toque em “Parear celular”. No Android, leia o QR ou digite o código de 8 dígitos.</p></li>
-    <li><span className="step-number">3</span><h3>Confirme e comece a usar</h3><p>No pareamento por código, compare a faixa de verificação. Aprove o pedido no PC e abra a ferramenta que quiser.</p></li>
+    <li><span className="step-number">2</span><h3>Leia o QR Code</h3><p>No PC, clique em “Parear celular”. No Android, aponte a câmera para o QR ou digite o código de 8 dígitos.</p></li>
+    <li><span className="step-number">3</span><h3>Aprove e use</h3><p>Confira se as cores batem nos dois aparelhos e permita o pedido no PC. Da próxima vez, ele reconecta sozinho.</p></li>
   </ol></section>
 }
 
 function Comparison() {
   const [rival, setRival] = useState<'remote' | 'unified' | 'phone'>('remote')
   const names = { remote: 'TeamViewer / AnyDesk', unified: 'Unified Remote', phone: 'Vínculo com Celular' }
-  return <section className="section comparison-section" id="comparar"><div className="shell"><div className="section-title"><h2>Escolha o controle<br />que faz sentido para você.</h2><p>Quer usar o PC pelo celular dentro de casa? Compare as opções pelo que elas realmente oferecem.</p></div>
+  return <section className="section comparison-section" id="comparar"><div className="shell"><div className="section-title"><h2>Feito para o controle em casa.<br />Não para acesso remoto.</h2><p>Ferramentas de acesso remoto resolvem outro problema. Compare pelo que cada uma realmente oferece.</p></div>
     <label className="comparison-select">Comparar PC Remote com<select value={rival} onChange={e => setRival(e.target.value as typeof rival)}><option value="remote">TeamViewer / AnyDesk</option><option value="unified">Unified Remote</option><option value="phone">Vínculo com Celular</option></select></label>
     <div className="table-wrap"><table><caption className="sr-only">Comparativo de finalidade, rede, conta, preço e plataformas</caption><thead><tr><th scope="col">O que muda</th><th scope="col" className="pc-column">PC Remote</th><th scope="col">TeamViewer / AnyDesk</th><th scope="col">Unified Remote</th><th scope="col">Vínculo com Celular</th></tr></thead><tbody>{comparison.map(row => <tr key={row.label}><th scope="row">{row.label}</th><td className="pc-column">{row.chip && <span className="status-chip"><Check size={13} weight="bold" />{row.chip}</span>}{row.pc}</td><td>{row.remote}</td><td>{row.unified}</td><td>{row.phone}</td></tr>)}</tbody></table></div>
     <div className="comparison-cards" aria-label={`PC Remote comparado com ${names[rival]}`}>{comparison.map(row => <article key={row.label}><h3>{row.label}</h3><div className="comparison-answer our-answer"><span>PC Remote{row.chip && <span className="status-chip"><Check size={13} weight="bold" />{row.chip}</span>}</span><p><Check size={17} />{row.pc}</p></div><div className="comparison-answer"><span>{names[rival]}</span><p>{row[rival]}</p></div></article>)}</div>
@@ -300,8 +302,8 @@ function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
     <section className="section downloads-section" id="downloads">
       <div className="shell">
         <div className="section-title">
-          <h2>Baixe grátis.<br />Controle seu PC.</h2>
-          <p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p>
+          <h2>Comece agora.<br />É grátis nos dois aparelhos.</h2>
+          <p>Instale no computador e no celular, conecte os dois ao mesmo Wi-Fi e pareie pelo QR Code.</p>
         </div>
         <div className="download-grid">
           <article className="download-card">
@@ -387,7 +389,7 @@ function Faq() {
     ['Funciona com qualquer player de música ou vídeo?', 'O app usa as capacidades que o player publica para o sistema: controles de mídia do Windows e MPRIS no Linux. Nem todo player permite todas as ações. O Android indica quais controles estão disponíveis.'],
     ['Preciso configurar meu roteador ou ter conta?', 'Não é preciso criar conta nem abrir portas no roteador. A comunicação de controle usa TCP 43127 na LAN, com descoberta opcional por mDNS. O firewall pode pedir permissão para a rede privada. Redes de convidados e VPNs podem bloquear a conexão.'],
   ]
-  return <section className="section shell faq-section" id="faq"><div className="faq-heading"><h2>Antes de baixar.</h2><p>O que você precisa saber para começar.</p><a className="text-link" href={links.installation} target="_blank" rel="noreferrer">Ler a documentação <ArrowUpRight size={16} /></a></div><div className="faq-list">{faqs.map(([q, a]) => <details key={q}><summary>{q}<Plus size={18} aria-hidden="true" /></summary><p>{a}</p></details>)}</div></section>
+  return <section className="section shell faq-section" id="faq"><div className="faq-heading"><h2>Perguntas frequentes.</h2><p>O que vale saber antes de instalar, sem letra miúda.</p><a className="text-link" href={links.installation} target="_blank" rel="noreferrer">Ler a documentação <ArrowUpRight size={16} /></a></div><div className="faq-list">{faqs.map(([q, a]) => <details key={q}><summary>{q}<Plus size={18} aria-hidden="true" /></summary><p>{a}</p></details>)}</div></section>
 }
 
 function Footer({ onNavigateReleases }: { onNavigateReleases: () => void }) {
@@ -397,7 +399,7 @@ function Footer({ onNavigateReleases }: { onNavigateReleases: () => void }) {
         <div className="footer-main">
           <div>
             <Brand onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
-            <p>Seu PC, mais perto.<br />Mesmo quando você está no sofá.</p>
+            <p>O controle do PC, no seu bolso.<br />Grátis, local e de código aberto.</p>
           </div>
           <div className="footer-links">
             <a href={links.desktopRepo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>

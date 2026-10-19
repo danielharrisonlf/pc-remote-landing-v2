@@ -77,3 +77,11 @@ As métricas Lighthouse e a matriz Axe acima pertencem ao redesign anterior; nã
 - Contraste calculado dos tokens: menor par de texto 5.03:1 no claro e 6.01:1 no escuro; bordas de controle 3.29:1 e 3.41:1. O verde Android no claro (4.42:1) foi escurecido antes da publicação.
 - Hashes Windows 0.6.5, Android 0.6.6 e Ubuntu 0.6.4 conferidos com os SHA256SUMS das releases. QR decodificado de forma independente (jsQR 1.4.0) para o link do APK 0.6.6.
 - Evidências em `../artifacts/qa/landing-refactor/`. Lighthouse e Axe não foram repetidos nesta rodada.
+
+## Hero com celulares e capturas 0.6.6, 19/10/2026
+
+- `npm run lint`, `npm run build` e `git diff --check` aprovados.
+- Matriz Chromium/Playwright no preview de produção (320/360/390/768/1024/1440, claro e escuro): zero overflow, nenhum alvo de toque abaixo de 44 px no celular, todas as imagens com dimensões, zero erros de console ou hidratação.
+- Interações repetidas: abas por teclado e toque, modal a partir do celular do hero (foco, blur, tamanho real, Escape e foco devolvido), tema persistido, barra móvel, menu.
+- Capturas: APK oficial 0.6.6-kotlin (SHA-256 `10c9935a…6fd7c1`, igual à release) instalado por cima do debug usado só para o convite de pareamento; versionCode 606 confirmado no aparelho. Recursos de Controles conferidos no código: `presentation.v1`, `deck.v1` e `numpad.v1` no Android e no desktop desde a v0.6.3.
+- Evidências em `../artifacts/qa/landing-phones/`.

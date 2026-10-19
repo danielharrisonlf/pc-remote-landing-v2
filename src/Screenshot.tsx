@@ -17,6 +17,8 @@ type Props = {
   crop?: [number, number, number?]
   loading?: 'eager' | 'lazy'
   fetchPriority?: 'high' | 'auto'
+  /** Platform chip under the frame; off for supporting devices in a group. */
+  badge?: boolean
   className?: string
 }
 
@@ -25,7 +27,7 @@ const platforms = {
   window: { label: 'App Windows', Icon: WindowsLogo },
 }
 
-export default function Screenshot({ name, alt, width, height, frame, crop, loading = 'lazy', fetchPriority = 'auto', className = '' }: Props) {
+export default function Screenshot({ name, alt, width, height, frame, crop, loading = 'lazy', fetchPriority = 'auto', badge = true, className = '' }: Props) {
   const dialog = useRef<HTMLDialogElement>(null)
   const [actualSize, setActualSize] = useState(false)
   const id = useId()
@@ -44,7 +46,7 @@ export default function Screenshot({ name, alt, width, height, frame, crop, load
           <img src={src} width={width} height={height} alt={alt} loading={loading} fetchPriority={fetchPriority} decoding="async" style={imageStyle} />
         </span>
       </button>
-      <span className="device-badge" aria-hidden="true"><Icon size={14} weight="bold" />{label}</span>
+      {badge && <span className="device-badge" aria-hidden="true"><Icon size={14} weight="bold" />{label}</span>}
     </div>
     <dialog className="image-dialog" ref={dialog} aria-labelledby={id} onClick={e => { if (e.target === e.currentTarget) dialog.current?.close() }}>
       <div className="image-dialog-toolbar">
