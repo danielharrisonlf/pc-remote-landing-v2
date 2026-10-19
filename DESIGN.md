@@ -76,3 +76,4 @@ A captura enviada mostrou conteúdo cortado. A auditoria independente do estado 
 - Ícones importados pelos caminhos individuais documentados pelo Phosphor para evitar varrer os milhares de módulos do pacote no build. Sem dependências novas no aplicativo.
 
 As evidências desta rodada ficam em `../artifacts/qa/landing-mobile/`. Memória Semantica indisponível; nenhum registro de memória durável foi criado.
+Na publicação, o novo host foi registrado nos domínios do projeto antes da promoção. O domínio antigo usa redirecionamento nativo 308 da Vercel, cobrindo a raiz e preservando caminhos e query strings; o `vercel.json` permanece como fallback para caminhos. A proteção de acesso dos previews foi mantida.

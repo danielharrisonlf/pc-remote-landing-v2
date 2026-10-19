@@ -1,4 +1,4 @@
-﻿# PC Remote | Landing page
+# PC Remote | Landing page
 
 Landing page do PC Remote em React 19, TypeScript e Vite. A apresentação usa benefícios, capturas reais ampliáveis, exploração de funcionalidades por teclado, comparação documentada e downloads diretos. Inclui temas claro/escuro com preferência persistida e layouts específicos para mobile.
 
@@ -41,4 +41,4 @@ Versões de avaliação: APK com chave debug e instalador Windows sem Authentico
 
 Projeto Vercel existente `pc-remote-landing-v2`, conectado ao repositório separado da landing. Publicação pela CLI: `npx vercel --prod --yes`.
 
-Endereço público: **https://pc-remote-app.vercel.app/**. O nome interno do projeto e do repositório foi mantido. `vercel.json` redireciona o host antigo para o novo, preservando os caminhos. Ao publicar a mudança de domínio pela primeira vez, ative o alias novo antes de promover o redirecionamento para produção.
+Endereço público: **https://pc-remote-app.vercel.app/**. O nome interno do projeto e do repositório foi mantido. O domínio antigo tem redirecionamento nativo 308 na Vercel para o novo endereço, preservando caminhos e query strings. `vercel.json` mantém a regra de caminhos como fallback. Na primeira configuração, associe o host novo aos domínios do projeto (um alias isolado continua protegido), confira acesso público e só então ative o redirecionamento do antigo.

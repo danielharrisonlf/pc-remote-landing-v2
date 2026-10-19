@@ -62,3 +62,10 @@ As métricas Lighthouse e a matriz Axe acima pertencem ao redesign anterior; nã
 - Revisão estática independente aprovou CSS, SSR, imports de ícones, versão/hash e redirecionamento condicionado ao host antigo. Canonical, Open Graph, robots e sitemap apontam para `pc-remote-app.vercel.app`.
 - Evidências desta rodada: `../artifacts/qa/landing-mobile/` (matrizes, screenshots, fluxos, logs de build e lint). As medições Lighthouse e Axe históricas acima não foram repetidas; não são resultados deste refinamento. A emulação não substitui testes em todos os celulares físicos.
 - Semantica indisponível; memória durável não registrada.
+### Publicação verificada
+
+- Endereço público `https://pc-remote-app.vercel.app/`, HTTP 200 sem login, canonical e Open Graph no host novo. Build aceito do commit `6eb5c38` promovido para produção.
+- Domínio novo associado ao projeto da Vercel, sem compra e sem desativar a proteção dos previews. Atribuir somente um alias deixou o endereço protegido; registrar o domínio no projeto resolveu o acesso público.
+- Domínio antigo configurado com redirecionamento nativo 308. Raiz, caminhos e query strings são preservados; o destino não entra em loop. A regra `/:path*` no `vercel.json` funcionou para caminhos, mas não para a raiz neste deployment; o redirecionamento nativo cobre ambos.
+- Verificação pública independente em Chromium: 320 claro e 440 escuro, sem overflow, imagens carregadas, APK 0.6.5 correto e sem erros de JavaScript. Robots, sitemap, favicon, CSS, JavaScript e QR públicos conferidos.
+- Registro operacional sanitizado e verificação pública em `../artifacts/qa/landing-mobile/`.
