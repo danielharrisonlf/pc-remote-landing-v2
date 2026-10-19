@@ -20,26 +20,52 @@ import { PlayPause } from '@phosphor-icons/react/dist/csr/PlayPause'
 import { Power } from '@phosphor-icons/react/dist/csr/Power'
 import { ShieldCheck } from '@phosphor-icons/react/dist/csr/ShieldCheck'
 import { Sun } from '@phosphor-icons/react/dist/csr/Sun'
+import { Tag } from '@phosphor-icons/react/dist/csr/Tag'
 import { WifiHigh } from '@phosphor-icons/react/dist/csr/WifiHigh'
 import { WindowsLogo } from '@phosphor-icons/react/dist/csr/WindowsLogo'
 import { X } from '@phosphor-icons/react/dist/csr/X'
 import { links, hashes, comparison, comparisonSources } from './content'
 import { useTheme } from './theme'
 import Screenshot from './Screenshot'
+import { Releases } from './Releases'
 
-function Brand() {
-  return <a className="brand" href="#top" aria-label="PC Remote, início"><span className="brand-mark"><img src="/brand/symbol.svg" width="56" height="56" alt="" /></span><span>PC Remote</span></a>
+function Brand({ onClick }: { onClick: () => void }) {
+  return (
+    <a className="brand" href="#top" aria-label="PC Remote, início" onClick={(e) => { e.preventDefault(); onClick() }}>
+      <span className="brand-mark"><img src="/brand/symbol.svg" width="56" height="56" alt="" /></span>
+      <span>PC Remote</span>
+    </a>
+  )
 }
 
 function ThemeToggle() {
   const { theme, toggle } = useTheme()
-  return <button className="theme-toggle" type="button" role="switch" aria-checked={theme === 'dark'} aria-label="Tema escuro" title={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'} onClick={toggle}><Sun className="theme-sun" size={19} /><Moon className="theme-moon" size={19} /></button>
+  return (
+    <button
+      className="theme-toggle"
+      type="button"
+      role="switch"
+      aria-checked={theme === 'dark'}
+      aria-label="Tema escuro"
+      title={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+      onClick={toggle}
+    >
+      <Sun className="theme-sun" size={19} />
+      <Moon className="theme-moon" size={19} />
+    </button>
+  )
 }
 
-function Header() {
+interface HeaderProps {
+  activeView: 'home' | 'releases'
+  onSelectView: (view: 'home' | 'releases', anchor?: string) => void
+}
+
+function Header({ activeView, onSelectView }: HeaderProps) {
   const [open, setOpen] = useState(false)
   const header = useRef<HTMLElement>(null)
   const menuButton = useRef<HTMLButtonElement>(null)
+
   useEffect(() => {
     if (!open) return
     const escape = (event: globalThis.KeyboardEvent) => { if (event.key === 'Escape') { setOpen(false); menuButton.current?.focus() } }
@@ -48,36 +74,115 @@ function Header() {
     document.addEventListener('keydown', escape)
     document.addEventListener('pointerdown', outside)
     window.addEventListener('resize', resize)
-    return () => { document.removeEventListener('keydown', escape); document.removeEventListener('pointerdown', outside); window.removeEventListener('resize', resize) }
+    return () => {
+      document.removeEventListener('keydown', escape)
+      document.removeEventListener('pointerdown', outside)
+      window.removeEventListener('resize', resize)
+    }
   }, [open])
-  return <header ref={header} className="site-header"><div className="shell header-inner">
-    <Brand />
-    <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Navegação principal">
-      {[['recursos', 'Recursos'], ['diferenciais', 'Diferenciais'], ['comparar', 'Comparar'], ['seguranca', 'Segurança'], ['faq', 'FAQ']].map(([id, label]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}
-    </nav>
-    <div className="header-actions"><a className="github-link" href={links.desktopRepo} target="_blank" rel="noreferrer" aria-label="Código do PC Remote no GitHub"><GithubLogo size={21} /></a><ThemeToggle /><a className="button small header-download" href="#downloads" onClick={() => setOpen(false)}>Baixar grátis <ArrowDown size={15} /></a></div>
-    <button ref={menuButton} className="menu-button" type="button" aria-controls="main-navigation" aria-expanded={open} aria-label={open ? 'Fechar menu' : 'Abrir menu'} onClick={() => setOpen(!open)}>{open ? <X size={23} /> : <List size={23} />}</button>
-  </div></header>
+
+  const handleNav = (view: 'home' | 'releases', anchor?: string) => {
+    setOpen(false)
+    onSelectView(view, anchor)
+  }
+
+  return (
+    <header ref={header} className="site-header">
+      <div className="shell header-inner">
+        <Brand onClick={() => handleNav('home', 'top')} />
+        <nav id="main-navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Navegação principal">
+          {[
+            ['recursos', 'Recursos'],
+            ['diferenciais', 'Diferenciais'],
+            ['comparar', 'Comparar'],
+            ['seguranca', 'Segurança'],
+            ['faq', 'FAQ']
+          ].map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={activeView === 'home' ? '' : 'nav-external'}
+              onClick={(e) => { e.preventDefault(); handleNav('home', id) }}
+            >
+              {label}
+            </a>
+          ))}
+          <a
+            href="#releases"
+            className={`nav-link-releases ${activeView === 'releases' ? 'is-active' : ''}`}
+            onClick={(e) => { e.preventDefault(); handleNav('releases') }}
+          >
+            <span>Releases</span>
+            <span className="nav-link-badge">v0.6.5</span>
+          </a>
+        </nav>
+        <div className="header-actions">
+          <a className="github-link" href={links.desktopRepo} target="_blank" rel="noreferrer" aria-label="Código do PC Remote no GitHub">
+            <GithubLogo size={21} />
+          </a>
+          <ThemeToggle />
+          <a
+            className="button small header-download"
+            href="#downloads"
+            onClick={(e) => { e.preventDefault(); handleNav('home', 'downloads') }}
+          >
+            Baixar grátis <ArrowDown size={15} />
+          </a>
+        </div>
+        <button
+          ref={menuButton}
+          className="menu-button"
+          type="button"
+          aria-controls="main-navigation"
+          aria-expanded={open}
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X size={23} /> : <List size={23} />}
+        </button>
+      </div>
+    </header>
+  )
 }
 
 function PhoneScreenshot({ name, alt, priority = false, className = '' }: { name: string; alt: string; priority?: boolean; className?: string }) {
   return <div className={`phone ${name === 'clipboard' ? 'phone-tall' : ''} ${className}`}><Screenshot name={name} width={640} height={name === 'clipboard' ? 1422 : 1138} alt={alt} priority={priority} /></div>
 }
 
-function Hero() {
-  return <section className="hero shell" id="top">
-    <div className="hero-copy">
-      <a className="hero-source" href={links.desktopRepo} target="_blank" rel="noreferrer">Grátis e código aberto <ArrowUpRight size={15} /></a>
-      <h1>Seu Android vira<br /><span>o controle do PC.</span></h1>
-      <p className="hero-description">Mouse, teclado, mídia e arquivos. Controle o computador pelo Android, na mesma rede Wi-Fi.</p>
-      <div className="hero-actions"><a className="button" href={links.android}><AndroidLogo size={21} /><span>Baixar Android</span></a><a className="button secondary" href={links.windows}><WindowsLogo size={21} /><span>Baixar Windows</span></a></div>
-      <div className="hero-help"><a className="hero-setup-link" href="#como-funciona">Como instalar nos dois aparelhos <ArrowRight size={15} /></a><a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Usa Ubuntu? <ArrowRight size={15} /></a></div>
-    </div>
-    <figure className="hero-product">
-      <div className="product-scene"><div className="desktop-shot"><Screenshot name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} priority /></div><PhoneScreenshot name="media" priority alt="Android com busca no YouTube e controles de mídia" /></div>
-      <figcaption><MagnifyingGlassPlus size={16} />Telas reais do app. Toque para ampliar.</figcaption>
-    </figure>
-  </section>
+function Hero({ onNavigateReleases }: { onNavigateReleases: () => void }) {
+  return (
+    <section className="hero shell" id="top">
+      <div className="hero-copy">
+        <a className="hero-source" href={links.desktopRepo} target="_blank" rel="noreferrer">
+          Grátis e código aberto <ArrowUpRight size={15} />
+        </a>
+        <h1>Seu Android vira<br /><span>o controle do PC.</span></h1>
+        <p className="hero-description">Mouse, teclado, mídia e arquivos. Controle o computador pelo Android, na mesma rede Wi-Fi.</p>
+        <div className="hero-actions">
+          <a className="button" href={links.android}><AndroidLogo size={21} /><span>Baixar Android</span></a>
+          <a className="button secondary" href={links.windows}><WindowsLogo size={21} /><span>Baixar Windows</span></a>
+        </div>
+        <div className="hero-help">
+          <a className="hero-setup-link" href="#como-funciona">Como instalar nos dois aparelhos <ArrowRight size={15} /></a>
+          <a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Usa Ubuntu? <ArrowRight size={15} /></a>
+          <a
+            className="hero-ubuntu-link text-link"
+            href="#releases"
+            onClick={(e) => { e.preventDefault(); onNavigateReleases() }}
+          >
+            <Tag size={17} />Ver histórico de releases <ArrowRight size={15} />
+          </a>
+        </div>
+      </div>
+      <figure className="hero-product">
+        <div className="product-scene">
+          <div className="desktop-shot"><Screenshot name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} priority /></div>
+          <PhoneScreenshot name="media" priority alt="Android com busca no YouTube e controles de mídia" />
+        </div>
+        <figcaption><MagnifyingGlassPlus size={16} />Telas reais do app. Toque para ampliar.</figcaption>
+      </figure>
+    </section>
+  )
 }
 
 const tools = [
@@ -159,29 +264,82 @@ function HashControl({ value, platform }: { value: string; platform: string }) {
   return <details className="hash-control"><summary>Conferir SHA-256</summary><code>{value}</code><button type="button" onClick={copy} aria-label={`Copiar hash SHA-256 do ${platform}`}><Copy size={15} />Copiar hash</button><span role="status">{status}</span></details>
 }
 
-function Downloads() {
-  return <section className="section downloads-section" id="downloads"><div className="shell"><div className="section-title"><p className="eyebrow">Windows ou Ubuntu + Android</p><h2>Baixe grátis.<br />Controle seu PC.</h2><p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p></div><div className="download-grid">
-    <article className="download-card"><div className="download-top"><WindowsLogo size={30} /><span>1. Instale no PC</span></div><div className="download-heading"><h3>PC Remote para Windows</h3><span>Mouse, mídia, arquivos e energia.</span></div><p>Windows 10 (1809+) e 11 · x64<br />Instalador .exe · v0.6.4</p><a className="button" href={links.windows}><DownloadSimple size={19} />Baixar para Windows</a><a className="release-link" href={links.windowsRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.windows} platform="Windows" /></article>
-    <article className="download-card"><div className="download-top"><AndroidLogo size={30} /><span>2. Instale no celular</span></div><div className="download-heading"><h3>PC Remote para Android</h3><span>Seu controle, pronto para conectar.</span></div><p>Android 7 ou superior · APK universal<br />App nativo · v0.6.5-kotlin</p><a className="button secondary" href={links.android}><DownloadSimple size={19} />Baixar APK Android</a><a className="release-link" href={links.androidRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.android} platform="Android" /></article>
-    <aside className="qr-download"><img src="/android-apk-qr.svg" width="144" height="144" loading="lazy" alt="QR code com o link direto para baixar o APK oficial no Android" /><h3>Está no computador?</h3><p>Aponte a câmera do celular para baixar o APK.</p></aside>
-  </div><div className="install-notes"><p><strong>Versão de avaliação.</strong> O Windows pode exibir um aviso do SmartScreen; o instalador ainda não tem Authenticode. O APK usa chave debug e o Android solicita autorização para instalar dessa fonte.</p><a href={links.installation} target="_blank" rel="noreferrer">Guia de instalação Windows <ArrowUpRight size={16} /></a></div>
-    <aside className="linux-download" id="ubuntu-download" aria-labelledby="ubuntu-download-title">
-      <LinuxLogo size={30} aria-hidden="true" />
-      <div className="linux-copy">
-        <h3 id="ubuntu-download-title">Ubuntu 22.04, 24.04 e 26.04 LTS</h3>
-        <p>Pacote .deb para PC amd64 · aplicativo v0.6.4. Instale com as dependências necessárias, sem compilar.</p>
-        <p>Prefere o instalador compactado? Extraia a pasta e execute <code>bash install-ubuntu.sh</code>.</p>
-        <p>No Wayland, abra <strong>Configurações → Controle no Ubuntu → Autorizar controle</strong> no PC Remote e permita mouse e teclado.</p>
-        <p className="linux-evaluation"><strong>Pré-release Ubuntu.</strong> Instalação e abertura testadas nas três LTS. O uso em um desktop GNOME Wayland real ainda precisa de validação.</p>
-        <HashControl value={hashes.linux} platform="Ubuntu (.deb)" />
+function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
+  return (
+    <section className="section downloads-section" id="downloads">
+      <div className="shell">
+        <div className="section-title">
+          <p className="eyebrow">Windows ou Ubuntu + Android</p>
+          <h2>Baixe grátis.<br />Controle seu PC.</h2>
+          <p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p>
+        </div>
+        <div className="download-grid">
+          <article className="download-card">
+            <div className="download-top"><WindowsLogo size={30} /><span>1. Instale no PC</span></div>
+            <div className="download-heading"><h3>PC Remote para Windows</h3><span>Mouse, mídia, arquivos e energia.</span></div>
+            <p>Windows 10 (1809+) e 11 · x64<br />Instalador .exe · v0.6.4</p>
+            <a className="button" href={links.windows}><DownloadSimple size={19} />Baixar para Windows</a>
+            <a className="release-link" href={links.windowsRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a>
+            <HashControl value={hashes.windows} platform="Windows" />
+          </article>
+
+          <article className="download-card">
+            <div className="download-top"><AndroidLogo size={30} /><span>2. Instale no celular</span></div>
+            <div className="download-heading"><h3>PC Remote para Android</h3><span>Seu controle, pronto para conectar.</span></div>
+            <p>Android 7 ou superior · APK universal<br />App nativo · v0.6.5-kotlin</p>
+            <a className="button secondary" href={links.android}><DownloadSimple size={19} />Baixar APK Android</a>
+            <a className="release-link" href={links.androidRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a>
+            <HashControl value={hashes.android} platform="Android" />
+          </article>
+
+          <aside className="qr-download">
+            <img src="/android-apk-qr.svg" width="144" height="144" loading="lazy" alt="QR code com o link direto para baixar o APK oficial no Android" />
+            <h3>Está no computador?</h3>
+            <p>Aponte a câmera do celular para baixar o APK.</p>
+          </aside>
+        </div>
+
+        <div className="install-notes">
+          <p><strong>Versão de avaliação.</strong> O Windows pode exibir um aviso do SmartScreen; o instalador ainda não tem Authenticode. O APK usa chave debug e o Android solicita autorização para instalar dessa fonte.</p>
+          <a href={links.installation} target="_blank" rel="noreferrer">Guia de instalação Windows <ArrowUpRight size={16} /></a>
+        </div>
+
+        <aside className="linux-download" id="ubuntu-download" aria-labelledby="ubuntu-download-title">
+          <LinuxLogo size={30} aria-hidden="true" />
+          <div className="linux-copy">
+            <h3 id="ubuntu-download-title">Ubuntu 22.04, 24.04 e 26.04 LTS</h3>
+            <p>Pacote .deb para PC amd64 · aplicativo v0.6.4. Instale com as dependências necessárias, sem compilar.</p>
+            <p>Prefere o instalador compactado? Extraia a pasta e execute <code>bash install-ubuntu.sh</code>.</p>
+            <p>No Wayland, abra <strong>Configurações → Controle no Ubuntu → Autorizar controle</strong> no PC Remote e permita mouse e teclado.</p>
+            <p className="linux-evaluation"><strong>Pré-release Ubuntu.</strong> Instalação e abertura testadas nas três LTS. O uso em um desktop GNOME Wayland real ainda precisa de validação.</p>
+            <HashControl value={hashes.linux} platform="Ubuntu (.deb)" />
+          </div>
+          <div className="linux-actions">
+            <a className="button" href={links.linux}><DownloadSimple size={19} />Baixar Ubuntu .deb</a>
+            <a className="text-link" href={links.linuxBundle}>Instalador compactado <DownloadSimple size={16} /></a>
+            <a className="text-link" href={links.linuxGuide} target="_blank" rel="noreferrer">Guia do Ubuntu <ArrowUpRight size={16} /></a>
+            <a className="text-link" href={links.linuxRelease} target="_blank" rel="noreferrer">Ver pré-release <ArrowUpRight size={16} /></a>
+          </div>
+        </aside>
+
+        {/* Callout banner to Releases Page */}
+        <div className="releases-banner-callout">
+          <div className="releases-banner-content">
+            <strong>Histórico completo de atualizações</strong>
+            <span>Consulte todas as 27 releases lançadas para Windows, Ubuntu e Android, com notas detalhadas de cada versão e downloads diretos de executáveis.</span>
+          </div>
+          <button
+            type="button"
+            className="releases-banner-btn"
+            onClick={onNavigateReleases}
+          >
+            <span>Ver histórico de releases</span>
+            <ArrowRight size={15} />
+          </button>
+        </div>
       </div>
-      <div className="linux-actions">
-        <a className="button" href={links.linux}><DownloadSimple size={19} />Baixar Ubuntu .deb</a>
-        <a className="text-link" href={links.linuxBundle}>Instalador compactado <DownloadSimple size={16} /></a>
-        <a className="text-link" href={links.linuxGuide} target="_blank" rel="noreferrer">Guia do Ubuntu <ArrowUpRight size={16} /></a>
-        <a className="text-link" href={links.linuxRelease} target="_blank" rel="noreferrer">Ver pré-release <ArrowUpRight size={16} /></a>
-      </div>
-    </aside></div></section>
+    </section>
+  )
 }
 
 function Faq() {
@@ -198,8 +356,35 @@ function Faq() {
   return <section className="section shell faq-section" id="faq"><div className="faq-heading"><h2>Antes de baixar.</h2><p>O que você precisa saber para começar.</p><a className="text-link" href={links.installation} target="_blank" rel="noreferrer">Ler a documentação <ArrowUpRight size={16} /></a></div><div className="faq-list">{faqs.map(([q, a]) => <details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
 }
 
-function Footer() {
-  return <footer className="site-footer"><div className="shell"><div className="footer-main"><div><Brand /><p>Seu PC, mais perto.<br />Mesmo quando você está no sofá.</p></div><div className="footer-links"><a href={links.desktopRepo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a><a href={links.protocol} target="_blank" rel="noreferrer">Protocolo <ArrowUpRight size={14} /></a><a href={links.changelog} target="_blank" rel="noreferrer">Changelog <ArrowUpRight size={14} /></a><a href={links.releases} target="_blank" rel="noreferrer">Releases <ArrowUpRight size={14} /></a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} PC Remote</span><span>Gratuito e de código aberto.</span><a href="#top">Voltar ao início ↑</a></div></div></footer>
+function Footer({ onNavigateReleases }: { onNavigateReleases: () => void }) {
+  return (
+    <footer className="site-footer">
+      <div className="shell">
+        <div className="footer-main">
+          <div>
+            <Brand onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+            <p>Seu PC, mais perto.<br />Mesmo quando você está no sofá.</p>
+          </div>
+          <div className="footer-links">
+            <a href={links.desktopRepo} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>
+            <a href={links.protocol} target="_blank" rel="noreferrer">Protocolo <ArrowUpRight size={14} /></a>
+            <a href={links.changelog} target="_blank" rel="noreferrer">Changelog <ArrowUpRight size={14} /></a>
+            <a
+              href="#releases"
+              onClick={(e) => { e.preventDefault(); onNavigateReleases() }}
+            >
+              Releases & Changelog <ArrowRight size={14} />
+            </a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} PC Remote</span>
+          <span>Gratuito e de código aberto.</span>
+          <a href="#top">Voltar ao início ↑</a>
+        </div>
+      </div>
+    </footer>
+  )
 }
 
 function MobileDownloadBar() {
@@ -225,5 +410,82 @@ function MobileDownloadBar() {
 }
 
 export default function App() {
-  return <><a className="skip-link" href="#conteudo">Pular para o conteúdo</a><Header /><main id="conteudo"><Hero /><Features /><Benefits /><HowItWorks /><Comparison /><Security /><Downloads /><Faq /></main><Footer /><MobileDownloadBar /></>
+  const [view, setView] = useState<'home' | 'releases'>('home')
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash
+      if (hash.startsWith('#releases')) {
+        setView('releases')
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        setView('home')
+        if (hash && hash !== '#' && hash !== '#top') {
+          setTimeout(() => {
+            const el = document.querySelector(hash)
+            if (el) el.scrollIntoView({ behavior: 'smooth' })
+          }, 50)
+        }
+      }
+    }
+
+    handleHash()
+    window.addEventListener('hashchange', handleHash)
+    return () => window.removeEventListener('hashchange', handleHash)
+  }, [])
+
+  const navigateTo = (newView: 'home' | 'releases', anchor?: string) => {
+    if (newView === 'releases') {
+      window.location.hash = '#releases'
+      setView('releases')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      if (view === 'releases') {
+        setView('home')
+        window.location.hash = anchor ? `#${anchor}` : '#'
+        setTimeout(() => {
+          if (anchor) {
+            const el = document.getElementById(anchor)
+            if (el) el.scrollIntoView({ behavior: 'smooth' })
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
+        }, 60)
+      } else {
+        if (anchor) {
+          const el = document.getElementById(anchor)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+          window.history.pushState(null, '', `#${anchor}`)
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+          window.history.pushState(null, '', '#')
+        }
+      }
+    }
+  }
+
+  return (
+    <>
+      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+      <Header activeView={view} onSelectView={navigateTo} />
+      <main id="conteudo">
+        {view === 'releases' ? (
+          <Releases onBackToHome={() => navigateTo('home')} />
+        ) : (
+          <>
+            <Hero onNavigateReleases={() => navigateTo('releases')} />
+            <Features />
+            <Benefits />
+            <HowItWorks />
+            <Comparison />
+            <Security />
+            <Downloads onNavigateReleases={() => navigateTo('releases')} />
+            <Faq />
+          </>
+        )}
+      </main>
+      <Footer onNavigateReleases={() => navigateTo('releases')} />
+      {view === 'home' && <MobileDownloadBar />}
+    </>
+  )
 }

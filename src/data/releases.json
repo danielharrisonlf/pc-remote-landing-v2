@@ -1,0 +1,905 @@
+[
+  {
+    "id": "android-416887342",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.5-kotlin",
+    "name": "PC Remote Android 0.6.5-kotlin",
+    "publishedAt": "2026-10-19T03:58:54Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.5-kotlin",
+    "body": "# 0.6.5-kotlin — fluidez do ponteiro\n\nVersão de correção, versionCode 605. Instale sobre a versão existente para manter pareamentos e preferências.\n\n- Adapta o número de movimentos aguardando confirmação ao tempo de resposta da conexão, mantendo cadência de 16 ms e um limite de 16 pedidos. A janela fixa anterior causava pausas em redes com maior RTT.\n- Preserva o último movimento ao levantar o dedo. Cancelamentos, saída da tela e interrupção do controle descartam a fila local; gestos novos não zeram o contador de pedidos já enviados.\n- Mantém movimentos e cliques na ordem correta e evita reproduzir movimento local antigo após congestionamento. A precisão de movimentos lentos continua acumulando frações de pixel.\n- Retira o parse das mensagens de rede da thread de interface.\n- Inclui as correções da 0.6.4 para abertura no Android 12 e retorno após atualizar. No Android 10+, a reabertura automática continua dependendo da autorização opcional **Exibir sobre outros apps**; sem ela, use o ícone ou a notificação.\n\nNão exige atualização do desktop. Verificação e limites da medição estão em [TESTING.md](https://github.com/danielharrisonlf/pc-remote-android/blob/v0.6.5-kotlin/docs/TESTING.md).\n\nValidação automatizada: 156 testes unitários aprovados, lint com zero erros e 28 avisos, builds debug e release otimizadas geradas. Na comparação determinística com entrada de 120 Hz e RTT de 200 ms, o maior intervalo entre envios passou de 120 ms para 16 ms após uma amostra de RTT de ativação. Isso mede a fila de envio; celular físico e Wi-Fi real permanecem sem validação. Jitter súbito e interrupções da rede ainda podem causar pausas.\n\nO APK mantém o pacote `com.pcremote.nativeandroid` e a chave de avaliação das versões anteriores. Confira o SHA-256 em `KOTLIN-SHA256SUMS-0.6.5.txt` desta release.\n\nO APK release foi instalado sobre a 0.6.4 em emulador Android 12 sem limpar dados: preferência preservada, abertura e navegação pelas cinco abas aprovadas, sem crash do app.\n\nUma conexão TLS de teste, sem controlar o mouse do Windows, também confirmou a janela adaptativa no app: 16 movimentos aguardaram confirmação, respeitando o teto, e todos foram confirmados após liberar os ACKs.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.5.txt",
+        "size": 112,
+        "sizeFormatted": "112 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.5-kotlin/KOTLIN-SHA256SUMS-0.6.5.txt"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.5-evaluation.apk",
+        "size": 726185,
+        "sizeFormatted": "709.2 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.5-kotlin/pc-remote-android-kotlin-0.6.5-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "android-416757440",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.4-kotlin",
+    "name": "PC Remote Android 0.6.4 - Corrige abertura e retorno após atualizar",
+    "publishedAt": "2026-10-18T22:51:39Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.4-kotlin",
+    "body": "Corrige o fechamento na abertura introduzido na 0.6.3, reproduzido no Android 12.\n\n**Se o app não abre, baixe o APK abaixo e instale por cima da versão atual, sem desinstalar.** O pacote e a assinatura são os mesmos; os dados são preservados.\n\n- O app volta a abrir e permite navegar por Touchpad, Controles, Mídia, Transferir e Conexão.\n- Atualizações iniciadas a partir desta versão podem reabrir o app automaticamente após instalar. No Android 10+, escolha **Abrir ajustes** e autorize **Exibir sobre outros apps** quando solicitado. Essa autorização é opcional e persistente e permite voltar ao app sobre outra tela.\n- **Só atualizar** continua sem essa autorização. Depois, abra pelo ícone ou pela notificação, se habilitada.\n- O Android encerra o processo durante a substituição do APK. O retorno automático depende da autorização e do novo fluxo iniciado na 0.6.4; uma instalação iniciada na 0.6.3 ainda usa o fluxo anterior.\n\nValidação no emulador Android 12: abertura, cinco abas, Deck/123/Slides, atualização real com retorno automático autorizado e alternativa por notificação sem autorização. Preferências preservadas. 145 testes unitários passaram; lint release com zero erros. Celular físico ainda não validado.\n\nAPK universal Android 7/API24+, 724.989 bytes. SHA-256 no arquivo `KOTLIN-SHA256SUMS-0.6.4.txt` desta release.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.4.txt",
+        "size": 112,
+        "sizeFormatted": "112 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.4-kotlin/KOTLIN-SHA256SUMS-0.6.4.txt"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.4-evaluation.apk",
+        "size": 724989,
+        "sizeFormatted": "708 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.4-kotlin/pc-remote-android-kotlin-0.6.4-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-416501723",
+    "repo": "desktop",
+    "platform": "linux",
+    "tag": "v0.6.4-ubuntu.1",
+    "name": "PC Remote Desktop 0.6.4 — Ubuntu 22.04, 24.04 e 26.04 LTS",
+    "publishedAt": "2026-10-18T14:39:30Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4-ubuntu.1",
+    "body": "# PC Remote Desktop 0.6.4 — Ubuntu 1\n\nPrimeira distribuição Ubuntu desta revisão, com instalação sem compilação e controle nativo Wayland pelo portal do sistema. Disponível para **Ubuntu 22.04, 24.04 e 26.04 LTS, amd64**.\n\n## Instalar\n\nBaixe e extraia `pc-remote-ubuntu-0.6.4-amd64.tar.gz`, abra o terminal na pasta extraída e execute:\n\n```bash\nbash install-ubuntu.sh\n```\n\nO instalador confere o Ubuntu, a identidade e a arquitetura do pacote, instala as dependências obrigatórias pelo APT e adiciona PC Remote ao menu. Não exige Node, Rust nem ferramentas de desenvolvimento.\n\nTambém é possível instalar diretamente o arquivo `.deb`:\n\n```bash\nsudo apt install --no-install-recommends ~/Downloads/pc-remote-desktop-0.6.4-amd64.deb\n```\n\nPara conferir os downloads, salve `UBUNTU-SHA256SUMS-0.6.4.txt` junto dos três arquivos desta distribuição e execute `sha256sum -c UBUNTU-SHA256SUMS-0.6.4.txt`. O arquivo compactado também inclui checksums de seu conteúdo.\n\n## Controle no Wayland\n\nAbra **Configurações → Controle no Ubuntu → Autorizar controle** no PC Remote e permita mouse e teclado na janela do sistema. O portal atende aplicativos nativos Wayland; eventos enviados pelo celular não abrem janelas de autorização. Cancelar ou revogar a permissão bloqueia a entrada. **Interromper** cancela textos em andamento, solta as teclas aceitas e mantém a autorização para um posterior **Liberar**.\n\n## Validação\n\n- 107 testes Rust de biblioteca, 38 de frontend, 7 de runtime Linux e 1 de integração do portal aprovados: **153 testes**.\n- O mesmo `.deb`, compilado no Ubuntu 22.04, instalado e aberto em imagens limpas de Ubuntu 22.04, 24.04 e 26.04.\n- Bibliotecas e atalho conferidos; processo ativo, janela mapeada e botão **Parear celular** identificado na interface embutida, como usuário normal sob D-Bus/Xvfb privados.\n- Portal testado com autorização aceita/negada, revogação, mouse, teclado, Unicode, texto de 1024 bytes e interrupção da digitação.\n\nEsta é uma **pré-release Ubuntu**: a janela de autorização, a entrega de eventos em aplicativos nativos e o clipboard ainda precisam ser validados em um desktop GNOME Wayland real. Áudio físico, ações reais de energia e interação com o seletor de arquivos também permanecem fora da validação isolada.\n\nO aplicativo e o pacote Debian continuam na versão **0.6.4**; a tag `v0.6.4-ubuntu.1` identifica esta distribuição Ubuntu. Atualize o Linux instalando o novo `.deb`; pareamentos e configurações são mantidos. A release Windows `v0.6.4` continua atendendo o atualizador automático.\n",
+    "assets": [
+      {
+        "name": "install-ubuntu.sh",
+        "size": 2033,
+        "sizeFormatted": "2 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/install-ubuntu.sh"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.4-amd64.deb",
+        "size": 10089492,
+        "sizeFormatted": "9.6 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/pc-remote-desktop-0.6.4-amd64.deb"
+      },
+      {
+        "name": "pc-remote-ubuntu-0.6.4-amd64.tar.gz",
+        "size": 10032292,
+        "sizeFormatted": "9.6 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/pc-remote-ubuntu-0.6.4-amd64.tar.gz"
+      },
+      {
+        "name": "UBUNTU-SHA256SUMS-0.6.4.txt",
+        "size": 286,
+        "sizeFormatted": "286 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/UBUNTU-SHA256SUMS-0.6.4.txt"
+      }
+    ]
+  },
+  {
+    "id": "desktop-415913522",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.6.4",
+    "name": "PC Remote Desktop 0.6.4 - Identidade Visual Multiplataforma, Correções X11/Clipboard Linux e Suite Container",
+    "publishedAt": "2026-10-17T16:08:33Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4",
+    "body": "# PC Remote Desktop 0.6.4\n\n- Nova identidade visual compartilhada com o Android: símbolo vetorial em obsidiana,\n  branco gelo e ciano, aplicado ao ícone do app, bandeja, instalador, sidebar e favicon.\n- Ícone Windows com sete resoluções independentes de 16 a 256px e assets PNG/SVG\n  para Linux e telas de alta densidade.\n- Corrigido evento espúrio no clipboard de imagens Linux: escrever e ler os mesmos\n  pixels mantém a sequência; mudanças reais de dimensões continuam sendo detectadas.\n- Corrigida perda intermitente de cliques, scroll e movimento X11 ao fechar a conexão.\n- Ambiente Linux reproduzível em Docker/Ubuntu 22.04 com Xvfb, D-Bus e áudio virtual:\n  105 testes Rust, 7 testes de runtime, 38 testes frontend e 32 repetições XTEST aprovados.\n\nProtocolo, identidade do PC e pareamentos preservados. Instalador Windows assinado\npara o atualizador com a mesma chave das versões anteriores; sem Authenticode.\nUse Android 0.6.3-kotlin para a identidade visual correspondente.\n\nNo Linux, a validação cobre X11 em ambiente isolado. Wayland, ações reais de energia\nvia logind, dispositivos de áudio físicos e integração com portais do desktop exigem\nvalidação em uma sessão Linux real. Os pacotes Linux são downloads manuais; o\nmanifesto de atualização automática continua destinado ao Windows.\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 2705,
+        "sizeFormatted": "2.6 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.4-x64-setup.exe",
+        "size": 4568744,
+        "sizeFormatted": "4.4 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4/pc-remote-desktop-0.6.4-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.4-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4/pc-remote-desktop-0.6.4-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.6.4.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4/WINDOWS-SHA256SUMS-0.6.4.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-415912058",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.3-kotlin",
+    "name": "PC Remote Android 0.6.3 - Aba Controles (Deck, 123, Slides), Touchpad Restaurado e Ícone Adaptativo",
+    "publishedAt": "2026-10-17T16:06:28Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.3-kotlin",
+    "body": "# PC Remote Android 0.6.3-kotlin\n\n## Novidades\n- **Nova aba Controles (`ControlsScreen`):** reúne de forma organizada e com seletor segmentado o **Deck de Ações** (12 atalhos instantâneos do sistema), o **Teclado Numérico (`123`)** e o **Apresentador (`Slides`)** com cronômetro tátil e avanço pelos botões físicos de volume.\n- **Nova identidade visual adaptativa:** ícone vetorial adaptativo para Android 8+ e ícone temático monocromático para Android 13+, alinhado à identidade visual do PC Remote Desktop 0.6.4, além de ícone branco dedicado (`ic_pc_remote_notification`) para notificações do sistema.\n\n## Correções\n- **Restauração integral do Touchpad:** corrigido o problema em que o espaçador da barra de modos expandia para toda a altura disponível e ocultava a área de toque do `TouchPadView` no celular. O Touchpad volta a ter tela limpa, dica de gestos, faixa de rolagem lateral e botões de clique desobstruídos.\n\n## Compatibilidade\n- Protocolo 1 e extensões (`input.v1`, `files.v1`, `files.v2`, `search.v1`, `info.v1`, `power.v1`, `clipboard.v2`, `wol.v1`, `numpad.v1`, `presentation.v1` e `deck.v1`) preservados.\n- Compatível com PC Remote Desktop **0.6.x** (recomendado **0.6.4**).\n- Pareamentos salvos, preferências e assinatura do APK preservados (`versionCode 603`).\n\n## Instalação e Atualização\n- Quem já tem a **0.5.0-kotlin** ou superior recebe a atualização diretamente dentro do app (**Conexão → Atualizações**).\n- Para instalação manual, baixe `pc-remote-android-kotlin-0.6.3-evaluation.apk`.\n\n## Verificação (SHA-256)\n```text\n673890551e02d89f5b8448ab0cf25b0500a9416782d4c102299b6c0347fea3f9  pc-remote-android-kotlin-0.6.3-evaluation.apk\ned832b24508ce93dad93d5ab6bdc8adb9bb895c2959dcccc0ea66a7dc4b98be6  pc-remote-android-kotlin-0.6.3-unminified-evaluation.apk\n```\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.3.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.3-kotlin/KOTLIN-SHA256SUMS-0.6.3.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.6.3.md",
+        "size": 2880,
+        "sizeFormatted": "2.8 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.3-kotlin/KOTLIN-SIZE-0.6.3.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.3-evaluation.apk",
+        "size": 723457,
+        "sizeFormatted": "706.5 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.3-kotlin/pc-remote-android-kotlin-0.6.3-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.3-unminified-evaluation.apk",
+        "size": 2604523,
+        "sizeFormatted": "2.5 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.3-kotlin/pc-remote-android-kotlin-0.6.3-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "android-415860631",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.2-kotlin",
+    "name": "PC Remote Android 0.6.2 - WoL, Numpad, Apresentador, Deck e Touchpad 60 FPS",
+    "publishedAt": "2026-10-17T14:51:46Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.2-kotlin",
+    "body": "Wake-on-LAN, teclado numérico dedicado, apresentador de slides, deck de ações rápidas, controle de mouse fluido a 60 FPS e purificação da interface.\n\n## Novidades\n\n- **Wake-on-LAN (Ligar PC pela rede):**\n  - O aplicativo descobre e guarda o endereço MAC físico de cada PC pareado durante a conexão autenticada.\n  - Na tela de conexão, toque no botão de ligar ou selecione **Ligar PC via rede** para emitir um Magic Packet UDP (porta 9) em broadcast e acordar a máquina remotamente.\n- **Teclado Numérico Virtual (Numpad):**\n  - Aba e painel dedicado acessível pelo Touchpad para digitação rápida de dados, contabilidade e planilhas.\n  - Suporte a dígitos 0 a 9, separador decimal, operações aritméticas (`+`, `-`, `*`, `/`), Enter e Backspace, com envio otimizado via extensão `numpad.v1`.\n- **Apresentador de Slides Remoto (Presentation):**\n  - Controle nativo para apresentações (PowerPoint, Google Slides, Keynote e leitores de PDF).\n  - Comandos de Iniciar apresentação, Iniciar do slide atual, Parar/Sair, Próximo slide, Slide anterior, Tela preta e Tela branca.\n  - Temporizador tátil em tempo real e suporte ao avanço/retrocesso de slides pelas teclas físicas de Volume (+ e -) do smartphone.\n- **Deck de Ações Rápidas (Quick Deck):**\n  - Grid de 12 atalhos pré-autorizados do sistema operacional: Mostrar Área de Trabalho, Alternar Janela (Alt+Tab), Visão de Tarefas, Captura de Tela, Tela Cheia, Calculadora, Pasta Downloads, Navegador padrão, Gerenciador de Tarefas, Emojis, Fechar Janela e Bloquear PC.\n\n## Desempenho e Engenharia\n\n- **Touchpad a 60 FPS com Janela Deslizante:**\n  - Pipeline de ponteiro totalmente reestruturado com buffer deslizante (`MAX_IN_FLIGHT = 6`) e cadência de despacho em 16 ms.\n  - Grid de pontos tátil pré-renderizado em Bitmap estático, eliminando centenas de chamadas repetitivas de desenho procedural no `onDraw`.\n  - Geração de IDs sequenciais ultraleves para eventos contínuos de ponteiro, eliminando pausas por contenção de entropia (`UUID.randomUUID()`).\n\n## Purificação da Interface\n\n- Remoção de ruídos informativos e textos instrutivos desnecessários nas áreas de toque, transferência e mídia.\n- Botões inferiores do Touchpad reformulados para \"Esquerdo\" e \"Direito\", com feedback visual e tátil imediato.\n\n## Segurança\n\n- Os endereços MAC dos computadores são armazenados em cofre criptografado pelo Android Keystore (AES-GCM), vinculado à identidade de cada PC.\n- Nenhum script arbitrário é executado: todos os comandos do Deck e do Apresentador passam por verificação estrita de catálogo negociado.\n\n## Compatibilidade\n\n- Feito para o PC Desktop [0.6.3](https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.3).\n- PCs com versões 0.4.0 a 0.6.2 continuam funcionando normalmente através de negociação automática de protocolo.\n\n## Instalação\n\nQuem usa a 0.5.0, 0.6.0 ou 0.6.1 recebe esta versão pelo próprio app (**Atualizar agora** ou download automático). Quem usa a 0.4.0 ou anterior instala o `pc-remote-android-kotlin-0.6.2-evaluation.apk` por cima da versão atual.\n\n## Verificação\n\n- 139 testes unitários JUnit aprovados; builds `release`, `sizeBaseline` e `lintRelease` sem erros.\n- APK release de **771.929 bytes (0,772 MB)**, versionCode 602, assinado com o certificado de depuração e avaliação SHA-256 `70c09aad2f64bd4a0ff345b63347b7c27c776bc0d52d8b23f9db5a04ac74aa32`.\n- Hashes SHA-256 disponíveis em `KOTLIN-SHA256SUMS-0.6.2.txt` e detalhamento métrico em `KOTLIN-SIZE-0.6.2.md`.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.2.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.2-kotlin/KOTLIN-SHA256SUMS-0.6.2.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.6.2.md",
+        "size": 2965,
+        "sizeFormatted": "2.9 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.2-kotlin/KOTLIN-SIZE-0.6.2.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.2-evaluation.apk",
+        "size": 771929,
+        "sizeFormatted": "753.8 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.2-kotlin/pc-remote-android-kotlin-0.6.2-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.2-unminified-evaluation.apk",
+        "size": 2653227,
+        "sizeFormatted": "2.5 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.2-kotlin/pc-remote-android-kotlin-0.6.2-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-415860465",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.6.3",
+    "name": "PC Remote Desktop 0.6.3 - WoL, Numpad, Apresentador, Deck e Mouse 60 FPS",
+    "publishedAt": "2026-10-17T14:51:23Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.3",
+    "body": "Novos recursos multiplataforma (Wake-on-LAN, Teclado Numérico, Apresentador de Slides e Deck de Atalhos Rápidos), controle do mouse a 60 FPS com TCP_NODELAY e purificação visual da interface.\n\n## Novidades\n\n- **Wake-on-LAN (`wol.v1`):** o PC descobre e informa seu endereço MAC físico da rede local durante a conexão autenticada (via `SendARP`/`getmac` no Windows e `/sys/class/net` no Linux). O celular armazena o MAC de forma criptografada e pode ligar o computador desligado enviando um Magic Packet UDP (porta 9).\n- **Teclado Numérico Virtual (`numpad.v1`):** suporte a eventos dedicados de teclado numérico (`VK_NUMPAD0` a `VK_NUMPAD9`, separador decimal, operadores aritméticos, Enter e Backspace) com injeção nativa via Win32 `SendInput` no Windows e X11 Keysyms no Linux.\n- **Apresentador Remoto (`presentation.v1`):** controle completo de slides para PowerPoint, Google Slides, Keynote e visualizadores PDF — iniciar (F5), iniciar do slide atual (Shift+F5), parar (Esc), avançar (PageDown), retroceder (PageUp), tela preta (B) e tela branca (W).\n- **Deck de Atalhos Rápidos (`deck.v1`):** 12 atalhos essenciais do sistema pré-autorizados (Mostrar Área de Trabalho, Alternar Janela, Visão de Tarefas, Captura de Tela, Tela Cheia, Calculadora, Pasta Downloads, Navegador Padrão, Gerenciador de Tarefas, Emojis, Fechar Janela e Bloquear PC).\n\n## Desempenho e Engenharia\n\n- **Latência Zero no Mouse (`TCP_NODELAY`):** ativação de `TCP_NODELAY` na conexão TCP/TLS do servidor de controle, eliminando o algoritmo de Nagle e garantindo resposta instantânea aos comandos do ponteiro.\n- **Despacho Contínuo a 60 FPS:** pipeline otimizado com janela deslizante de transmissão no celular e recepção assíncrona desacoplada no desktop.\n\n## Alterações\n\n- **Purificação da UX:** remoção de ruídos informativos e textos instrutivos óbvios nas telas de transferência, mídia e touchpad, tornando a interface 100% utilitária e direta.\n\n## Segurança\n\n- Ações do Deck e comandos de apresentação são validados estritamente no backend contra uma lista exaustiva de ações permitidas; nenhuma execução arbitrária de comandos ou scripts de shell é permitida.\n- As credenciais e endereços MAC são armazenados em cofre criptografado local (DPAPI no Windows, diretório de permissão 0700 no Linux).\n\n## Compatibilidade\n\n- Compatível com o aplicativo Android [0.6.2-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.2-kotlin).\n- Celulares com versões 0.4.0 a 0.6.1 continuam compatíveis com negociação graciosa de recursos. Pareamentos e identidades anteriores são preservados integralmente.\n\n## Instalação\n\nQuem usa a 0.5.0, 0.6.0, 0.6.1 ou 0.6.2 recebe esta versão pelo próprio app (**Reiniciar para atualizar**). Quem usa a 0.4.0 ou anterior instala o `pc-remote-desktop-0.6.3-x64-setup.exe` manualmente, por cima da instalação existente.\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 4304,
+        "sizeFormatted": "4.2 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.3/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.3-x64-setup.exe",
+        "size": 4558535,
+        "sizeFormatted": "4.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.3/pc-remote-desktop-0.6.3-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.3-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.3/pc-remote-desktop-0.6.3-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.6.3.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.3/WINDOWS-SHA256SUMS-0.6.3.txt"
+      }
+    ]
+  },
+  {
+    "id": "desktop-415599291",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.6.2",
+    "name": "PC Remote Desktop 0.6.2 - arquitetura multiplataforma (Windows + Linux/Ubuntu)",
+    "publishedAt": "2026-10-17T05:20:54Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.2",
+    "body": "Arquitetura multiplataforma (Windows + Linux / Ubuntu 22.04 e 24.04 LTS) e decodificação de imagens em Rust puro.\n\n## Novidades\n\n- **Suporte oficial ao Linux (Ubuntu 22.04 / 24.04 LTS e distros Debian/XDG):**\n  - **Entrada (`input.rs`):** simulação de mouse (movimento relativo acumulador sub-pixel, cliques e rolagem) e teclado (atalhos e texto Unicode) via extensão XTEST (`x11rb`) em X11, com fallback gracioso para `xdotool`/`ydotool`/`wtype`.\n  - **Áudio (`audio.rs`):** leitura, alteração linear (0 a 100%) e mudo do volume mestre via PulseAudio/PipeWire (`pactl`), WirePlumber (`wpctl`) ou ALSA (`amixer`).\n  - **Mídia (`media.rs`):** descoberta de players, metadados (título, artista, álbum, posição) e comandos (`PlayPause`, `Play`, `Pause`, `Next`, `Previous`, `Seek`) via padrão **MPRIS2 D-Bus** (`org.mpris.MediaPlayer2.*`).\n  - **Energia e sessão (`power.rs`):** bloqueio de tela (`LockSession`/`LockSessions` com fallback `loginctl`/`xdg-screensaver`), suspensão (`Suspend`), desligamento (`PowerOff`), reinício (`Reboot`) e inibidor de suspensão durante transferências (`Inhibit`) via `systemd-logind` (`org.freedesktop.login1.Manager`).\n  - **Área de transferência (`clipboard.rs`):** leitura e escrita de texto e imagens via `arboard`, com controle de sequência por SHA-256 para evitar eco.\n  - **Inicialização com o sistema (`autostart.rs`):** criação e remoção do arquivo `~/.config/autostart/pc-remote-desktop.desktop` segundo a especificação XDG Autostart.\n  - **Empacotamento Linux:** suporte aos pacotes `.deb` e `AppImage` em `tauri.conf.json`.\n\n## Alterações\n\n- **Padrão Portas e Adaptadores (`src/platform/`):** todas as chamadas nativas de SO foram extraídas para `src/platform/windows/` e `src/platform/linux/` por trás de traits bem tipadas (`InputBackend`, `AudioBackend`, `MediaBackend`, `PowerBackend`, `ClipboardBackend`, `AutostartBackend` e `SystemBackend`), sem `#[cfg]` espalhados nas regras de negócio.\n- **Isolamento de dependências no `Cargo.toml`:** `windows` e `windows-registry` restritas a `[target.'cfg(windows)'.dependencies]`; `arboard`, `zbus`, `x11rb` e `libc` restritas a `[target.'cfg(target_os = \"linux\")'.dependencies]`.\n- **Conversão de imagens agnóstica a SO (`wic.rs`):** substituição da dependência `Win32_Graphics_Imaging` (WIC/COM) pela crate `image` em Rust puro para validar e converter PNG, JPEG e bitmaps DIB/DIBV5.\n\n## Segurança\n\n- Validação e recodificação de imagens da área de transferência em Rust puro (PNG/JPEG/DIB até 50 megapixels e 32 MB), preservando a conferência de SHA-256 e as flags de exclusão de conteúdo sensível no Windows.\n- No Linux, armazenamento de credenciais e identidade TLS em `~/.local/share/pc-remote` com permissões restritas ao usuário (`0600` para arquivos e `0700` para o diretório) e movimentação atômica de arquivos recebidos com `renameat2(RENAME_NOREPLACE)`.\n\n## Compatibilidade\n\n- Compatível com o celular [0.6.1-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.1-kotlin) (protocolo 1 + `input.v1`, `files.v1`, `files.v2`, `search.v1`, `info.v1`, `power.v1` e `clipboard.v2`). Celulares 0.4 a 0.6.0 continuam funcionando sem alterações.\n- Pareamentos, identidade e configurações existentes no Windows são mantidos integralmente.\n\n## Instalação\n\nQuem usa a 0.5.0, 0.6.0 ou 0.6.1 recebe esta versão pelo próprio app (**Reiniciar para atualizar**). Quem usa a 0.4.0 ou anterior instala o `pc-remote-desktop-0.6.2-x64-setup.exe` manualmente, uma vez.\n\n## Verificação\n\n- **Windows (`x86_64-pc-windows-msvc`):** 102 testes unitários Rust e 5 de integração do atualizador, 38 testes Vitest, `npx tsc --noEmit` e `cargo fmt --check`, zero warnings.\n- **Linux (`x86_64-unknown-linux-gnu` em container Ubuntu 22.04 LTS):** 106 testes unitários Rust compilados e aprovados com zero warnings.\n- Instalador x64 por usuário: **4.549.481 bytes**, sem Authenticode, assinado para o atualizador e verificado pelo teste de artefatos reais do plugin (`--test updater -- --ignored`). SHA-256 dos anexos em `WINDOWS-SHA256SUMS-0.6.2.txt`.\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 2330,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.2/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.2-x64-setup.exe",
+        "size": 4549481,
+        "sizeFormatted": "4.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.2/pc-remote-desktop-0.6.2-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.2-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.2/pc-remote-desktop-0.6.2-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.6.2.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.2/WINDOWS-SHA256SUMS-0.6.2.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-415501836",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.1-kotlin",
+    "name": "PC Remote Android 0.6.1 - vários PCs, mídia fora do app, energia e imagens",
+    "publishedAt": "2026-10-17T01:01:23Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.1-kotlin",
+    "body": "Vários PCs, controles de mídia fora do app, energia do PC e imagens na área de transferência.\n\n## Novidades\n\n- **Vários PCs:** **Adicionar PC** pareia outro PC sem apagar os anteriores, até 8. Os demais ficam em **Outros PCs**, com **Conectar** e a lixeira; com mais de um, tocar no nome do PC na barra superior abre **Trocar de PC**. O celular conecta a um PC por vez.\n- **Mídia do PC fora do app:** com o PC tocando e o app aberto, anterior, tocar/pausar e próxima aparecem na notificação, na tela de bloqueio e nos controles de mídia do Android, e continuam funcionando com o app em segundo plano. **Fechar** os tira até você abrir o app de novo.\n- **Widget e bloco \"Mídia do PC\"**, na tela inicial e nas Configurações rápidas: controlam o PC atual e conectam na hora do toque, mesmo com o app fechado.\n- **Energia do PC** (com o PC 0.6.1), em Conexão:\n  - **Bloquear** age na hora;\n  - **Suspender** e **Desligar** oferecem Agora, 15 min, 30 min, 1 hora e 2 horas;\n  - **Reiniciar** pede confirmação;\n  - um agendamento aparece com a hora e o tempo restante, com **Cancelar**.\n- **Imagens na área de transferência** (com o PC 0.6.1), até 32 MB:\n  - um print copiado no PC chega pronto para colar;\n  - uma imagem copiada no celular (\"Copiar imagem\" no navegador) vai para o PC;\n  - **Enviar o que copiei** também envia imagens.\n\n## Alterações\n\n- \"Outro PC\" virou **Adicionar PC**.\n- O cartão de recebimento em Transferir agora se chama \"Recebido do PC\" e mostra a miniatura da imagem.\n\n## Segurança\n\n- Cada PC tem o próprio token, identidade fixada e identificador, guardados na mesma credencial criptografada pelo Android Keystore. Trocar de PC descarta a fila e o histórico de arquivos do anterior.\n- Os controles de mídia usam um serviço em primeiro plano (`mediaPlayback`) que só começa com o app aberto ou por um toque seu no widget, no bloco ou na notificação. Ele não toca áudio e não assume as teclas de volume do celular.\n- As imagens recebidas do PC ficam no cache privado do app; só a última é guardada e só ela é oferecida aos outros apps ao colar. O app nunca reenvia ao PC uma imagem que veio dele.\n- Permissão nova: `FOREGROUND_SERVICE_MEDIA_PLAYBACK`.\n\n## Compatibilidade\n\n- Feito para o PC [0.6.1](https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.1). Com o PC 0.6.0, tudo funciona, menos energia e imagens; com 0.4.0 e 0.5.0, valem os limites de antes.\n- O pareamento das versões anteriores passa sozinho para a lista de PCs; não é preciso parear de novo.\n\n## Instalação\n\nQuem usa a 0.5.0 ou a 0.6.0 recebe esta versão pelo próprio app (**Atualizar agora** ou download automático). Quem usa a 0.4.0 ou anterior instala o `pc-remote-android-kotlin-0.6.1-evaluation.apk` por cima, uma vez.\n\n## Verificação\n\n- 137 testes JUnit; release, sizeBaseline e lint sem erros.\n- APK de **759.953 bytes (0,760 MB)**, versionCode 601, assinado com a mesma chave de avaliação das versões anteriores. SHA-256 em `KOTLIN-SHA256SUMS-0.6.1.txt`; tamanhos em `KOTLIN-SIZE-0.6.1.md`.\n- Teste de ponta a ponta com o PC real nos emuladores Android 13 e 16:\n  - atualização 0.5.0 → 0.6.0 → 0.6.1 mantendo o pareamento;\n  - dois PCs com identidades diferentes, com troca e remoção;\n  - controles de mídia na notificação, na tela de bloqueio e com o Android em economia de bateria (Doze);\n  - bloco e widget com o app fechado;\n  - energia (agendar, cancelar, Interromper e Bloquear de verdade);\n  - imagens nos dois sentidos com SHA-256 igual ao original, coladas no Google Mensagens pelo teclado;\n  - o APK release instalado por cima da build de teste.\n- Não testados: celular físico e Wi-Fi real, Android 7 a 12, suspender, desligar e reiniciar de verdade, e conversão de WebP, GIF e HEIC no celular.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.1.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.1-kotlin/KOTLIN-SHA256SUMS-0.6.1.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.6.1.md",
+        "size": 2909,
+        "sizeFormatted": "2.8 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.1-kotlin/KOTLIN-SIZE-0.6.1.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.1-evaluation.apk",
+        "size": 759953,
+        "sizeFormatted": "742.1 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.1-kotlin/pc-remote-android-kotlin-0.6.1-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.1-unminified-evaluation.apk",
+        "size": 2634807,
+        "sizeFormatted": "2.5 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.1-kotlin/pc-remote-android-kotlin-0.6.1-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-415501797",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.6.1",
+    "name": "PC Remote Desktop 0.6.1 - energia do PC e imagens na área de transferência",
+    "publishedAt": "2026-10-17T01:01:19Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.1",
+    "body": "Energia do PC pelo celular e imagens na área de transferência.\n\n## Novidades\n\n- **Energia pelo celular:** com o celular 0.6.1-kotlin, bloqueie, suspenda, desligue ou reinicie o PC, agora ou com prazo (o celular oferece de 15 min a 2 h). Ao agendar, o PC mostra uma notificação e outra 60 s antes. O cartão **Energia** da Visão geral mostra a ação, o horário e quem pediu, com **Cancelar**; a bandeja tem **Cancelar ação agendada**.\n- **Imagens na área de transferência**, nos dois sentidos, até 32 MB: um print ou uma imagem copiada no navegador chega ao celular pronta para colar, e o que você copia no celular vem para o PC. Quando a cópia tem texto e imagem, vai o texto.\n\n## Alterações\n\n- **Interromper** também bloqueia as ações de energia pelo celular e cancela o que estiver agendado, até **Liberar**.\n- O histórico da Transferência mostra imagens (\"Imagem · 2,3 MB\").\n\n## Correções\n\n- O texto ou a imagem que chegava do celular voltava a ele como se fosse uma cópia nova no PC. Com texto o efeito não aparecia; com imagens, a cópia do celular era trocada.\n\n## Segurança\n\n- As ações de energia só valem para um celular pareado e conectado, com a extensão negociada, e nunca com **Interromper** ativo. O agendamento fica só na memória do PC; fechar o PC Remote ou reiniciar o Windows o descarta, e revogar o celular que agendou também.\n- Desligar e reiniciar não forçam o fechamento de programas: com trabalho não salvo, o Windows pergunta.\n- Imagens seguem as regras do texto: sincronização em tempo real, conteúdo marcado como sensível nunca sai. Cada imagem é conferida por SHA-256 e decodificada antes de entrar na área de transferência (PNG ou JPEG, até 50 megapixels). Nada é salvo em Downloads.\n\n## Compatibilidade\n\n- Feita para o celular [0.6.1-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.1-kotlin). Celulares 0.4 a 0.6.0 continuam funcionando, com os recursos de antes.\n- Pareamentos e configurações são mantidos.\n\n## Instalação\n\nQuem usa a 0.5.0 ou a 0.6.0 recebe esta versão pelo próprio app (**Reiniciar para atualizar**). Quem usa a 0.4.0 ou anterior instala o `pc-remote-desktop-0.6.1-x64-setup.exe` manualmente, uma vez.\n\n## Verificação\n\n- 100 testes Rust e 5 de integração do atualizador, 38 testes Vitest, TypeScript e `cargo fmt`. Os testes que escrevem na área de transferência real do Windows foram rodados à mão.\n- Instalador x64 por usuário: **4.373.889 bytes**, sem Authenticode, assinado para o atualizador e aceito pelo verificador do próprio plugin. SHA-256 dos anexos em `WINDOWS-SHA256SUMS-0.6.1.txt`.\n- Teste de ponta a ponta com o PC real e emuladores Android 13 e 16:\n  - agendar, cancelar pelos dois lados e Interromper;\n  - **Bloquear** executado de verdade;\n  - imagens nos dois sentidos com SHA-256 igual ao original;\n  - sincronização desligada e \"Buscar do PC\";\n  - texto com prioridade sobre a imagem;\n  - nada volta ao celular depois da correção.\n- Não testados de verdade: suspender, desligar e reiniciar (encerrariam a sessão de teste; cobertos por testes automatizados), além de celular físico e Wi-Fi real.\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 2302,
+        "sizeFormatted": "2.2 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.1/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.1-x64-setup.exe",
+        "size": 4373889,
+        "sizeFormatted": "4.2 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.1/pc-remote-desktop-0.6.1-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.1-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.1/pc-remote-desktop-0.6.1-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.6.1.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.1/WINDOWS-SHA256SUMS-0.6.1.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-415278349",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.0-kotlin",
+    "name": "PC Remote Android 0.6.0 - arquivos de até 1 GB, voz e menos configurações",
+    "publishedAt": "2026-10-16T18:49:07Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.0-kotlin",
+    "body": "Menos telas para configurar: depois de parear, touchpad, área de transferência e arquivos já funcionam.\n\n## Novidades\n\n- **Arquivos de até 1 GB, de qualquer tipo, nos dois sentidos.** **Enviar arquivo** ou **Compartilhar → PC Remote** em qualquer app. O que o PC envia chega sozinho em `Download/PC Remote` (no Android 7 a 9, na pasta do app) e aparece em **Recentes**. Envios grandes mostram uma notificação de progresso e continuam se você trocar de app.\n- **Pesquisar no YouTube** no topo de Mídia: o PC abre a pesquisa no navegador.\n- **Microfone:** fale a pesquisa ou comandos como \"pausar\", \"próxima música\", \"voltar 10 segundos\" e \"aumentar o volume\". Usa o reconhecimento do próprio Android, ouve uma frase por toque e para sozinho.\n- A Conexão mostra o Windows do PC (por exemplo, Windows 11 Pro).\n\n## Alterações\n\n- **Conexão** mostra só o nome do PC, o estado, o Windows e as ações (Desconectar/Reconectar, Outro PC, Remover este PC).\n- **Sincronização em tempo real** é a única opção da área de transferência e já vem ligada. O que você copia no PC chega ao celular, também com o app em segundo plano; o que você copia no celular vai para o PC.\n- O touchpad já vem pronto depois do pareamento. **Desligar** vale até **Ativar touchpad**; se o PC usar **Interromper**, o app mostra \"Bloqueado no PC\" e volta sozinho depois de **Liberar**.\n\n## Correções\n\n- Mídia: com o PC 0.6.0, a lista começa pelo player que o Windows trata como atual e os botões mostram o estado certo logo depois de cada comando.\n\n## Removido\n\n- Latência, endereço salvo, identidade conferida e endereço manual da Conexão.\n- As opções de cada sentido do clipboard, de pausa e de aplicar automaticamente.\n- **Vibração** em todo o app, e com ela a permissão VIBRATE.\n- O botão de tema da barra superior; o tema continua em Conexão → Preferências.\n\n## Segurança\n\n- Arquivos do PC só são aceitos na conexão pareada e fixada ao certificado do PC. No Android 10+ ficam ocultos até o tamanho e o SHA-256 conferirem; qualquer falha apaga o arquivo. Nada é aberto ou instalado sozinho.\n- O microfone é pedido só no primeiro toque, nunca fica ligado e encerra em no máximo 20 s.\n- Conteúdo marcado como sensível não é sincronizado, e o Android 10+ continua sem ler a área de transferência em segundo plano: um texto copiado em outro app vai ao PC uma vez, quando você volta ao PC Remote.\n- Permissões novas: RECORD_AUDIO (sob demanda) e o serviço `dataSync` só para mostrar o progresso de transferências.\n\n## Compatibilidade\n\n- Feito para o PC [0.6.0](https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.0). Atualize os dois para ter arquivos de até 1 GB, pesquisa e touchpad pronto ao parear.\n- Com PC 0.4.0 ou 0.5.0: imagens e PDFs de até 50 MB só do celular para o PC, sem pesquisa; o touchpad pede **Ativar touchpad**.\n- Pareamentos e preferências são mantidos; não é preciso parear de novo.\n\n## Instalação\n\nQuem usa a 0.5.0 recebe esta versão pelo próprio app (**Atualizar agora** ou download automático). Quem usa a 0.4.0 ou anterior instala o `pc-remote-android-kotlin-0.6.0-evaluation.apk` por cima, uma vez.\n\n## Verificação\n\n- 109 testes JUnit; release, sizeBaseline e lint sem erros.\n- APK de **725.441 bytes (0,725 MB)**, versionCode 600, assinado com a mesma chave de avaliação das versões anteriores. SHA-256 em `KOTLIN-SHA256SUMS-0.6.0.txt`; tamanhos em `KOTLIN-SIZE-0.6.0.md`.\n- Teste ponta a ponta no emulador Android 13 com o PC real, inclusive com o APK release: pareamento, Conexão, clipboard nos dois sentidos e em segundo plano, 1 GiB nos dois sentidos com SHA-256 igual, bloqueio e liberação pelo PC, mídia, pesquisa, permissão do microfone, ausência de vibração e compatibilidade com PC 0.5.0.\n- Não testados: celular físico e Wi-Fi real, Android 7 a 9 e 14+, reconhecimento de fala real (o emulador não recebe voz), comandos no YouTube e no Spotify e o download real desta versão pelo atualizador da 0.5.0.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.0.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.0-kotlin/KOTLIN-SHA256SUMS-0.6.0.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.6.0.md",
+        "size": 2762,
+        "sizeFormatted": "2.7 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.0-kotlin/KOTLIN-SIZE-0.6.0.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.0-evaluation.apk",
+        "size": 725441,
+        "sizeFormatted": "708.4 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.0-kotlin/pc-remote-android-kotlin-0.6.0-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.0-unminified-evaluation.apk",
+        "size": 2587047,
+        "sizeFormatted": "2.5 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.0-kotlin/pc-remote-android-kotlin-0.6.0-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-415278297",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.6.0",
+    "name": "PC Remote Desktop 0.6.0 - arquivos de até 1 GB, mídia e pesquisa",
+    "publishedAt": "2026-10-16T18:49:03Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.0",
+    "body": "Menos opções para configurar e mais coisas funcionando logo depois de parear.\n\n## Novidades\n\n- **Arquivos de até 1 GB, de qualquer tipo, nos dois sentidos.** Em Transferência, **Enviar arquivos ao celular** abre o seletor do Windows; também dá para arrastar arquivos para a janela. O progresso aparece no painel e no celular, e dá para cancelar dos dois lados. Os arquivos do celular continuam em `Downloads\\PC Remote`.\n- **Pesquisa no YouTube pelo celular:** o PC abre a pesquisa no navegador padrão.\n- O celular mostra o nome do Windows (por exemplo, Windows 11 Pro).\n\n## Alterações\n\n- **Sincronização em tempo real** é a única opção da área de transferência e já vem ligada, nos dois sentidos. Desligada, enviar texto e arquivos continua manual.\n- Arquivos e mouse/teclado funcionam logo depois do pareamento, sem liberar nada no PC.\n- **Interromper** (no painel ou na bandeja) bloqueia o mouse e o teclado do celular até você clicar em **Liberar**, inclusive depois de reiniciar o app. Mídia, arquivos e área de transferência continuam funcionando.\n- Visão geral mais simples, sem endereço e identidade (continuam em Diagnóstico).\n\n## Correções\n\n- Mídia: o player que o Windows trata como atual vem primeiro, a sessão não muda de identidade entre leituras e o estado chega ao celular logo depois de cada comando.\n\n## Removido\n\n- As chaves **Receber imagens e PDFs do celular**, **Permitir mouse e teclado pelo celular** e as de cada sentido e de pausa do clipboard.\n- O botão de tema do cabeçalho; o tema continua em Configurações.\n\n## Segurança\n\n- O pareamento continua exigindo o código de 8 dígitos e a aprovação no PC. Para retirar o acesso de um celular, use **Revogar acesso** em Dispositivos.\n- Todo arquivo recebido é marcado como vindo da internet (o SmartScreen avisa antes de rodar um programa e o Office abre em Modo de Exibição Protegido). Nada é aberto sozinho. Atalhos e arquivos que o Explorador executa só por listar a pasta (`.lnk`, `.url`, `.scf`, `desktop.ini` e semelhantes) são recusados.\n- O celular só recebe o que você escolheu no PC. Cada arquivo é conferido por SHA-256, e a memória usada não cresce com o tamanho dele. Durante a transferência o PC não entra em suspensão.\n- A pesquisa monta sempre um endereço `youtube.com/results`; nenhum endereço vindo do celular é aberto.\n- Conteúdo marcado como sensível (gerenciadores de senha) não é sincronizado. Quem não quer sincronização automática desliga **Sincronização em tempo real** no painel ou na bandeja.\n\n## Compatibilidade\n\n- Feita para o celular [0.6.0-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.0-kotlin). Atualize os dois para ter arquivos de até 1 GB, pesquisa e touchpad pronto ao parear.\n- Celulares 0.4 e 0.5 continuam funcionando com o que já tinham: imagens e PDFs, mouse/teclado e clipboard.\n- Pareamentos e configurações são mantidos. Voltar à 0.5.0 também mantém tudo.\n\n## Instalação\n\nQuem usa a 0.5.0 recebe esta versão pelo próprio app (**Reiniciar para atualizar**). Quem usa a 0.4.0 ou anterior instala o `pc-remote-desktop-0.6.0-x64-setup.exe` manualmente, uma vez.\n\n## Verificação\n\n- 77 testes Rust e 5 de integração do atualizador, 36 testes Vitest, TypeScript e `cargo fmt`.\n- Instalador x64 por usuário: **4.311.428 bytes**, sem Authenticode, assinado para o atualizador. O `.sig` confere com este arquivo. SHA-256 dos anexos em `WINDOWS-SHA256SUMS-0.6.0.txt`.\n- Teste ponta a ponta com o PC real e um emulador Android 13: pareamento, clipboard nos dois sentidos e desligado, 1 GiB nos dois sentidos com SHA-256 igual (cerca de 3 min), Interromper/Liberar com reinício, controles de mídia no Reprodutor Multimídia, pesquisa no Chrome e celular 0.6 com PC 0.5.\n- Não testados: celular físico e Wi-Fi real, comandos pelo celular no YouTube e no Spotify, arrastar arquivos para a janela e a primeira atualização real 0.5.0 → 0.6.0 pelo app, que acontece com esta versão.\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 2557,
+        "sizeFormatted": "2.5 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.0/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.0-x64-setup.exe",
+        "size": 4311428,
+        "sizeFormatted": "4.1 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.0/pc-remote-desktop-0.6.0-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.0-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.0/pc-remote-desktop-0.6.0-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.6.0.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.0/WINDOWS-SHA256SUMS-0.6.0.txt"
+      }
+    ]
+  },
+  {
+    "id": "desktop-415084870",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.5.0",
+    "name": "PC Remote Desktop 0.5.0 - atualização automática",
+    "publishedAt": "2026-10-16T15:01:04Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.5.0",
+    "body": "Atualização pelo próprio app.\n\n## Novidades\n\n- **Atualizações automáticas:** o PC Remote encontra a versão nova, baixa em segundo plano e mostra **Reiniciar para atualizar**. O instalador roda sozinho, sem a página \"já instalado\", e o app abre de novo.\n- **Assinatura conferida:** cada atualização é verificada com a chave do projeto antes de ser instalada. Arquivos adulterados são descartados.\n- Nova opção **Baixar atualizações automaticamente** (ligada por padrão) em Configurações → Atualizações. Desligada, o botão vira **Baixar e instalar**.\n- Falhas aparecem no cartão com **Tentar de novo** e o link da página da versão.\n\n## Instalação\n\nQuem usa a 0.4.0 ou anterior instala esta versão manualmente uma vez. Da 0.5.0 em diante as atualizações chegam pelo app.\n\n## Verificação\n\n- 57 testes Rust e 5 de integração do atualizador (assinatura válida, adulterada, sem versão, rebaixamento, feed ausente), 35 testes Vitest, TypeScript e `cargo fmt`.\n- Instalador x64 por usuário: **4.253.443 bytes**, sem Authenticode, assinado para o atualizador. O `.sig` confere com este arquivo. SHA-256 dos anexos em `WINDOWS-SHA256SUMS-0.5.0.txt`.\n- Não testados: a instalação silenciosa `/UPDATE` com reabertura do app, que acontece pela primeira vez na próxima atualização, além de celular físico e Wi-Fi real.\n\nAPK Android: [0.5.0-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.5.0-kotlin).\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 2169,
+        "sizeFormatted": "2.1 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.5.0/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.5.0-x64-setup.exe",
+        "size": 4253443,
+        "sizeFormatted": "4.1 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.5.0/pc-remote-desktop-0.5.0-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.5.0-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.5.0/pc-remote-desktop-0.5.0-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.5.0.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.5.0/WINDOWS-SHA256SUMS-0.5.0.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-415084670",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.5.0-kotlin",
+    "name": "PC Remote Android 0.5.0 - atualização dentro do app",
+    "publishedAt": "2026-10-16T15:00:51Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.5.0-kotlin",
+    "body": "Atualização dentro do app: sem navegador e, no Android 12 ou mais novo, sem confirmação.\n\n## Novidades\n\n- **Atualizar agora** baixa o APK dentro do app, confere e instala. Não abre mais o navegador.\n- **Download automático:** com **Baixar atualizações automaticamente** ligado (padrão), a versão nova é baixada no Wi-Fi e o aviso mostra **Atualização pronta — toque para instalar**.\n- **Verificação antes de instalar:** SHA-256 publicado na release, mesmo pacote, versão maior e mesma assinatura do app instalado. Se algo não confere, nada é instalado.\n- **Sem confirmação no Android 12+:** depois da primeira atualização pelo app, as próximas instalam sem tela de confirmação. Em versões anteriores do Android aparece uma confirmação do sistema.\n- Ao terminar, a notificação **PC Remote atualizado para X** abre o app.\n\n## Instalação\n\nInstale esta versão por cima da 0.4.0, do jeito de sempre e uma última vez. Na primeira atualização pelo app, o Android pede para permitir **Instalar apps desconhecidos** para o PC Remote.\n\n## Verificação\n\n- 92 testes JUnit; release, sizeBaseline e lint sem erros.\n- APK de **707.333 bytes (0,707 MB)**, assinado com a mesma chave de avaliação das versões anteriores. SHA-256 nos anexos.\n- Emuladores API 33 e API 31 contra um servidor de releases de teste:\n  - atualizações 0.5.0 → 0.5.1 → 0.5.2 instaladas sem confirmação\n  - hash errado, assinatura diferente e redirecionamento para outro endereço recusados\n  - rede móvel não baixa\n  - o fluxo de confirmação funciona quando o Android pede\n- Ainda não testados: celular físico, Android 7 a 11 e 14+, e o download real pelo GitHub (acontece na próxima versão).\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.5.0.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.5.0-kotlin/KOTLIN-SHA256SUMS-0.5.0.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.5.0.md",
+        "size": 2620,
+        "sizeFormatted": "2.6 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.5.0-kotlin/KOTLIN-SIZE-0.5.0.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.5.0-evaluation.apk",
+        "size": 707333,
+        "sizeFormatted": "690.8 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.5.0-kotlin/pc-remote-android-kotlin-0.5.0-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.5.0-unminified-evaluation.apk",
+        "size": 2556523,
+        "sizeFormatted": "2.4 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.5.0-kotlin/pc-remote-android-kotlin-0.5.0-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-414994099",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.4.0",
+    "name": "PC Remote Desktop 0.4.0 - imagens e PDFs do celular",
+    "publishedAt": "2026-10-16T13:27:28Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.4.0",
+    "body": "Recebimento de imagens e PDFs do celular, com notificação nativa.\n\n## Novidades\n\n- **Arquivos do celular:**\n  - Recebe PNG, JPG e PDF de até 50 MB enviados pelo Android 0.4.0, pelo seletor ou pelo menu Compartilhar.\n  - Antes de salvar, o PC confere extensão, tipo, assinatura do conteúdo e SHA-256.\n  - Salva em `Downloads\\PC Remote`, marcado como vindo da internet (Mark-of-the-Web), sem nunca sobrescrever: o segundo `foto.jpg` vira `foto (1).jpg`.\n- **Notificação do Windows** a cada arquivo recebido.\n- **Card \"Arquivos do celular\"** na página Transferência: chave **Receber imagens e PDFs do celular**, progresso do arquivo em andamento, últimos arquivos e o botão **Abrir pasta**.\n- A transferência usa uma conexão própria e temporária, autorizada por um ticket de uso único. Mouse, volume e mídia não travam durante o envio.\n- A faixa de cores da identidade aparece só na gaveta de pareamento. Visão geral e Diagnóstico mostram o código.\n\n## Compatibilidade\n\nProtocolo 1 + input.v1 + files.v1 (novo, negociado). O recebimento começa **desligado**. O Android 0.3.0 e os 0.2.x continuam funcionando, sem envio de arquivos.\n\n## Verificação\n\n- 53 testes Rust (entre eles TLS real com o fluxo completo de arquivo e os casos de abortar) e 25 testes Vitest. TypeScript, Vite, Rust release e NSIS concluídos.\n- Ponta a ponta com o Android 0.4.0 no emulador API 33:\n  - arquivos recebidos com hash conferido e ZoneId=3\n  - nomes `(1)`, `(2)`, `(3)`\n  - notificação exibida\n  - cancelar e desligar o recebimento no meio sem deixar parcial\n- Instalador x64 por usuário: **3.635.721 bytes**, sem assinatura Authenticode. Hash SHA-256 anexo. O instalador não foi executado na máquina de build.\n\nAPK Android: [0.4.0-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.4.0-kotlin).\n",
+    "assets": [
+      {
+        "name": "pc-remote-desktop-0.4.0-x64-setup.exe",
+        "size": 3635721,
+        "sizeFormatted": "3.5 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.4.0/pc-remote-desktop-0.4.0-x64-setup.exe"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.4.0.txt",
+        "size": 104,
+        "sizeFormatted": "104 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.4.0/WINDOWS-SHA256SUMS-0.4.0.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-414993992",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.4.0-kotlin",
+    "name": "PC Remote Android 0.4.0 - arquivos, volume e touchpad",
+    "publishedAt": "2026-10-16T13:27:23Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.4.0-kotlin",
+    "body": "Envio de imagens e PDFs para o PC, teclas de volume controlando o PC e touchpad que continua ligado.\n\n## Novidades\n\n- **Enviar arquivos ao PC:** PNG, JPG e PDF de até 50 MB, pelo botão \"Escolher imagem ou PDF\" na aba Transferir ou pelo menu **Compartilhar → PC Remote**, com vários arquivos de uma vez. Fila de até 20 arquivos, barra de progresso e Cancelar. O PC salva em `Downloads\\PC Remote`.\n- **Teclas de volume do celular** mudam o volume do PC nas abas Touchpad e Mídia, de 5 em 5%, e a tecla de mudo silencia o PC. Nas outras abas elas controlam o celular, como antes.\n- **Touchpad persistente:** trocar de aba não desliga mais o controle. Ao sair do app ele pausa e volta sozinho. Desliga só com \"Desligar\", se a conexão cair ou se o PC bloquear.\n- **Interface mais limpa:** sem o selo \"Controle ativo\" e sem a latência na barra superior (ela continua na aba Conexão). A faixa de cores aparece só no pareamento.\n- **Segurança:** no pareamento por código, a conexão fica presa ao primeiro certificado visto.\n\n## Instalação\n\nInstale por cima da versão anterior: a assinatura é a mesma e o pareamento é mantido. Para enviar arquivos, use o PC Remote para Windows **0.4.0** e ligue **Transferência → Receber imagens e PDFs do celular** no PC. Com o Windows 0.3.0, todo o resto funciona e o app avisa para atualizar o PC.\n\n## Verificação\n\n- 76 testes JUnit; release, sizeBaseline e lint sem erros.\n- APK de **691.725 bytes (0,692 MB)**, assinado com a chave debug de avaliação. SHA-256 nos anexos.\n- Emulador API 33 contra o Windows 0.4.0:\n  - touchpad persistente (abas, Home, notificações, seletor de arquivos)\n  - teclas de volume\n  - 11 arquivos enviados com o hash conferido no PC\n  - nomes sem sobrescrever\n  - PNG falso recusado\n  - cancelar e desligar o recebimento no meio sem deixar arquivo parcial\n- Emulador API 33 contra o Windows 0.3.0: conexão, touchpad e volume funcionam, e o envio de arquivos fica indisponível com o aviso.\n- Ainda não testados: celular físico, Wi-Fi real e TalkBack.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.4.0.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.4.0-kotlin/KOTLIN-SHA256SUMS-0.4.0.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.4.0.md",
+        "size": 2404,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.4.0-kotlin/KOTLIN-SIZE-0.4.0.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.4.0-evaluation.apk",
+        "size": 691725,
+        "sizeFormatted": "675.5 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.4.0-kotlin/pc-remote-android-kotlin-0.4.0-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.4.0-unminified-evaluation.apk",
+        "size": 2534707,
+        "sizeFormatted": "2.4 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.4.0-kotlin/pc-remote-android-kotlin-0.4.0-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-414542403",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.3.0",
+    "name": "PC Remote Desktop 0.3.0 - painel redesenhado",
+    "publishedAt": "2026-10-16T04:36:16Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.3.0",
+    "body": "Painel redesenhado, pareamento com o código em destaque e aviso de atualização.\n\n## Novidades\n\n- Barra lateral retrátil, cabeçalho com o estado da conexão e as páginas Visão geral, Dispositivos, Transferência, Diagnóstico e Configurações.\n- Tema claro, escuro ou do sistema.\n- Gaveta **Parear celular** com o código de 8 dígitos em destaque, o QR e a faixa de cores da identidade, a mesma que o celular mostra. O pedido é aprovado no próprio painel.\n- Dispositivos mostram o último contato; Transferência lista as trocas da sessão só com metadados, sem o texto.\n- Aviso de atualização com notas da versão e download pelo navegador. Com este repositório privado, a consulta ao GitHub sem login não encontra as releases.\n\n## Compatibilidade\n\nProtocolo 1 + input.v1, sem mudanças. Funciona com o Android 0.3.0-kotlin e com os Android 0.2.x.\n\n## Verificação\n\n- 33 testes Rust e 23 testes Vitest; TypeScript, Vite, Rust release e NSIS concluídos.\n- Instalador x64 por usuário: **3.490.247 bytes**, sem assinatura Authenticode. Hash SHA-256 anexo.\n- O instalador não foi executado na máquina de build, para não substituir a instalação em uso. Celular físico, Wi-Fi/mDNS real e players específicos continuam pendentes.\n\nAPK Android: [0.3.0-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.3.0-kotlin).\n",
+    "assets": [
+      {
+        "name": "pc-remote-desktop-0.3.0-x64-setup.exe",
+        "size": 3490247,
+        "sizeFormatted": "3.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.3.0/pc-remote-desktop-0.3.0-x64-setup.exe"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.3.0.txt",
+        "size": 104,
+        "sizeFormatted": "104 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.3.0/WINDOWS-SHA256SUMS-0.3.0.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-414541066",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.3.0-kotlin",
+    "name": "PC Remote Android 0.3.0 - nova interface",
+    "publishedAt": "2026-10-16T04:33:29Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.3.0-kotlin",
+    "body": "Interface nova, alinhada ao app do Windows, e pareamento só com o código.\n\n## Novidades\n\n- Quatro abas: Touchpad, Mídia, Transferir e Conexão. A barra superior mostra o PC, o estado da conexão e a latência.\n- Tema claro, escuro ou do sistema.\n- Touchpad com aceleração, rolagem e clique direito com dois dedos, faixa de rolagem e teclas rápidas.\n- Painel \"Digitar no PC\" com Enviar e Enviar + Enter, sem desligar o controle.\n- Pareamento digitando o código de 8 dígitos mostrado no PC e escolhendo o PC encontrado na rede. O QR continua disponível.\n- Aviso de atualização: o app consulta as releases do GitHub e abre o download do APK no navegador.\n\n## Instalação\n\nInstale por cima da versão anterior: a assinatura é a mesma e o pareamento é mantido. Para ver no PC a mesma faixa de cores do pareamento, use o PC Remote para Windows 0.3.0.\n\n## Verificação\n\n- 52 testes JUnit; release, sizeBaseline e lint sem erros.\n- APK de **671.817 bytes (0,672 MB)**, assinado com a chave debug de avaliação. SHA-256 nos anexos.\n- Emulador API 33: atualização a partir da 0.2.4 com reconexão automática, touchpad, digitação, mídia, transferência, temas e aviso de atualização.\n- Ainda não testados: celular físico, QR pela câmera e pareamento por código numa rede Wi-Fi real.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.3.0.txt",
+        "size": 235,
+        "sizeFormatted": "235 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.3.0-kotlin/KOTLIN-SHA256SUMS-0.3.0.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.3.0.md",
+        "size": 2313,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.3.0-kotlin/KOTLIN-SIZE-0.3.0.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.3.0-evaluation.apk",
+        "size": 671817,
+        "sizeFormatted": "656.1 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.3.0-kotlin/pc-remote-android-kotlin-0.3.0-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.3.0-unminified-evaluation.apk",
+        "size": 2503247,
+        "sizeFormatted": "2.4 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.3.0-kotlin/pc-remote-android-kotlin-0.3.0-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-414419953",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.2.2",
+    "name": "PC Remote Desktop 0.2.2 - revogacao e clipboard seguros",
+    "publishedAt": "2026-10-16T00:57:00Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.2.2",
+    "body": "Corrige gravação de pareamento/configurações, revogação e conflitos de clipboard, mantendo o backend Rust na bandeja e o protocolo 1 + input.v1.\n\n- Credenciais de pareamento só são publicadas após salvar.\n- Revogar encerra a sessão e bloqueia o dispositivo no processo imediatamente; se o disco falhar, o erro orienta repetir. Reiniciar antes da revogação durável pode restaurar o acesso antigo.\n- Alterações de configurações são serializadas, com rollback da inicialização Windows em caso de falha e erro explícito caso o rollback também falhe.\n- Sincronização automática confere a sequência do clipboard sob a trava nativa, preservando uma nova cópia local ainda não processada pelo listener.\n- Erros de ação continuam visíveis durante polling e são separados de erros de conexão.\n- Rustls atualizado para 0.23.46; detalhes e avisos residuais em docs/SECURITY-AUDIT.md.\n\n**28 testes Rust passaram**, além de um smoke nativo Windows separado de clipboard com Unicode e sequência obsoleta. Clipboard original foi restaurado em RAM. **2 testes Vitest**, TypeScript, Vite, Rust release e NSIS passaram. A instalação pessoal em execução não foi substituída nesta validação.\n\nInstalador x64 por usuário: **3.470.367 bytes**, sem assinatura Authenticode. Hash SHA-256 anexo. APKs compatíveis e links no README: [Kotlin 0.2.4](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.4-kotlin) e [React Native 0.2.1](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.1).\n\nCelular físico, Wi-Fi/mDNS real, players específicos, troca de saída de áudio e suspensão física permanecem pendentes. Consulte docs/TESTING.md e docs/BUG-AUDIT-2026-10-15.md. Todos os subagentes desta rodada foram GPT-6.1 Sol.\n",
+    "assets": [
+      {
+        "name": "pc-remote-desktop-0.2.2-x64-setup.exe",
+        "size": 3470367,
+        "sizeFormatted": "3.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.2/pc-remote-desktop-0.2.2-x64-setup.exe"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.2.2.txt",
+        "size": 105,
+        "sizeFormatted": "105 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.2/WINDOWS-SHA256SUMS-0.2.2.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-414419778",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.2.4-kotlin",
+    "name": "PC Remote Kotlin 0.2.4 - volume, navegacao e clipboard",
+    "publishedAt": "2026-10-16T00:56:35Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.4-kotlin",
+    "body": "Correções de volume sem toque, desativação da entrada ao navegar e descarte de clipboard pertencente a uma conexão encerrada. Branch independente `native/kotlin`; React Native permanece na `main`. Protocolo 1 + input.v1, compatível com Windows 0.2.2 e versões 0.2.x anteriores conforme capacidades.\n\n- APK final universal: **599.989 bytes (0,600 MB)**; assinatura debug de avaliação. ZIP sem runtime JavaScript/bibliotecas .so.\n- 33 testes JUnit passaram; release, sizeBaseline e lint passaram (0 erros, 13 avisos).\n- API36: volume por DPAD com confirmação e atualização externa posterior; navegação desarma entrada; preview em segundo plano é preservado na mesma sessão e descartado após perda de conexão. Servidor TLS/WebSocket controlado, sem substituir integrações do produto.\n- Construtores ML Kit necessários ao QR continuam preservados pelo R8; assinatura permite atualizar a avaliação anterior.\n\nInstale também o [Windows 0.2.2](https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.2.2). Fechar a janela Windows mantém o backend na bandeja. Sincronização começa desabilitada e exige consentimento nos dois aplicativos.\n\nO APK unminified é somente uma comparação de tamanho. Consulte SIZE e os arquivos SHA-256 anexos. Scanner Google pode baixar módulo externo, fora do tamanho do APK. Celular físico, QR óptico, Wi-Fi real, players e comportamento OEM/Doze permanecem pendentes. APK sem assinatura de produção; não há promessa de conexão durante suspensão.\n\nREADME inclui os downloads `.apk`/`.exe`; docs/BUG-AUDIT-2026-10-15.md e docs/SECURITY-AUDIT.md descrevem a revisão e pendências. Kotlin não usa npm. Todos os subagentes desta rodada foram GPT-6.1 Sol.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.2.4.txt",
+        "size": 237,
+        "sizeFormatted": "237 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.4-kotlin/KOTLIN-SHA256SUMS-0.2.4.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.2.4.md",
+        "size": 2349,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.4-kotlin/KOTLIN-SIZE-0.2.4.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.4-evaluation.apk",
+        "size": 599989,
+        "sizeFormatted": "585.9 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.4-kotlin/pc-remote-android-kotlin-0.2.4-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.4-unminified-evaluation.apk",
+        "size": 2409747,
+        "sizeFormatted": "2.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.4-kotlin/pc-remote-android-kotlin-0.2.4-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-413896136",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.2.1",
+    "name": "PC Remote Desktop 0.2.1 — correção do endereço no pareamento",
+    "publishedAt": "2026-10-15T14:15:50Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.2.1",
+    "body": "Corrige o endereço usado no QR de pareamento quando o Windows possui adaptadores virtuais além do Wi-Fi/Ethernet.\n\nO backend agora prioriza o IPv4 de uma interface com rota padrão, somente quando encontrado na enumeração válida do sistema. Mantém os demais endereços, fallback determinístico e o pareamento manual; nenhuma alteração ao protocolo 1 ou à validação TLS. VPNs/múltiplas rotas ainda podem exigir endereço manual alcançável pelo celular.\n\nValidação: 22 testes Rust passaram, dois testes Vitest e TypeScript passaram. Smoke nativo no Windows confirmou o endereço da rota padrão no payload do convite. Build Tauri/MSVC x64 com frontend React e instalador NSIS gerada com sucesso. Revisão independente sem bloqueios.\n\nInstalador: 3.470.366 bytes, sem Authenticode, instalação por usuário. Hash SHA-256 anexado. O instalador não foi aplicado sobre a instalação pessoal durante a validação.\n\nCompatível com Android React Native 0.2.x e com Kotlin 0.2.3 na branch native/kotlin. O README inclui links do .exe e APK. Android Kotlin 0.2.3 também corrige o fechamento do leitor QR e revisa pareamento/conexão.\n",
+    "assets": [
+      {
+        "name": "pc-remote-desktop-0.2.1-x64-setup.exe",
+        "size": 3470366,
+        "sizeFormatted": "3.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.1/pc-remote-desktop-0.2.1-x64-setup.exe"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.2.1.txt",
+        "size": 105,
+        "sizeFormatted": "105 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.1/WINDOWS-SHA256SUMS-0.2.1.txt"
+      }
+    ]
+  },
+  {
+    "id": "android-413893178",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.2.3-kotlin",
+    "name": "PC Remote Kotlin 0.2.3 — correções QR, pareamento e conexão",
+    "publishedAt": "2026-10-15T14:13:02Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.3-kotlin",
+    "body": "Correção do leitor de QR e revisão de regressões na branch native/kotlin. Mantém a correção R8/ML Kit da 0.2.2.\n\n- Pareamento só grava a nova credencial após Welcome válido; falhas e cancelamentos preservam o PC anterior.\n- Falha de commit não deixa uma credencial candidata disponível no cache para reconexão.\n- Callbacks de conexões encerradas e perdas de redes antigas não disparam reconexões duplicadas.\n- Seletor de mídia atualiza títulos da mesma sessão; Views ignoram mudanças sem efeito visual.\n- QR possui proteção contra falhas de inicialização, cancelamento, leituras concorrentes e callbacks após destruição da tela. Serviços/módulo indisponíveis exibem orientação e mantêm pareamento manual.\n\n20 testes JUnit passaram; release otimizada, variante comparativa e lint concluídos (zero erros, 13 avisos). Revisão independente aprovada. Testes com Windows real e emulador verificaram pareamento, persistência/reconexão, falha de novo pareamento, perda de rede e revogação. Detalhes e resultados por Android estão em docs/TESTING.md.\n\nAndroid 12/API31 e 13/API33: início com processo encerrado e toques repetidos no leitor não encerraram o app; mensagens de módulo indisponível foram apresentadas. O módulo opcional do Google não baixou nesses emuladores, portanto a câmera/leitura óptica não foi validada neles. Android API36: o scanner real abriu e retornou ao pareamento sem crash.\n\nAPK universal: 597.197 bytes (0,597 MB). Assinatura debug de avaliação; instale sobre o PC Remote Kotlin anterior para preservar seus dados quando a assinatura corresponder. Não requer Metro. React Native main e desktop 0.2.0 continuam disponíveis separadamente; README contém os links APK e .exe.\n\nO leitor opcional pode precisar baixar módulo do Google Play Services na primeira utilização. A comunicação PC/celular permanece local. Leitura óptica de convite em celulares físicos Android 12/13, particularidades OEM e falhas físicas de armazenamento ainda exigem validação em hardware. Veja os hashes anexos antes da instalação.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.2.3.txt",
+        "size": 237,
+        "sizeFormatted": "237 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.3-kotlin/KOTLIN-SHA256SUMS-0.2.3.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.2.3.md",
+        "size": 2349,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.3-kotlin/KOTLIN-SIZE-0.2.3.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.3-evaluation.apk",
+        "size": 597197,
+        "sizeFormatted": "583.2 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.3-kotlin/pc-remote-android-kotlin-0.2.3-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.3-unminified-evaluation.apk",
+        "size": 2406519,
+        "sizeFormatted": "2.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.3-kotlin/pc-remote-android-kotlin-0.2.3-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "android-413421961",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.2.2-kotlin",
+    "name": "PC Remote Android 0.2.2 — Kotlin nativo (avaliação)",
+    "publishedAt": "2026-10-15T04:35:41Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.2-kotlin",
+    "body": "Atualização da alternativa Kotlin na branch `native/kotlin`; React Native permanece em `main`. Desktop Windows 0.2.0 e protocolo 1 + input.v1 continuam compatíveis.\n\n### Correções e melhorias nesta versão:\n- **Correção de ProGuard/R8 para ML Kit**: Adicionada regra `-keep class * implements com.google.firebase.components.ComponentRegistrar { void <init>(); }` para preservar os construtores necessários na inicialização por reflexão do Google ML Kit Barcode Scanner, eliminando o crash ao tocar em \"Ler QR code\" no APK otimizado.\n- **Isolamento de ciclo de vida do leitor**: Implementado `QrScanner` e `QrScanGate` com gate de execução única, detach em Activities destruídas e mensagens de fallback claras sem expor credenciais em logs ou exceptions.\n- **Detecção de cancelamento**: Suporte a cancelamento via `ApiException` do Google Play Services (`CommonStatusCodes.CANCELED`) e tratamento de exceções encadeadas.\n- **Resiliência de credenciais**: Persistência de credenciais criptografadas via `commit()` síncrono; restauração automática do pareamento anterior do PC caso uma nova tentativa de pareamento seja recusada ou falhe.\n- **Proteção de notificações**: Envio de notificações locais protegido contra `RuntimeException` de permissões em versões heterogêneas do Android.\n\n### Métricas de tamanho:\n- **APK otimizado: 597.017 bytes (0,597 MB)** — aproximadamente **97,0% menor** que os 20,195 MB do React Native entregue.\n- **Sem R8 (sizeBaseline)**: 2.406.087 bytes (2,406 MB).\n- *Tamanho de download; não representa espaço instalado ou memória RAM.*\n\n### Validação:\n- 14 testes unitários automatizados passaram (protocolo, dedup/tracker de clipboard e comportamento/gate do leitor QR).\n- `assembleRelease`, `assembleSizeBaseline` e `lintRelease` aprovados (0 erros, 12 avisos).\n- Testado e validado em emulador API 36 (Android 16): abertura do scanner de código de barras do Google Play Services (`BarcodeScanningActivityProxy`), leitura contínua de frames sem crash e retorno seguro à tela de pareamento.\n\n[README](https://github.com/danielharrisonlf/pc-remote-android/blob/native/kotlin/README.md) · [Testes e pendências](https://github.com/danielharrisonlf/pc-remote-android/blob/native/kotlin/docs/TESTING.md) · [Instalador Windows .exe](https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.0/pc-remote-desktop-0.2.0-x64-setup.exe)\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.2.2.txt",
+        "size": 237,
+        "sizeFormatted": "237 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.2-kotlin/KOTLIN-SHA256SUMS-0.2.2.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.2.2.md",
+        "size": 2349,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.2-kotlin/KOTLIN-SIZE-0.2.2.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.2-evaluation.apk",
+        "size": 597017,
+        "sizeFormatted": "583 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.2-kotlin/pc-remote-android-kotlin-0.2.2-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.2-unminified-evaluation.apk",
+        "size": 2406087,
+        "sizeFormatted": "2.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.2-kotlin/pc-remote-android-kotlin-0.2.2-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "android-413313653",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.2.1-kotlin",
+    "name": "PC Remote Android 0.2.1 — Kotlin nativo (avaliação)",
+    "publishedAt": "2026-10-15T00:58:42Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.1-kotlin",
+    "body": "﻿Atualização da alternativa Kotlin na branch `native/kotlin`; React Native permanece em `main`. Desktop Windows 0.2.0 e protocolo 1 + input.v1 continuam compatíveis.\n\nCorrige recópias de texto recebido (A → B → A), estabelece baseline após ganho de foco/reconexão, evita reescritas idênticas e mostra erros claros para conteúdo sensível, textos acima de 64 KiB e clipboard Windows ocupado. Metadados do ClipData retornado são revalidados antes do envio.\n\n**APK otimizado: 595.241 bytes (0,595 MB)**. Sem R8: 2.403.711 bytes (2,404 MB). React Native ARM64 entregue: 20.195.433 bytes (20,195 MB); redução aproximada 97,1%. Tamanho de download; não representa espaço instalado ou RAM.\n\n9 testes JUnit e lint passaram (0 erros, 12 avisos). APK/R8 instalado em emulador API36 com Windows real: sincronização automática nas duas direções, ausência de loops com emulador isolado, recópias, Unicode, bloqueio de sensibilidade e excesso de tamanho, pausa/retomada sem replay, ausência de upload em segundo plano, erro/releitura com clipboard ocupado e funcionamento com painel desktop fechado. A integração de clipboard do próprio emulador foi desligada para isolar o protocolo. Fixture real Android fica fora do APK produto.\n\nInstale `pc-remote-android-kotlin-0.2.1-evaluation.apk`; `unminified` é somente comparação. Atualiza a avaliação anterior com o mesmo pacote `com.pcremote.nativeandroid` e assinatura debug. Sync nova instalação continua desligada. Download privado exige conta autorizada no GitHub.\n\n[README](https://github.com/danielharrisonlf/pc-remote-android/blob/native/kotlin/README.md) · [Testes e pendências](https://github.com/danielharrisonlf/pc-remote-android/blob/native/kotlin/docs/TESTING.md) · [Instalador Windows .exe](https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.0/pc-remote-desktop-0.2.0-x64-setup.exe)\n\nCelular físico, OEM/Doze, câmera QR, rede Wi-Fi e players reais permanecem pendentes. APK tem assinatura de avaliação; instalador Windows não possui Authenticode. O app não garante conexão ou leitura de clipboard de outros apps em segundo plano. Use o app em foco ou Compartilhar. Hashes SHA-256 e relatório medido anexos.\r\n\r\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.2.1.txt",
+        "size": 237,
+        "sizeFormatted": "237 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.1-kotlin/KOTLIN-SHA256SUMS-0.2.1.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE-0.2.1.md",
+        "size": 2349,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.1-kotlin/KOTLIN-SIZE-0.2.1.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.1-evaluation.apk",
+        "size": 595241,
+        "sizeFormatted": "581.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.1-kotlin/pc-remote-android-kotlin-0.2.1-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.1-unminified-evaluation.apk",
+        "size": 2403711,
+        "sizeFormatted": "2.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.1-kotlin/pc-remote-android-kotlin-0.2.1-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "android-413100332",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.2.0-kotlin",
+    "name": "PC Remote Android 0.2.0 — Kotlin nativo (avaliação)",
+    "publishedAt": "2026-10-14T19:27:15Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.2.0-kotlin",
+    "body": "﻿Alternativa Android totalmente nativa em Kotlin, publicada na branch `native/kotlin`. A branch `main` conserva React Native. Mesmo desktop Windows 0.2.0 e protocolo 1 + input.v1; volume, mídia, clipboard, touchpad e teclado usam integrações reais.\n\n| Build | Tamanho do APK |\n|---|---:|\n| Kotlin otimizado com R8 | **593.853 bytes (0,594 MB)** |\n| Kotlin sem R8 | 2.401.955 bytes (2,402 MB) |\n| React Native 0.2.0 ARM64 entregue | 20.195.433 bytes (20,195 MB) |\n\nKotlin otimizado: **97,1% menor**. Sem R8: **88,1% menor**. Tamanho de download, não espaço instalado ou RAM. APK Kotlin universal; módulos externos opcionais do scanner Google Play Services não entram nessa medida.\n\nInstale `pc-remote-android-kotlin-0.2.0-evaluation.apk`. A variante `unminified` serve à comparação. Nome **PC Remote Kotlin**, pacote `com.pcremote.nativeandroid`, pode coexistir com React Native. Pareie separadamente; um controlador conectado por PC.\n\n[Instalador Windows .exe](https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.0/pc-remote-desktop-0.2.0-x64-setup.exe) · [README e build](https://github.com/danielharrisonlf/pc-remote-android/blob/native/kotlin/README.md) · [Testes e pendências](https://github.com/danielharrisonlf/pc-remote-android/blob/native/kotlin/docs/TESTING.md)\n\n5 testes JUnit e lint passaram (0 erros, 12 avisos). APK release/R8 validado em emulador API36 com PC Windows real: pareamento/aprovação, identidade TLS incorreta rejeitada, revogação, volume/mudo, texto Unicode nas duas direções, compartilhar aberto/fechado, reconexão, cursor real, digitação em janela descartável e desativação de entrada ao sair do app. Hardware Android físico, QR por câmera, Wi-Fi/Doze e players reais permanecem pendentes.\n\nBuild de avaliação com assinatura debug; instalador Windows sem Authenticode. Hashes SHA-256 e relatório de comparação anexos. Sync inicia desligada. Android não promete leitura de clipboard de outros apps em segundo plano nem conexão durante suspensão; abra o app ou use Compartilhar.\r\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS.txt",
+        "size": 237,
+        "sizeFormatted": "237 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.0-kotlin/KOTLIN-SHA256SUMS.txt"
+      },
+      {
+        "name": "KOTLIN-SIZE.md",
+        "size": 2349,
+        "sizeFormatted": "2.3 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.0-kotlin/KOTLIN-SIZE.md"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.0-evaluation.apk",
+        "size": 593853,
+        "sizeFormatted": "579.9 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.0-kotlin/pc-remote-android-kotlin-0.2.0-evaluation.apk"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.2.0-unminified-evaluation.apk",
+        "size": 2401955,
+        "sizeFormatted": "2.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.2.0-kotlin/pc-remote-android-kotlin-0.2.0-unminified-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-413063794",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.2.0",
+    "name": "PC Remote Windows 0.2.0 — avaliação",
+    "publishedAt": "2026-10-14T18:45:28Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.2.0",
+    "body": "PC Remote 0.2.0 — avaliação, protocolo 1 + input.v1.\n\nTouchpad e teclado com consentimento no Windows e ativação por conexão no Android. Cliques e texto vão à janela em foco. Controle desarmado após desconectar/sair do Android. Volume, mídia e clipboard preservados.\n\n40 testes automatizados passaram (18 Android, 20 Rust, 2 desktop). Pareamento/capacidade/entrada desativada no Home e inicialização com credencial salva foram conferidos no emulador. Smoke nativo moveu/restaurou cursor. Digitação em diversos aplicativos, celular físico, Wi-Fi real e players permanecem pendentes; consulte docs/TESTING.md.\n\nAPKs com JavaScript embutido e assinatura debug de avaliação; Windows NSIS x64 sem Authenticode. Os hashes são fornecidos em SHA256SUMS.txt. Leia o README para instalação/pareamento e os links do aplicativo complementar.",
+    "assets": [
+      {
+        "name": "pc-remote-desktop-0.2.0-x64-setup.exe",
+        "size": 3463053,
+        "sizeFormatted": "3.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.0/pc-remote-desktop-0.2.0-x64-setup.exe"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 105,
+        "sizeFormatted": "105 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.2.0/SHA256SUMS.txt"
+      }
+    ]
+  },
+  {
+    "id": "desktop-412786191",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.1.0",
+    "name": "PC Remote Windows 0.1.0 — avaliação",
+    "publishedAt": "2026-10-14T13:59:29Z",
+    "prerelease": true,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.1.0",
+    "body": "Versão de avaliação 0.1.0, protocolo 1.\n\n- Instalador NSIS Windows x64, instalação por usuário.\n- Instalador sem assinatura Authenticode.\n- Instale também o APK Android: https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.1.0\n- Instalação, pareamento, firewall e limitações no README. Consulte docs/TESTING.md para as verificações realizadas.\n- Confira SHA256SUMS.txt antes da instalação.",
+    "assets": [
+      {
+        "name": "pc-remote-desktop-0.1.0-x64-setup.exe",
+        "size": 3453739,
+        "sizeFormatted": "3.3 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.1.0/pc-remote-desktop-0.1.0-x64-setup.exe"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 105,
+        "sizeFormatted": "105 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.1.0/SHA256SUMS.txt"
+      }
+    ]
+  }
+]
