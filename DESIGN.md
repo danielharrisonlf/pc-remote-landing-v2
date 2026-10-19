@@ -77,3 +77,20 @@ A captura enviada mostrou conteúdo cortado. A auditoria independente do estado 
 
 As evidências desta rodada ficam em `../artifacts/qa/landing-mobile/`. Memória Semantica indisponível; nenhum registro de memória durável foi criado.
 Na publicação, o novo host foi registrado nos domínios do projeto antes da promoção. O domínio antigo usa redirecionamento nativo 308 da Vercel, cobrindo a raiz e preservando caminhos e query strings; o `vercel.json` permanece como fallback para caminhos. A proteção de acesso dos previews foi mantida.
+## Design system, molduras e ícone, 19/10/2026
+
+Refatoração do sistema visual preservando marca, Geist, acento cyan, capturas reais, âncoras e interações acessíveis. Configuração aplicada: DESIGN_VARIANCE 5, MOTION_INTENSITY 3, VISUAL_DENSITY 4.
+
+- Tokens semânticos em `:root` (escuro) redefinidos só como valores em `[data-theme='light']`: escala de superfície `bg → surface-soft → surface → surface-strong`, `--raised` para o item selecionado (mais claro no escuro, branco no claro), `--chip-*`, `--focus`, cores de plataforma e de aviso por tema. Âmbar e verde não aparecem mais como tinta fixa sobre fundo claro.
+- Elevação: `--edge` (luz de borda superior), `--shadow-sm/md/lg` sempre com deslocamento e blur, `--shadow-glow` deslocado sob o CTA primário. Sem halo de deslocamento zero.
+- Tipografia fluida com `clamp()` para h1, h2, h3 e texto de apoio; tracking de display -0.035em, entrelinha de corpo 1.65 (antes 1.75–1.9). Piso de 12 px mantido.
+- Movimento: 150/200 ms em `cubic-bezier(0.16, 1, 0.3, 1)`. Um único momento autoral: a captura entra em foco (blur → nítido) ao trocar de ferramenta. A troca de tema desliga transições por dois quadros para não piscar a tela.
+- Molduras CSS: celular em grafite com borda interna iluminada e teclas laterais; janela Windows com anel fino e sombra profunda, sem barra de título falsa porque a captura já traz a barra real. Selo discreto "App Android" / "App Windows" sobre a borda inferior. O raio da tela foi reduzido para 19/15 px porque raios maiores cortavam o horário da barra de status da captura real.
+- Recorte das capturas de desktop apenas nos pixels de outras janelas capturados ao redor (8/8/1 px no painel, 6/7/2 px no Interromper), por CSS com `aspect-ratio`. A interface do app não foi alterada nem recolorida.
+- Modal de ampliação com backdrop desfocado (8 px), entrada suave, título com plataforma, alternância por botão ou toque duplo.
+- Hero sem eyebrow; a linha "grátis e código aberto" virou parte de três provas verificáveis (rede local, sem conta, código aberto). Não usamos "latência zero" nem "privacidade total": não há benchmark nem garantia que sustente essas frases.
+- Explorador: no mobile, o seletor nativo foi trocado por chips roláveis com `role=tablist`, máscara nas bordas e centralização da aba ativa. Teclado (setas, Home, End) inalterado.
+- Comparativo com chips de status no PC Remote (rede local, sem conta, código aberto, aprovação no PC), na tabela e nos cartões.
+- Downloads: metadados com ponto médio viraram lista de definição (Sistema, Pacote, Versão). As versões vêm de `versions` em `content.ts`, que também monta os links, porque os cartões mostravam 0.6.4/0.6.5 enquanto os links já eram 0.6.5/0.6.6. O QR codificava o APK 0.6.5; foi regenerado (qrcode 1.5.4, correção M, quiet zone de 4 módulos) para o APK 0.6.6 e ganhou três passos de escaneamento. O banner de releases conta os itens do JSON.
+- Ícones de texto (`+`, `↑`) substituídos por Phosphor. Barra móvel sempre montada, desliza com `inert` quando oculta, respeita safe areas.
+- Ícone: mesma geometria dos dois prismas, tile sangrado (a marca fica maior no favicon), sem filtro de sombra (borrava em 16 px), variante escura por `prefers-color-scheme` no SVG e tile escuro no cabeçalho quando o tema é escuro. PNG 32, apple-touch 180 (quadrado, o iOS aplica a máscara), 192 e 512 com manifest, gerados por `npm run build:icons`. Os ícones dos apps desktop e Android não foram alterados.

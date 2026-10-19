@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import { AndroidLogo } from '@phosphor-icons/react/dist/csr/AndroidLogo'
 import { ArrowDown } from '@phosphor-icons/react/dist/csr/ArrowDown'
 import { ArrowRight } from '@phosphor-icons/react/dist/csr/ArrowRight'
+import { ArrowUp } from '@phosphor-icons/react/dist/csr/ArrowUp'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/csr/ArrowUpRight'
+import { Camera } from '@phosphor-icons/react/dist/csr/Camera'
 import { Check } from '@phosphor-icons/react/dist/csr/Check'
 import { ClipboardText } from '@phosphor-icons/react/dist/csr/ClipboardText'
 import { Copy } from '@phosphor-icons/react/dist/csr/Copy'
@@ -17,22 +19,42 @@ import { LockKey } from '@phosphor-icons/react/dist/csr/LockKey'
 import { MagnifyingGlassPlus } from '@phosphor-icons/react/dist/csr/MagnifyingGlassPlus'
 import { Moon } from '@phosphor-icons/react/dist/csr/Moon'
 import { PlayPause } from '@phosphor-icons/react/dist/csr/PlayPause'
+import { Plus } from '@phosphor-icons/react/dist/csr/Plus'
 import { Power } from '@phosphor-icons/react/dist/csr/Power'
+import { Scan } from '@phosphor-icons/react/dist/csr/Scan'
 import { ShieldCheck } from '@phosphor-icons/react/dist/csr/ShieldCheck'
 import { Sun } from '@phosphor-icons/react/dist/csr/Sun'
 import { Tag } from '@phosphor-icons/react/dist/csr/Tag'
 import { WifiHigh } from '@phosphor-icons/react/dist/csr/WifiHigh'
 import { WindowsLogo } from '@phosphor-icons/react/dist/csr/WindowsLogo'
 import { X } from '@phosphor-icons/react/dist/csr/X'
-import { links, hashes, comparison, comparisonSources } from './content'
+import { links, hashes, versions, comparison, comparisonSources } from './content'
+import { initialReleases } from './releasesData'
 import { useTheme } from './theme'
 import Screenshot from './Screenshot'
 import { Releases } from './Releases'
 
+const markInk = 'M 37.00 30.20 L 71.00 30.20 C 73.81 30.20 76.10 32.49 76.10 35.30 L 76.10 40.40 C 76.10 42.20 75.16 43.87 73.62 44.80 L 58.67 53.86 C 55.80 55.61 52.20 55.61 49.33 53.86 L 34.38 44.80 C 32.84 43.87 31.90 42.20 31.90 40.40 L 31.90 35.30 C 31.90 32.49 34.19 30.20 37.00 30.20 Z M 42.10 37.00 L 42.10 39.55 L 54.00 46.77 L 65.90 39.55 L 65.90 37.00 L 42.10 37.00 Z'
+const markAccent = 'M 49.33 54.14 C 52.20 52.39 55.80 52.39 58.67 54.14 L 73.62 63.20 C 75.16 64.13 76.10 65.80 76.10 67.60 L 76.10 72.70 C 76.10 75.51 73.81 77.80 71.00 77.80 L 37.00 77.80 C 34.19 77.80 31.90 75.51 31.90 72.70 L 31.90 67.60 C 31.90 65.80 32.84 64.13 34.38 63.20 L 49.33 54.14 Z M 65.90 71.00 L 65.90 68.45 L 54.00 61.23 L 42.10 68.45 L 42.10 71.00 L 65.90 71.00 Z'
+
+function BrandMark() {
+  const gradient = `brand-cyan-${useId().replace(/[^\w-]/g, '')}`
+  return (
+    <svg className="brand-mark" viewBox="0 0 108 108" width="36" height="36" aria-hidden="true">
+      <defs><linearGradient id={gradient} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#00E5FF" /><stop offset="1" stopColor="#0284C7" /></linearGradient></defs>
+      <rect className="brand-tile" x="1" y="1" width="106" height="106" rx="25" />
+      <g transform="translate(-14.04 -14.04) scale(1.26)">
+        <path className="brand-ink" fillRule="evenodd" d={markInk} />
+        <path fill={`url(#${gradient})`} fillRule="evenodd" d={markAccent} />
+      </g>
+    </svg>
+  )
+}
+
 function Brand({ onClick }: { onClick: () => void }) {
   return (
     <a className="brand" href="#top" aria-label="PC Remote, início" onClick={(e) => { e.preventDefault(); onClick() }}>
-      <span className="brand-mark"><img src="/brand/symbol.svg" width="56" height="56" alt="" /></span>
+      <BrandMark />
       <span>PC Remote</span>
     </a>
   )
@@ -113,7 +135,7 @@ function Header({ activeView, onSelectView }: HeaderProps) {
             onClick={(e) => { e.preventDefault(); handleNav('releases') }}
           >
             <span>Releases</span>
-            <span className="nav-link-badge">v0.6.5</span>
+            <span className="nav-link-badge">v{versions.windows}</span>
           </a>
         </nav>
         <div className="header-actions">
@@ -146,22 +168,25 @@ function Header({ activeView, onSelectView }: HeaderProps) {
 }
 
 function PhoneScreenshot({ name, alt, priority = false, className = '' }: { name: string; alt: string; priority?: boolean; className?: string }) {
-  return <div className={`phone ${name === 'clipboard' ? 'phone-tall' : ''} ${className}`}><Screenshot name={name} width={640} height={name === 'clipboard' ? 1422 : 1138} alt={alt} priority={priority} /></div>
+  const tall = name === 'clipboard'
+  return <Screenshot frame="phone" name={name} width={640} height={tall ? 1422 : 1138} alt={alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} className={`${tall ? 'device-tall' : ''} ${className}`} />
 }
 
 function Hero({ onNavigateReleases }: { onNavigateReleases: () => void }) {
   return (
     <section className="hero shell" id="top">
       <div className="hero-copy">
-        <a className="hero-source" href={links.desktopRepo} target="_blank" rel="noreferrer">
-          Grátis e código aberto <ArrowUpRight size={15} />
-        </a>
         <h1>Seu Android vira<br /><span>o controle do PC.</span></h1>
-        <p className="hero-description">Mouse, teclado, mídia e arquivos. Controle o computador pelo Android, na mesma rede Wi-Fi.</p>
+        <p className="hero-description">Mouse, teclado, mídia e arquivos. Os comandos vão direto do celular ao computador pela sua rede Wi-Fi, sem conta e sem servidor na nuvem.</p>
         <div className="hero-actions">
           <a className="button" href={links.android}><AndroidLogo size={21} /><span>Baixar Android</span></a>
           <a className="button secondary" href={links.windows}><WindowsLogo size={21} /><span>Baixar Windows</span></a>
         </div>
+        <ul className="hero-proof" aria-label="Por que é diferente">
+          <li><WifiHigh size={18} />Controle pela rede local</li>
+          <li><LockKey size={18} />Sem conta e sem login</li>
+          <li><a href={links.desktopRepo} target="_blank" rel="noreferrer"><GithubLogo size={18} />Grátis e código aberto<ArrowUpRight size={14} /></a></li>
+        </ul>
         <div className="hero-help">
           <a className="hero-setup-link" href="#como-funciona">Como instalar nos dois aparelhos <ArrowRight size={15} /></a>
           <a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Usa Ubuntu? <ArrowRight size={15} /></a>
@@ -176,8 +201,8 @@ function Hero({ onNavigateReleases }: { onNavigateReleases: () => void }) {
       </div>
       <figure className="hero-product">
         <div className="product-scene">
-          <div className="desktop-shot"><Screenshot name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} priority /></div>
-          <PhoneScreenshot name="media" priority alt="Android com busca no YouTube e controles de mídia" />
+          <Screenshot frame="window" className="scene-window" name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} crop={[8, 8, 1]} fetchPriority="high" />
+          <PhoneScreenshot name="media" priority className="scene-phone" alt="Android com busca no YouTube e controles de mídia" />
         </div>
         <figcaption><MagnifyingGlassPlus size={16} />Telas reais do app. Toque para ampliar.</figcaption>
       </figure>
@@ -197,6 +222,13 @@ function Features() {
   const [selected, setSelected] = useState(0)
   const refs = useRef<(HTMLButtonElement | null)[]>([])
   const tool = tools[selected]
+  const tabList = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    // Keep the active tab in view when the list scrolls horizontally on phones.
+    const list = tabList.current, tab = refs.current[selected]
+    if (!list || !tab || list.scrollWidth <= list.clientWidth) return
+    list.scrollTo({ left: tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2, behavior: 'smooth' })
+  }, [selected])
   function navigateTabs(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     let next = index
     if (event.key === 'ArrowRight') next = (index + 1) % tools.length
@@ -207,9 +239,8 @@ function Features() {
     event.preventDefault(); setSelected(next); refs.current[next]?.focus()
   }
   return <section className="section shell" id="recursos">
-    <div className="section-title"><p className="eyebrow">Um controle para o seu dia a dia</p><h2>Faça pelo celular.<br />Fique onde você está.</h2><p>Do vídeo no sofá ao arquivo que você precisa no PC. Escolha o que quer fazer.</p></div>
-    <label className="feature-picker">O que você quer controlar?<select value={selected} onChange={e => setSelected(Number(e.target.value))}>{tools.map((item, i) => <option key={item.id} value={i}>{item.label}</option>)}</select></label>
-    <div className="feature-tabs" role="tablist" aria-label="Funcionalidades do PC Remote">{tools.map((item, i) => <button ref={el => { refs.current[i] = el }} key={item.id} id={`tab-${item.id}`} aria-selected={selected === i} aria-controls="feature-panel" tabIndex={selected === i ? 0 : -1} role="tab" onKeyDown={e => navigateTabs(e, i)} onClick={() => setSelected(i)}><item.icon size={21} /><span>{item.label}</span></button>)}</div>
+    <div className="section-title"><h2>Faça pelo celular.<br />Fique onde você está.</h2><p>Do vídeo no sofá ao arquivo que você precisa no PC. Escolha o que quer fazer.</p></div>
+    <div className="feature-tabs" ref={tabList} role="tablist" aria-label="Funcionalidades do PC Remote">{tools.map((item, i) => <button ref={el => { refs.current[i] = el }} key={item.id} id={`tab-${item.id}`} aria-selected={selected === i} aria-controls="feature-panel" tabIndex={selected === i ? 0 : -1} role="tab" onKeyDown={e => navigateTabs(e, i)} onClick={() => setSelected(i)}><item.icon size={21} /><span>{item.label}</span></button>)}</div>
     <div className="feature-panel" id="feature-panel" role="tabpanel" aria-label={tool.label} tabIndex={0}>
       <div className="feature-copy" key={`copy-${tool.id}`}><span className="feature-kind"><tool.icon size={22} />{tool.label}</span><h3>{tool.title}</h3><p>{tool.description}</p><ul className="check-list">{tool.bullets.map(item => <li key={item}><Check size={18} />{item}</li>)}</ul><a className="text-link" href="#downloads">Baixar e começar a usar <ArrowRight size={18} /></a><details className="feature-note"><summary>Detalhes e compatibilidade</summary><p>{tool.note}</p></details></div>
       <figure className="feature-visual" key={tool.id}><PhoneScreenshot name={tool.id} alt={tool.alt} /><figcaption>{tool.metric}</figcaption></figure>
@@ -239,15 +270,15 @@ function Comparison() {
   const names = { remote: 'TeamViewer / AnyDesk', unified: 'Unified Remote', phone: 'Vínculo com Celular' }
   return <section className="section comparison-section" id="comparar"><div className="shell"><div className="section-title"><h2>Escolha o controle<br />que faz sentido para você.</h2><p>Quer usar o PC pelo celular dentro de casa? Compare as opções pelo que elas realmente oferecem.</p></div>
     <label className="comparison-select">Comparar PC Remote com<select value={rival} onChange={e => setRival(e.target.value as typeof rival)}><option value="remote">TeamViewer / AnyDesk</option><option value="unified">Unified Remote</option><option value="phone">Vínculo com Celular</option></select></label>
-    <div className="table-wrap"><table><caption className="sr-only">Comparativo de finalidade, rede, conta, preço e plataformas</caption><thead><tr><th scope="col">O que muda</th><th scope="col" className="pc-column">PC Remote</th><th scope="col">TeamViewer / AnyDesk</th><th scope="col">Unified Remote</th><th scope="col">Vínculo com Celular</th></tr></thead><tbody>{comparison.map(row => <tr key={row.label}><th scope="row">{row.label}</th><td className="pc-column">{row.pc}</td><td>{row.remote}</td><td>{row.unified}</td><td>{row.phone}</td></tr>)}</tbody></table></div>
-    <div className="comparison-cards" aria-label={`PC Remote comparado com ${names[rival]}`}>{comparison.map(row => <article key={row.label}><h3>{row.label}</h3><div className="comparison-answer our-answer"><span>PC Remote</span><p><Check size={17} />{row.pc}</p></div><div className="comparison-answer"><span>{names[rival]}</span><p>{row[rival]}</p></div></article>)}</div>
+    <div className="table-wrap"><table><caption className="sr-only">Comparativo de finalidade, rede, conta, preço e plataformas</caption><thead><tr><th scope="col">O que muda</th><th scope="col" className="pc-column">PC Remote</th><th scope="col">TeamViewer / AnyDesk</th><th scope="col">Unified Remote</th><th scope="col">Vínculo com Celular</th></tr></thead><tbody>{comparison.map(row => <tr key={row.label}><th scope="row">{row.label}</th><td className="pc-column">{row.chip && <span className="status-chip"><Check size={13} weight="bold" />{row.chip}</span>}{row.pc}</td><td>{row.remote}</td><td>{row.unified}</td><td>{row.phone}</td></tr>)}</tbody></table></div>
+    <div className="comparison-cards" aria-label={`PC Remote comparado com ${names[rival]}`}>{comparison.map(row => <article key={row.label}><h3>{row.label}</h3><div className="comparison-answer our-answer"><span>PC Remote{row.chip && <span className="status-chip"><Check size={13} weight="bold" />{row.chip}</span>}</span><p><Check size={17} />{row.pc}</p></div><div className="comparison-answer"><span>{names[rival]}</span><p>{row[rival]}</p></div></article>)}</div>
     <p className="comparison-note">TeamViewer e AnyDesk também oferecem conexão LAN. O Unified Remote também funciona localmente. A escolha depende do uso e da edição.</p>
     <details className="sources"><summary>Fontes e critérios do comparativo</summary><p>Resumo da documentação oficial consultada em 17/10/2026. Recursos e condições podem mudar. Não comparamos RAM ou coleta de dados sem uma medição equivalente.</p><div>{comparisonSources.map(([label, url]) => <a href={url} key={url} target="_blank" rel="noreferrer">{label}<ArrowUpRight size={14} /></a>)}</div></details>
   </div></section>
 }
 
 function Security() {
-  return <section className="section shell security-section" id="seguranca"><div className="section-title"><h2>Você autoriza o acesso.<br />Você decide quando parar.</h2><p>Aprove o celular no computador. Se precisar, um clique interrompe mouse, teclado e energia.</p></div><div className="security-layout"><figure className="security-shot"><Screenshot name="security" width={1000} height={767} alt="Mouse, teclado e energia bloqueados no PC após usar Interromper" /><figcaption><MagnifyingGlassPlus size={15} />Toque para ver o botão “Interromper” no app real.</figcaption></figure><div className="security-points">
+  return <section className="section shell security-section" id="seguranca"><div className="section-title"><h2>Você autoriza o acesso.<br />Você decide quando parar.</h2><p>Aprove o celular no computador. Se precisar, um clique interrompe mouse, teclado e energia.</p></div><div className="security-layout"><figure className="security-shot"><Screenshot frame="window" name="security" width={1000} height={767} crop={[6, 7, 2]} alt="Mouse, teclado e energia bloqueados no PC após usar Interromper" /><figcaption><MagnifyingGlassPlus size={15} />Toque para ver o botão “Interromper” no app real.</figcaption></figure><div className="security-points">
     <article><ShieldCheck /><div><h3>Conexão criptografada</h3><p>TLS com certificado fixado. Código temporário de 8 dígitos e verificação visual ajudam a identificar o PC correto.</p></div></article>
     <article><LockKey /><div><h3>Seus dados ficam entre os dispositivos</h3><p>Sem servidor de controle na nuvem e sem telemetria de uso. O conteúdo copiado não vira histórico em disco.</p></div></article>
     <article><Desktop /><div><h3>Permissões sob seu controle</h3><p>Funciona na sessão do usuário, sem executar como administrador e sem expor terminal de comandos remotos.</p></div></article>
@@ -269,7 +300,6 @@ function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
     <section className="section downloads-section" id="downloads">
       <div className="shell">
         <div className="section-title">
-          <p className="eyebrow">Windows ou Ubuntu + Android</p>
           <h2>Baixe grátis.<br />Controle seu PC.</h2>
           <p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p>
         </div>
@@ -277,7 +307,7 @@ function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
           <article className="download-card">
             <div className="download-top"><WindowsLogo size={30} /><span>1. Instale no PC</span></div>
             <div className="download-heading"><h3>PC Remote para Windows</h3><span>Mouse, mídia, arquivos e energia.</span></div>
-            <p>Windows 10 (1809+) e 11 · x64<br />Instalador .exe · v0.6.4</p>
+            <dl className="download-specs"><div><dt>Sistema</dt><dd>Windows 10 (1809+) e 11, x64</dd></div><div><dt>Pacote</dt><dd>Instalador .exe</dd></div><div><dt>Versão</dt><dd>{versions.windows}</dd></div></dl>
             <a className="button" href={links.windows}><DownloadSimple size={19} />Baixar para Windows</a>
             <a className="release-link" href={links.windowsRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a>
             <HashControl value={hashes.windows} platform="Windows" />
@@ -286,16 +316,20 @@ function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
           <article className="download-card">
             <div className="download-top"><AndroidLogo size={30} /><span>2. Instale no celular</span></div>
             <div className="download-heading"><h3>PC Remote para Android</h3><span>Seu controle, pronto para conectar.</span></div>
-            <p>Android 7 ou superior · APK universal<br />App nativo · v0.6.5-kotlin</p>
+            <dl className="download-specs"><div><dt>Sistema</dt><dd>Android 7 ou superior</dd></div><div><dt>Pacote</dt><dd>APK universal, app nativo</dd></div><div><dt>Versão</dt><dd>{versions.android}</dd></div></dl>
             <a className="button secondary" href={links.android}><DownloadSimple size={19} />Baixar APK Android</a>
             <a className="release-link" href={links.androidRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a>
             <HashControl value={hashes.android} platform="Android" />
           </article>
 
-          <aside className="qr-download">
-            <img src="/android-apk-qr.svg" width="144" height="144" loading="lazy" alt="QR code com o link direto para baixar o APK oficial no Android" />
-            <h3>Está no computador?</h3>
-            <p>Aponte a câmera do celular para baixar o APK.</p>
+          <aside className="qr-download" aria-labelledby="qr-title">
+            <div className="qr-plate"><img src="/android-apk-qr.svg" width="148" height="148" loading="lazy" decoding="async" alt={`QR code com o link direto para baixar o APK oficial ${versions.android} no Android`} /></div>
+            <h3 id="qr-title">Está no computador?</h3>
+            <ol className="qr-steps">
+              <li><Camera size={17} />Abra a câmera do Android</li>
+              <li><Scan size={17} />Aponte para o código</li>
+              <li><DownloadSimple size={17} />Toque no link e instale o APK</li>
+            </ol>
           </aside>
         </div>
 
@@ -308,7 +342,7 @@ function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
           <LinuxLogo size={30} aria-hidden="true" />
           <div className="linux-copy">
             <h3 id="ubuntu-download-title">Ubuntu 22.04, 24.04 e 26.04 LTS</h3>
-            <p>Pacote .deb para PC amd64 · aplicativo v0.6.4. Instale com as dependências necessárias, sem compilar.</p>
+            <p>Pacote .deb para PC amd64, aplicativo v{versions.linux}. Instale com as dependências necessárias, sem compilar.</p>
             <p>Prefere o instalador compactado? Extraia a pasta e execute <code>bash install-ubuntu.sh</code>.</p>
             <p>No Wayland, abra <strong>Configurações → Controle no Ubuntu → Autorizar controle</strong> no PC Remote e permita mouse e teclado.</p>
             <p className="linux-evaluation"><strong>Pré-release Ubuntu.</strong> Instalação e abertura testadas nas três LTS. O uso em um desktop GNOME Wayland real ainda precisa de validação.</p>
@@ -326,7 +360,7 @@ function Downloads({ onNavigateReleases }: { onNavigateReleases: () => void }) {
         <div className="releases-banner-callout">
           <div className="releases-banner-content">
             <strong>Histórico completo de atualizações</strong>
-            <span>Consulte todas as 27 releases lançadas para Windows, Ubuntu e Android, com notas detalhadas de cada versão e downloads diretos de executáveis.</span>
+            <span>Consulte todas as {initialReleases.length} releases lançadas para Windows, Ubuntu e Android, com notas detalhadas de cada versão e downloads diretos de executáveis.</span>
           </div>
           <button
             type="button"
@@ -353,7 +387,7 @@ function Faq() {
     ['Funciona com qualquer player de música ou vídeo?', 'O app usa as capacidades que o player publica para o sistema: controles de mídia do Windows e MPRIS no Linux. Nem todo player permite todas as ações. O Android indica quais controles estão disponíveis.'],
     ['Preciso configurar meu roteador ou ter conta?', 'Não é preciso criar conta nem abrir portas no roteador. A comunicação de controle usa TCP 43127 na LAN, com descoberta opcional por mDNS. O firewall pode pedir permissão para a rede privada. Redes de convidados e VPNs podem bloquear a conexão.'],
   ]
-  return <section className="section shell faq-section" id="faq"><div className="faq-heading"><h2>Antes de baixar.</h2><p>O que você precisa saber para começar.</p><a className="text-link" href={links.installation} target="_blank" rel="noreferrer">Ler a documentação <ArrowUpRight size={16} /></a></div><div className="faq-list">{faqs.map(([q, a]) => <details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div></section>
+  return <section className="section shell faq-section" id="faq"><div className="faq-heading"><h2>Antes de baixar.</h2><p>O que você precisa saber para começar.</p><a className="text-link" href={links.installation} target="_blank" rel="noreferrer">Ler a documentação <ArrowUpRight size={16} /></a></div><div className="faq-list">{faqs.map(([q, a]) => <details key={q}><summary>{q}<Plus size={18} aria-hidden="true" /></summary><p>{a}</p></details>)}</div></section>
 }
 
 function Footer({ onNavigateReleases }: { onNavigateReleases: () => void }) {
@@ -380,7 +414,7 @@ function Footer({ onNavigateReleases }: { onNavigateReleases: () => void }) {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} PC Remote</span>
           <span>Gratuito e de código aberto.</span>
-          <a href="#top">Voltar ao início ↑</a>
+          <a href="#top">Voltar ao início <ArrowUp size={14} /></a>
         </div>
       </div>
     </footer>
@@ -406,7 +440,7 @@ function MobileDownloadBar() {
     observer.observe(hero); observer.observe(downloads)
     return () => observer.disconnect()
   }, [])
-  return visible ? <aside className="mobile-download-bar" aria-label="Download rápido"><div><strong>PC Remote é grátis</strong><span>PC + Android</span></div><a className="button small" href="#downloads">Baixar os apps <ArrowDown size={17} /></a></aside> : null
+  return <aside className={`mobile-download-bar${visible ? ' is-visible' : ''}`} aria-label="Download rápido" aria-hidden={!visible} inert={!visible}><div><strong>PC Remote é grátis</strong><span>Windows, Ubuntu e Android</span></div><a className="button small" href="#downloads">Baixar os apps <ArrowDown size={17} /></a></aside>
 }
 
 export default function App() {

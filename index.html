@@ -3,22 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0F141C" />
+    <meta name="theme-color" content="#0B1017" />
     <script>
       (() => {
         let saved
         try { saved = localStorage.getItem('pc-remote-theme') } catch {}
         const theme = saved === 'light' || saved === 'dark' ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
         document.documentElement.dataset.theme = theme
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#0f141c' : '#f8fafc')
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#0b1017' : '#f5f7fa')
       })()
     </script>
     <meta name="description" content="Seu Android vira o controle do PC. Mouse, teclado, mídia e arquivos pela sua rede Wi-Fi. Baixe grátis para Windows, Ubuntu 22.04, 24.04 e 26.04 LTS e Android." />
     <meta property="og:title" content="PC Remote | Seu Android vira o controle do PC" />
     <meta property="og:description" content="Transforme o Android em touchpad, teclado e controle de mídia para o PC. Conexão local, gratuita e de código aberto." />
     <meta property="og:type" content="website" />
-    <link rel="preload" as="image" href="/screenshots/desktop.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/screenshots/desktop.webp" fetchpriority="high" media="(min-width: 768px)" />
+    <link rel="preload" as="image" href="/screenshots/media.webp" fetchpriority="high" media="(max-width: 767px)" />
     <link rel="icon" type="image/svg+xml" href="/brand/symbol.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://pc-remote-app.vercel.app/" />
     <meta property="og:url" content="https://pc-remote-app.vercel.app/" />
     <meta property="og:image" content="https://pc-remote-app.vercel.app/screenshots/desktop.webp" />

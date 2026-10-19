@@ -1,22 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108">
-<title>PC Remote</title>
+  <title>PC Remote</title>
+  <style>
+    .tile { fill: url(#pcr-tile); stroke: #DCE4EC; }
+    .ink { fill: #0F172A; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #111922; stroke: #2A3644; }
+      .ink { fill: #E8EEF4; }
+    }
+  </style>
   <defs>
-    <linearGradient id="pcr-bg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#F1F5F9"/>
+    <linearGradient id="pcr-tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F1F5F9"/>
     </linearGradient>
-    <linearGradient id="pcr-cyan-accent" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00E5FF"/>
-      <stop offset="100%" stop-color="#0284C7"/>
+    <linearGradient id="pcr-cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00E5FF"/>
+      <stop offset="1" stop-color="#0284C7"/>
     </linearGradient>
-    <filter id="pcr-elevation" x="-10%" y="-10%" width="120%" height="125%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
-      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#0F172A" flood-opacity="0.04"/>
-    </filter>
   </defs>
-  <rect x="4" y="4" width="100" height="100" rx="24" fill="url(#pcr-bg)" filter="url(#pcr-elevation)" stroke="#E2E8F0" stroke-width="1.2"/>
-  <g transform="translate(-9.53 -9.53) scale(1.176470588235)">
-  <path fill="#0F172A" fill-rule="evenodd" d="M 37.00 30.20 L 71.00 30.20 C 73.81 30.20 76.10 32.49 76.10 35.30 L 76.10 40.40 C 76.10 42.20 75.16 43.87 73.62 44.80 L 58.67 53.86 C 55.80 55.61 52.20 55.61 49.33 53.86 L 34.38 44.80 C 32.84 43.87 31.90 42.20 31.90 40.40 L 31.90 35.30 C 31.90 32.49 34.19 30.20 37.00 30.20 Z M 42.10 37.00 L 42.10 39.55 L 54.00 46.77 L 65.90 39.55 L 65.90 37.00 L 42.10 37.00 Z"/>
-  <path fill="url(#pcr-cyan-accent)" fill-rule="evenodd" d="M 49.33 54.14 C 52.20 52.39 55.80 52.39 58.67 54.14 L 73.62 63.20 C 75.16 64.13 76.10 65.80 76.10 67.60 L 76.10 72.70 C 76.10 75.51 73.81 77.80 71.00 77.80 L 37.00 77.80 C 34.19 77.80 31.90 75.51 31.90 72.70 L 31.90 67.60 C 31.90 65.80 32.84 64.13 34.38 63.20 L 49.33 54.14 Z M 65.90 71.00 L 65.90 68.45 L 54.00 61.23 L 42.10 68.45 L 42.10 71.00 L 65.90 71.00 Z"/>
+  <rect class="tile" x="1" y="1" width="106" height="106" rx="25" stroke-width="2"/>
+  <g transform="translate(-14.04 -14.04) scale(1.26)">
+    <path class="ink" fill-rule="evenodd" d="M 37.00 30.20 L 71.00 30.20 C 73.81 30.20 76.10 32.49 76.10 35.30 L 76.10 40.40 C 76.10 42.20 75.16 43.87 73.62 44.80 L 58.67 53.86 C 55.80 55.61 52.20 55.61 49.33 53.86 L 34.38 44.80 C 32.84 43.87 31.90 42.20 31.90 40.40 L 31.90 35.30 C 31.90 32.49 34.19 30.20 37.00 30.20 Z M 42.10 37.00 L 42.10 39.55 L 54.00 46.77 L 65.90 39.55 L 65.90 37.00 L 42.10 37.00 Z"/>
+    <path fill="url(#pcr-cyan)" fill-rule="evenodd" d="M 49.33 54.14 C 52.20 52.39 55.80 52.39 58.67 54.14 L 73.62 63.20 C 75.16 64.13 76.10 65.80 76.10 67.60 L 76.10 72.70 C 76.10 75.51 73.81 77.80 71.00 77.80 L 37.00 77.80 C 34.19 77.80 31.90 75.51 31.90 72.70 L 31.90 67.60 C 31.90 65.80 32.84 64.13 34.38 63.20 L 49.33 54.14 Z M 65.90 71.00 L 65.90 68.45 L 54.00 61.23 L 42.10 68.45 L 42.10 71.00 L 65.90 71.00 Z"/>
   </g>
 </svg>

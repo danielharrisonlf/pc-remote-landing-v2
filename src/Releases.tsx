@@ -297,7 +297,6 @@ export function Releases({ onBackToHome }: ReleasesProps) {
 
       {/* Hero / Header */}
       <header className="releases-hero">
-        <p className="eyebrow">PC Remote · Changelog & Releases</p>
         <h1>Histórico de Atualizações</h1>
         <p className="releases-hero-desc">
           Acompanhe todas as versões lançadas para Windows, Ubuntu Linux e Android.

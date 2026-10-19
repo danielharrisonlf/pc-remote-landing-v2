@@ -69,3 +69,11 @@ As métricas Lighthouse e a matriz Axe acima pertencem ao redesign anterior; nã
 - Domínio antigo configurado com redirecionamento nativo 308. Raiz, caminhos e query strings são preservados; o destino não entra em loop. A regra `/:path*` no `vercel.json` funcionou para caminhos, mas não para a raiz neste deployment; o redirecionamento nativo cobre ambos.
 - Verificação pública independente em Chromium: 320 claro e 440 escuro, sem overflow, imagens carregadas, APK 0.6.5 correto e sem erros de JavaScript. Robots, sitemap, favicon, CSS, JavaScript e QR públicos conferidos.
 - Registro operacional sanitizado e verificação pública em `../artifacts/qa/landing-mobile/`.
+## Design system, molduras e ícone, 19/10/2026
+
+- `npm run lint`, `npm run build` (TypeScript, cliente, SSR e HTML estático) e `git diff --check` aprovados.
+- Matriz Chromium/Playwright sobre o preview de produção: 320, 360, 390, 768, 1024 e 1440 px, claro e escuro. Zero overflow do documento, nenhum elemento além da viewport, nenhum alvo de toque abaixo de 44 px abaixo de 768 px, todas as imagens com `width`/`height`, zero erros ou avisos de console (incluindo hidratação).
+- Interações: tabs com setas/End e foco; modal abre com foco interno, backdrop `blur(8px)`, alterna tamanho real, fecha por Escape e devolve o foco à captura; tema alterna, persiste após reload e atualiza `theme-color`; barra móvel oculta e `inert` no hero e em downloads, visível entre eles; chip da última aba centralizado ao tocar; menu fecha por Escape.
+- Contraste calculado dos tokens: menor par de texto 5.03:1 no claro e 6.01:1 no escuro; bordas de controle 3.29:1 e 3.41:1. O verde Android no claro (4.42:1) foi escurecido antes da publicação.
+- Hashes Windows 0.6.5, Android 0.6.6 e Ubuntu 0.6.4 conferidos com os SHA256SUMS das releases. QR decodificado de forma independente (jsQR 1.4.0) para o link do APK 0.6.6.
+- Evidências em `../artifacts/qa/landing-refactor/`. Lighthouse e Axe não foram repetidos nesta rodada.

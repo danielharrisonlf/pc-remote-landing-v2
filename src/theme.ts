@@ -11,8 +11,12 @@ function preference(): Theme | null {
 }
 
 function apply(theme: Theme) {
-  document.documentElement.dataset.theme = theme
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0f141c' : '#f8fafc')
+  const root = document.documentElement
+  // Hover and focus transitions would otherwise animate every token at once.
+  root.classList.add('theme-switching')
+  root.dataset.theme = theme
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0b1017' : '#f5f7fa')
+  requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')))
 }
 
 function subscribe(onChange: () => void) {
