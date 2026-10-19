@@ -201,8 +201,7 @@ function Hero({ onNavigateReleases }: { onNavigateReleases: () => void }) {
         </div>
         <figure className="hero-product">
           <div className="phone-stage">
-            <PhoneScreenshot name="deck" badge={false} className="stage-phone stage-left" alt="Deck de Ações no Android com atalhos como mostrar a área de trabalho, capturar a tela e alternar janelas" />
-            <PhoneScreenshot name="slides" badge={false} className="stage-phone stage-right" alt="Apresentador de slides no Android com timer, próximo, anterior, tela preta e tela branca" />
+            <PhoneScreenshot name="deck" badge={false} className="stage-phone stage-back" alt="Deck de Ações no Android com atalhos como mostrar a área de trabalho, capturar a tela e alternar janelas" />
             <PhoneScreenshot name="media" priority className="stage-phone stage-front" alt="Tela de mídia no Android tocando uma faixa no PC, com volume do computador em 53%" />
           </div>
           <figcaption><MagnifyingGlassPlus size={16} />Telas reais do app Android {versions.android}. Toque para ampliar.</figcaption>

@@ -85,3 +85,8 @@ As métricas Lighthouse e a matriz Axe acima pertencem ao redesign anterior; nã
 - Interações repetidas: abas por teclado e toque, modal a partir do celular do hero (foco, blur, tamanho real, Escape e foco devolvido), tema persistido, barra móvel, menu.
 - Capturas: APK oficial 0.6.6-kotlin (SHA-256 `10c9935a…6fd7c1`, igual à release) instalado por cima do debug usado só para o convite de pareamento; versionCode 606 confirmado no aparelho. Recursos de Controles conferidos no código: `presentation.v1`, `deck.v1` e `numpad.v1` no Android e no desktop desde a v0.6.3.
 - Evidências em `../artifacts/qa/landing-phones/`.
+
+## Hero em notebooks baixos, 19/10/2026
+
+- Teste de dobra em 1280×600, 1280×720, 1366×768, 1525×730, 1440×800, 1536×864, 1920×1080, 1100×700 e 2560×1440: celular da frente e bloco de texto inteiros acima da dobra em todos, sem overflow. Antes da correção, 1280×720, 1366×768 e 1525×730 cortavam o aparelho.
+- Matriz de 12 cenários (320–1440, claro e escuro) e interações repetidas sem falhas.

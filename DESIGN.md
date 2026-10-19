@@ -105,3 +105,9 @@ Refatoração do sistema visual preservando marca, Geist, acento cyan, capturas 
 - Copy de vendas reescrita em torno de cenas concretas (sofá, apresentação, arquivo que precisa ir para o PC), mantendo os limites: sem "latência zero", sem promessa de tempo de instalação, Wake-on-LAN condicionado à placa de rede e à BIOS.
 - Toggle de tema compacto: botão de 40 px (44 px no celular) com o ícone do tema ativo e troca animada; mantém `role=switch`.
 - Preload só da captura de mídia, usada em todas as larguras; Open Graph continua com a captura horizontal do desktop.
+
+## Hero em notebooks baixos e aparelhos menores, 19/10/2026
+
+- Em notebooks de 720–800 px de altura (ex.: 1525 × 730 CSS com zoom de 125%) o celular da frente passava da dobra e sobrava espaço acima do título. No layout de duas colunas, o palco agora é dimensionado também pela altura da viewport (`svh`, com `vh` de fallback), os espaçamentos do hero acompanham a altura e o h1 tem teto de 8,4 svh.
+- Hero com dois aparelhos (Mídia na frente, Deck de Ações atrás) em vez de três; palco de no máximo 420 px, com o celular da frente em ~227 px de largura. O Apresentador continua no explorador, em Slides e atalhos.
+- Celular do explorador reduzido para 228 px (220 px / 72% no celular).
