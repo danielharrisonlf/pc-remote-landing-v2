@@ -1,22 +1,22 @@
 export const links = {
-  windows: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4/pc-remote-desktop-0.6.4-x64-setup.exe',
-  windowsRelease: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4',
-  android: 'https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.5-kotlin/pc-remote-android-kotlin-0.6.5-evaluation.apk',
-  androidRelease: 'https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.5-kotlin',
+  windows: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.5/pc-remote-desktop-0.6.5-x64-setup.exe',
+  windowsRelease: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.5',
+  android: 'https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.6-kotlin/pc-remote-android-kotlin-0.6.6-evaluation.apk',
+  androidRelease: 'https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.6-kotlin',
   desktopRepo: 'https://github.com/danielharrisonlf/pc-remote-desktop',
   protocol: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/PROTOCOL.md',
   security: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/SECURITY-AUDIT.md',
   releases: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases',
-  changelog: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/releases/0.6.4-ubuntu.1.md',
-  installation: 'https://github.com/danielharrisonlf/pc-remote-desktop#baixar-e-instalar--windows-064',
+  changelog: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/releases/0.6.5.md',
+  installation: 'https://github.com/danielharrisonlf/pc-remote-desktop#baixar-e-instalar--windows-065',
   linux: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/pc-remote-desktop-0.6.4-amd64.deb',
   linuxBundle: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4-ubuntu.1/pc-remote-ubuntu-0.6.4-amd64.tar.gz',
   linuxRelease: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4-ubuntu.1',
   linuxGuide: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/UBUNTU.md',
 }
 export const hashes = {
-  windows: '3fe6cd4e5efa41c2e9c7037be165502c34f1a499b924cdc3458362f1e3a7354c',
-  android: '55480613150f71cdb90a82fba7acef278a8ab0f40492dfedd09432e0993d9197',
+  windows: 'b8b7e997586e19c164945c05a47cebd3f224c64f6abb97d483b23dab3817fb91',
+  android: '10c9935a03aca15245f6a4d2cb3fa3f30ece9b32a3e5873f086acb80766fd7c1',
   linux: '591407a13b30059fd3309d5687fcb897fc8cd6263916563da44c1a9bde91dea4',
 }
 export const comparison = [
