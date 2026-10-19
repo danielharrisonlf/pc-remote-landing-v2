@@ -48,3 +48,17 @@ Relatório bruto e evidências de navegador desta revisão estão no workspace p
 - Evidências em `../artifacts/landing-ubuntu/browser-checks.json`, `qa-final.log` e capturas correspondentes. O navegador Orca perdeu a conexão durante a primeira inspeção; a verificação foi concluída em Chromium pelo Playwright.
 
 As métricas Lighthouse e a matriz Axe acima pertencem ao redesign anterior; não foram medidas novamente para esta alteração de conteúdo e downloads.
+
+## Mobile, zoom e domínio, 19/10/2026
+
+- `npm run lint`, `npm run build` (TypeScript, cliente, SSR e HTML estático) e `git diff --check` aprovados. O build cliente transforma 84 módulos com imports de ícones individuais; nenhuma dependência de aplicativo foi adicionada.
+- Auditoria inicial da página publicada e local em 320, 360, 390, 440, 768, 1024 e 1440 px: o recorte horizontal da captura enviada não foi reproduzido. A primeira captura do app se estendia abaixo da dobra; isso não era perda de conteúdo.
+- A validação adicional identificou problemas reproduzíveis: `min-width: 320px` impedia reflow em viewport CSS de 220 px; o guia de instalação usava `nowrap`; e os rótulos do menu em duas colunas eram cortados com texto ampliado. Corrigidos com largura flexível, quebra de texto e menu mobile em uma coluna.
+- Matriz Chromium/Playwright do candidato: sete larguras (320/360/390/440/768/1024/1440), claro e escuro, sem overflow de documento nem erros de JavaScript. Preview de produção com HTML inicial antes do JavaScript, sem erro de hidratação em 320/440/1024, nos dois temas.
+- Regressão final após os ajustes: 440/1440 claro e escuro; 220 × 478 CSS com DPR 2 (simulação do reflow de uma área física de 440 × 956 a 200%); texto ampliado a 200% em 320 e 440, com estilos-base capturados antes da alteração. Sem corte horizontal, sobreposição da marca ou controles fora da viewport. O menu, Escape e restauração de foco passaram também nesses casos.
+- Hero de 848 px em viewport 440 × 956, abaixo do cabeçalho de 69 px: captura real inteira e downloads visíveis. O conteúdo continua rolável nas telas menores; não ocultamos overflow do documento para passar no teste.
+- Menu (Escape e clique fora), seletor de funcionalidades, tabs com setas/Home/End, modal com fechamento por botão/Escape e foco devolvido, temas persistidos, cópia dos três hashes e links de download conferidos.
+- Downloads APK 0.6.5, Windows, `.deb` e `.tar.gz` responderam HTTP 200. O APK Android tem 726.185 bytes e SHA-256 `55480613150f71cdb90a82fba7acef278a8ab0f40492dfedd09432e0993d9197`. QR regenerado para o mesmo link; SVG carregado corretamente, visível no desktop e oculto no mobile. O payload do QR não foi decodificado independentemente nesta rodada.
+- Revisão estática independente aprovou CSS, SSR, imports de ícones, versão/hash e redirecionamento condicionado ao host antigo. Canonical, Open Graph, robots e sitemap apontam para `pc-remote-app.vercel.app`.
+- Evidências desta rodada: `../artifacts/qa/landing-mobile/` (matrizes, screenshots, fluxos, logs de build e lint). As medições Lighthouse e Axe históricas acima não foram repetidas; não são resultados deste refinamento. A emulação não substitui testes em todos os celulares físicos.
+- Semantica indisponível; memória durável não registrada.

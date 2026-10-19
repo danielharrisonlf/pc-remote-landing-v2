@@ -1,5 +1,7 @@
 import { useId, useRef, useState } from 'react'
-import { ArrowsOut, MagnifyingGlassPlus, X } from '@phosphor-icons/react'
+import { ArrowsOut } from '@phosphor-icons/react/dist/csr/ArrowsOut'
+import { MagnifyingGlassPlus } from '@phosphor-icons/react/dist/csr/MagnifyingGlassPlus'
+import { X } from '@phosphor-icons/react/dist/csr/X'
 
 type Props = { name: string; alt: string; width: number; height: number; priority?: boolean }
 

@@ -57,3 +57,22 @@ Sem promessa de latência zero, segurança absoluta ou RAM sem benchmark. TeamVi
 O aviso de compilação foi substituído por downloads da release `v0.6.4-ubuntu.1`. O hero aponta para o bloco Ubuntu; os downloads principais de Windows e Android mantêm suas posições. O bloco Ubuntu mostra as três versões LTS, arquitetura amd64, comando do instalador, autorização no Wayland, condição de pré-release, hash verificável, guia e release oficial. No mobile, ações ficam abaixo do texto e o código pode quebrar linha; a âncora considera o cabeçalho para manter o título acessível. Comparação, FAQ e descrição de busca refletem o pacote publicado.
 
 Nenhum registro de memória durável foi criado: Semantica não está disponível nesta sessão.
+
+## Mobile e domínio público, 19/10/2026
+
+Refinamento da página existente, preservando marca, tipografia Geist, acento cyan, imagens reais, âncoras e interações acessíveis. Configuração aplicada: DESIGN_VARIANCE 5, MOTION_INTENSITY 2, VISUAL_DENSITY 4. A prioridade é leitura e toque no celular; o movimento permanece restrito ao feedback dos controles.
+
+A captura enviada mostrou conteúdo cortado. A auditoria independente do estado publicado e local não reproduziu overflow horizontal em 320, 360, 390, 440, 768, 1024 e 1440 px. Portanto, não atribuímos aquele recorte a uma causa CSS comprovada. O refinamento reduz a altura do primeiro bloco e fortalece o reflow para larguras menores e texto ampliado.
+
+- Cabeçalho mobile com controle de tema de 44 px, marca que pode quebrar linha e menu em uma coluna, posicionado abaixo da altura efetiva do cabeçalho. A página não força largura mínima; o link de instalação também pode quebrar linha com texto ampliado.
+- Hero com descrição curta, downloads Android e Windows lado a lado quando cabem, empilhados em 320 px. Instruções e Ubuntu ficam próximos às ações. A versão técnica saiu do hero; versões exatas continuam nos downloads.
+- Preview real do app inteiro no primeiro bloco em 440 × 956, com ampliação acessível preservada. Nenhuma interface fictícia ou imagem decorativa nova.
+- Colunas com mínimo zero e botões com quebra natural de texto. As ações Ubuntu ocupam a largura inteira no mobile.
+- Comparação mobile usa menos caixas aninhadas. O QR aparece no computador; no celular, o download direto ocupa esse papel.
+- Modal permite título e controles em linhas separadas; somente a imagem em tamanho real pode ter rolagem horizontal interna.
+- A barra móvel observa a saída do hero, sem depender de uma altura fixa de cabeçalho.
+- Endereço público limpo `pc-remote-app.vercel.app`, com canonical, Open Graph, sitemap e redirecionamento do host antigo. Os nomes mais curtos estavam ocupados por terceiros.
+- Downloads, hash e QR Android atualizados para a 0.6.5 já publicada. O QR foi gerado com qrcode 8.2, correção M e quiet zone de quatro módulos, a partir do mesmo link direto do APK.
+- Ícones importados pelos caminhos individuais documentados pelo Phosphor para evitar varrer os milhares de módulos do pacote no build. Sem dependências novas no aplicativo.
+
+As evidências desta rodada ficam em `../artifacts/qa/landing-mobile/`. Memória Semantica indisponível; nenhum registro de memória durável foi criado.

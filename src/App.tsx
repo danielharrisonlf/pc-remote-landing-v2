@@ -1,5 +1,28 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
-import { AndroidLogo, ArrowDown, ArrowRight, ArrowUpRight, Check, CheckCircle, ClipboardText, Copy, CursorClick, Desktop, DownloadSimple, FolderSimple, GithubLogo, LinuxLogo, List, LockKey, MagnifyingGlassPlus, Moon, PlayPause, Power, ShieldCheck, Sun, WifiHigh, WindowsLogo, X } from '@phosphor-icons/react'
+import { AndroidLogo } from '@phosphor-icons/react/dist/csr/AndroidLogo'
+import { ArrowDown } from '@phosphor-icons/react/dist/csr/ArrowDown'
+import { ArrowRight } from '@phosphor-icons/react/dist/csr/ArrowRight'
+import { ArrowUpRight } from '@phosphor-icons/react/dist/csr/ArrowUpRight'
+import { Check } from '@phosphor-icons/react/dist/csr/Check'
+import { ClipboardText } from '@phosphor-icons/react/dist/csr/ClipboardText'
+import { Copy } from '@phosphor-icons/react/dist/csr/Copy'
+import { CursorClick } from '@phosphor-icons/react/dist/csr/CursorClick'
+import { Desktop } from '@phosphor-icons/react/dist/csr/Desktop'
+import { DownloadSimple } from '@phosphor-icons/react/dist/csr/DownloadSimple'
+import { FolderSimple } from '@phosphor-icons/react/dist/csr/FolderSimple'
+import { GithubLogo } from '@phosphor-icons/react/dist/csr/GithubLogo'
+import { LinuxLogo } from '@phosphor-icons/react/dist/csr/LinuxLogo'
+import { List } from '@phosphor-icons/react/dist/csr/List'
+import { LockKey } from '@phosphor-icons/react/dist/csr/LockKey'
+import { MagnifyingGlassPlus } from '@phosphor-icons/react/dist/csr/MagnifyingGlassPlus'
+import { Moon } from '@phosphor-icons/react/dist/csr/Moon'
+import { PlayPause } from '@phosphor-icons/react/dist/csr/PlayPause'
+import { Power } from '@phosphor-icons/react/dist/csr/Power'
+import { ShieldCheck } from '@phosphor-icons/react/dist/csr/ShieldCheck'
+import { Sun } from '@phosphor-icons/react/dist/csr/Sun'
+import { WifiHigh } from '@phosphor-icons/react/dist/csr/WifiHigh'
+import { WindowsLogo } from '@phosphor-icons/react/dist/csr/WindowsLogo'
+import { X } from '@phosphor-icons/react/dist/csr/X'
 import { links, hashes, comparison, comparisonSources } from './content'
 import { useTheme } from './theme'
 import Screenshot from './Screenshot'
@@ -44,13 +67,11 @@ function PhoneScreenshot({ name, alt, priority = false, className = '' }: { name
 function Hero() {
   return <section className="hero shell" id="top">
     <div className="hero-copy">
-      <a className="release-badge" href={links.windowsRelease} target="_blank" rel="noreferrer">Grátis e código aberto <ArrowUpRight size={14} /><span>v0.6.4</span></a>
+      <a className="hero-source" href={links.desktopRepo} target="_blank" rel="noreferrer">Grátis e código aberto <ArrowUpRight size={15} /></a>
       <h1>Seu Android vira<br /><span>o controle do PC.</span></h1>
-      <p className="hero-description">Dê play, ajuste o volume, use o mouse e envie arquivos. Tudo pelo celular, sem precisar ir até o computador.</p>
-      <div className="hero-actions"><a className="button" href={links.windows}><WindowsLogo size={21} />Baixar para Windows<DownloadSimple size={18} /></a><a className="button secondary" href={links.android}><AndroidLogo size={21} />Baixar para Android</a></div>
-      <p className="hero-note"><CheckCircle size={16} />Na mesma rede Wi-Fi. Sem conta ou mensalidade.</p>
-      <a className="hero-setup-link" href="#como-funciona">Instale no PC e no Android para começar <ArrowRight size={15} /></a>
-      <a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Também para Ubuntu 22.04, 24.04 e 26.04 LTS <ArrowRight size={15} /></a>
+      <p className="hero-description">Mouse, teclado, mídia e arquivos. Controle o computador pelo Android, na mesma rede Wi-Fi.</p>
+      <div className="hero-actions"><a className="button" href={links.android}><AndroidLogo size={21} /><span>Baixar Android</span></a><a className="button secondary" href={links.windows}><WindowsLogo size={21} /><span>Baixar Windows</span></a></div>
+      <div className="hero-help"><a className="hero-setup-link" href="#como-funciona">Como instalar nos dois aparelhos <ArrowRight size={15} /></a><a className="hero-ubuntu-link text-link" href="#ubuntu-download"><LinuxLogo size={18} />Usa Ubuntu? <ArrowRight size={15} /></a></div>
     </div>
     <figure className="hero-product">
       <div className="product-scene"><div className="desktop-shot"><Screenshot name="desktop" alt="Painel do Windows com celular conectado e controles rápidos" width={1260} height={966} priority /></div><PhoneScreenshot name="media" priority alt="Android com busca no YouTube e controles de mídia" /></div>
@@ -141,7 +162,7 @@ function HashControl({ value, platform }: { value: string; platform: string }) {
 function Downloads() {
   return <section className="section downloads-section" id="downloads"><div className="shell"><div className="section-title"><p className="eyebrow">Windows ou Ubuntu + Android</p><h2>Baixe grátis.<br />Controle seu PC.</h2><p>Instale nos dois aparelhos, conecte à mesma rede e comece a usar.</p></div><div className="download-grid">
     <article className="download-card"><div className="download-top"><WindowsLogo size={30} /><span>1. Instale no PC</span></div><div className="download-heading"><h3>PC Remote para Windows</h3><span>Mouse, mídia, arquivos e energia.</span></div><p>Windows 10 (1809+) e 11 · x64<br />Instalador .exe · v0.6.4</p><a className="button" href={links.windows}><DownloadSimple size={19} />Baixar para Windows</a><a className="release-link" href={links.windowsRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.windows} platform="Windows" /></article>
-    <article className="download-card"><div className="download-top"><AndroidLogo size={30} /><span>2. Instale no celular</span></div><div className="download-heading"><h3>PC Remote para Android</h3><span>Seu controle, pronto para conectar.</span></div><p>Android 7 ou superior · APK universal<br />App nativo · v0.6.3-kotlin</p><a className="button secondary" href={links.android}><DownloadSimple size={19} />Baixar APK Android</a><a className="release-link" href={links.androidRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.android} platform="Android" /></article>
+    <article className="download-card"><div className="download-top"><AndroidLogo size={30} /><span>2. Instale no celular</span></div><div className="download-heading"><h3>PC Remote para Android</h3><span>Seu controle, pronto para conectar.</span></div><p>Android 7 ou superior · APK universal<br />App nativo · v0.6.5-kotlin</p><a className="button secondary" href={links.android}><DownloadSimple size={19} />Baixar APK Android</a><a className="release-link" href={links.androidRelease} target="_blank" rel="noreferrer">Ver release oficial <ArrowUpRight size={14} /></a><HashControl value={hashes.android} platform="Android" /></article>
     <aside className="qr-download"><img src="/android-apk-qr.svg" width="144" height="144" loading="lazy" alt="QR code com o link direto para baixar o APK oficial no Android" /><h3>Está no computador?</h3><p>Aponte a câmera do celular para baixar o APK.</p></aside>
   </div><div className="install-notes"><p><strong>Versão de avaliação.</strong> O Windows pode exibir um aviso do SmartScreen; o instalador ainda não tem Authenticode. O APK usa chave debug e o Android solicita autorização para instalar dessa fonte.</p><a href={links.installation} target="_blank" rel="noreferrer">Guia de instalação Windows <ArrowUpRight size={16} /></a></div>
     <aside className="linux-download" id="ubuntu-download" aria-labelledby="ubuntu-download-title">
@@ -192,11 +213,11 @@ function MobileDownloadBar() {
     const update = () => setVisible(pastHero && !atDownloads)
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
-        if (entry.target === hero) pastHero = entry.boundingClientRect.bottom <= 76
+        if (entry.target === hero) pastHero = entry.boundingClientRect.bottom <= 0
         if (entry.target === downloads) atDownloads = entry.isIntersecting
       }
       update()
-    }, { rootMargin: '-76px 0px 0px 0px' })
+    })
     observer.observe(hero); observer.observe(downloads)
     return () => observer.disconnect()
   }, [])

@@ -32,7 +32,7 @@ As imagens vêm das evidências locais dos apps 0.6.0/0.6.1. Para regenerar os W
 ## Releases
 
 - [Windows v0.6.4](https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4)
-- [Android v0.6.3-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.3-kotlin)
+- [Android v0.6.5-kotlin](https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.5-kotlin)
 - [Ubuntu v0.6.4-ubuntu.1](https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4-ubuntu.1)
 
 Versões de avaliação: APK com chave debug e instalador Windows sem Authenticode. Ubuntu 22.04, 24.04 e 26.04 LTS com `.deb` amd64, instalador compactado e guia; a pré-release Ubuntu teve instalação e abertura validadas nas três LTS. A autorização e o controle em um desktop GNOME Wayland real permanecem pendentes. Os links diretos e o hash do `.deb` estão em `src/content.ts`.
@@ -40,3 +40,5 @@ Versões de avaliação: APK com chave debug e instalador Windows sem Authentico
 ## Publicação
 
 Projeto Vercel existente `pc-remote-landing-v2`, conectado ao repositório separado da landing. Publicação pela CLI: `npx vercel --prod --yes`.
+
+Endereço público: **https://pc-remote-app.vercel.app/**. O nome interno do projeto e do repositório foi mantido. `vercel.json` redireciona o host antigo para o novo, preservando os caminhos. Ao publicar a mudança de domínio pela primeira vez, ative o alias novo antes de promover o redirecionamento para produção.

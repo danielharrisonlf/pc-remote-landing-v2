@@ -1,8 +1,8 @@
 export const links = {
   windows: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.4/pc-remote-desktop-0.6.4-x64-setup.exe',
   windowsRelease: 'https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.4',
-  android: 'https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.3-kotlin/pc-remote-android-kotlin-0.6.3-evaluation.apk',
-  androidRelease: 'https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.3-kotlin',
+  android: 'https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.5-kotlin/pc-remote-android-kotlin-0.6.5-evaluation.apk',
+  androidRelease: 'https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.5-kotlin',
   desktopRepo: 'https://github.com/danielharrisonlf/pc-remote-desktop',
   protocol: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/PROTOCOL.md',
   security: 'https://github.com/danielharrisonlf/pc-remote-desktop/blob/main/docs/SECURITY-AUDIT.md',
@@ -16,7 +16,7 @@ export const links = {
 }
 export const hashes = {
   windows: '3fe6cd4e5efa41c2e9c7037be165502c34f1a499b924cdc3458362f1e3a7354c',
-  android: '673890551e02d89f5b8448ab0cf25b0500a9416782d4c102299b6c0347fea3f9',
+  android: '55480613150f71cdb90a82fba7acef278a8ab0f40492dfedd09432e0993d9197',
   linux: '591407a13b30059fd3309d5687fcb897fc8cd6263916563da44c1a9bde91dea4',
 }
 export const comparison = [
