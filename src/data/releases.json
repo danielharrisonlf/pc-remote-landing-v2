@@ -1,5 +1,67 @@
 [
   {
+    "id": "android-417392182",
+    "repo": "android",
+    "platform": "android",
+    "tag": "v0.6.6-kotlin",
+    "name": "PC Remote Android 0.6.6-kotlin — Nova Identidade Visual Clean",
+    "publishedAt": "2026-10-19T14:30:03Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/tag/v0.6.6-kotlin",
+    "body": "# 0.6.6-kotlin — nova identidade visual clean\n\nVersão de atualização visual, versionCode 606. Instale sobre a versão existente para manter pareamentos e preferências.\n\n- Nova identidade visual unificada: ícone adaptativo Android redesenhado em tons claros (Precision Dual Prism em porcelana fria com acento ciano elétrico).\n- Compatibilidade nativa com máscaras de lançador (círculo, squircle, quadrado arredondado) e ícone temático Material You (monocromático) no Android 13+.\n- Notificação na barra de status com novo glifo de alta visibilidade.\n- Mantém todas as otimizações de fluidez do ponteiro, controles e protocolo da versão 0.6.5.\n\nNão exige atualização do desktop (compatível com PC Remote Desktop 0.6.x).\n\nValidação automatizada: 156 testes unitários aprovados, drawables adaptativos validados no safe circle central (raio <= 33dp).\nAPK assinado com chave debug de avaliação das versões anteriores. Confira o SHA-256 em `KOTLIN-SHA256SUMS-0.6.6.txt` desta release.\n",
+    "assets": [
+      {
+        "name": "KOTLIN-SHA256SUMS-0.6.6.txt",
+        "size": 113,
+        "sizeFormatted": "113 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.6-kotlin/KOTLIN-SHA256SUMS-0.6.6.txt"
+      },
+      {
+        "name": "pc-remote-android-kotlin-0.6.6-evaluation.apk",
+        "size": 759385,
+        "sizeFormatted": "741.6 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-android/releases/download/v0.6.6-kotlin/pc-remote-android-kotlin-0.6.6-evaluation.apk"
+      }
+    ]
+  },
+  {
+    "id": "desktop-417391483",
+    "repo": "desktop",
+    "platform": "windows",
+    "tag": "v0.6.5",
+    "name": "PC Remote Desktop 0.6.5 - Nova Identidade Visual Clean",
+    "publishedAt": "2026-10-19T14:29:24Z",
+    "prerelease": false,
+    "htmlUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/tag/v0.6.5",
+    "body": "# PC Remote Desktop 0.6.5 — Nova Identidade Visual Clean\n\n- Nova identidade visual moderna e limpa: símbolo vetorial dual-prism (interlocking host PC & mobile client) sobre squircle em porcelana fria com elevação sutil e acento ciano/azul elétrico.\n- Novos ícones em alta fidelidade para Windows em 7 resoluções independentes (16 a 256px), bandeja do sistema, instalador NSIS e web.\n- Atualização visual da landing page com o novo emblema e refinamento do favicon para alta legibilidade em temas claro e escuro.\n- Compatibilidade total: protocolo 1, pareamentos anteriores e atualizações automáticas via app mantidos integralmente.\n",
+    "assets": [
+      {
+        "name": "latest.json",
+        "size": 2006,
+        "sizeFormatted": "2 KB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.5/latest.json"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.5-x64-setup.exe",
+        "size": 4596695,
+        "sizeFormatted": "4.4 MB",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.5/pc-remote-desktop-0.6.5-x64-setup.exe"
+      },
+      {
+        "name": "pc-remote-desktop-0.6.5-x64-setup.exe.sig",
+        "size": 440,
+        "sizeFormatted": "440 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.5/pc-remote-desktop-0.6.5-x64-setup.exe.sig"
+      },
+      {
+        "name": "WINDOWS-SHA256SUMS-0.6.5.txt",
+        "size": 290,
+        "sizeFormatted": "290 B",
+        "downloadUrl": "https://github.com/danielharrisonlf/pc-remote-desktop/releases/download/v0.6.5/WINDOWS-SHA256SUMS-0.6.5.txt"
+      }
+    ]
+  },
+  {
     "id": "android-416887342",
     "repo": "android",
     "platform": "android",
